@@ -1,0 +1,34 @@
+App visionner des films
+
+Requête OMDb : https://www.omdbapi.com/?apikey=c6e5cf6d&s=transformers
+
+3 pages :
+# index.html
+> 3 films minimum de la BDD on considère tendance.
+> Chaque card doit avoir : Poster, Nom, Redirection vers une page, petit résumé du film.
+> Bouton pour charger plus de films.
+# search.html
+> Barre de recherche
+> Recherche en temps réel, sans rechargement de page.
+> Bouton pour afficher plus de résultats.
+> Chaque card doit avoir : Poster, Titre, Redirection vers une page.
+# movie.html
+> Titre
+> Poster
+> Grand résumé du film
+> Genre du film
+> Acteurs / Casting
+> Notes du film
+> Date FR sortie en DVD 
+
+GIT:
+> Organisation de branches.
+> Messages par commit.
+
+PLUS:
+> Le JS doit avoir plusieurs fichiers et doivent être traités par un bundler.
+> Filtres
+
+FIN :
+Mettre le projet GitHub en public.
+Rendre en .ZIP. Renseigner le github dans le readme.md

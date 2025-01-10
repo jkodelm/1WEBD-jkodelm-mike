@@ -1,21 +1,58 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-    <link rel="stylesheet" href="css/styles.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Pridi:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <header>
-        <nav>test my html</nav>
-        <div class="icon icon-cv"></div>
-    </header>
-    <main>
-  <p>test my csgo my bro</p>
-    </main>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orléans Ciné</title>
+  <link rel="stylesheet" href="css/stylework.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pridi:wght@400;600&display=swap" rel="stylesheet">
+  <script src="js/mainwork.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="work.html"><img width="200" height="60" alt="orlan"></a>
+      <div class="nav-icons">
+        <div class="icon search"></div>
+        <div class="icon account"></div>
+      </div>
+    </nav>
 
-    <footer></footer>
-  </body>
+    <section class="hero">
+      <div class="hero-header"><h2 class="title">À ne pas manquer</h2></div>
+      <div id="hero-content">
+        <div class="hero-card hero-card-farleft"></div>
+        <div class="hero-card hero-card-left"></div>
+        <div class="hero-card hero-card-main"></div>
+        <div class="hero-card hero-card-right"></div>
+        <div class="hero-card hero-card-farright"></div>
+      </div>
+      <div class="hero-footer">
+        <div class="controls">
+          <button class="icon pause"></button>
+        </div>
+        <div class="indicators">
+          <button class="indicator active"></button>
+          <button class="indicator"></button>
+          <button class="indicator"></button>
+        </div>
+        <div class="controls">
+          <button class="icon" id="arrow-left"></button>
+          <button class="icon" id="arrow-right"></button>
+        </div>
+      </div>
+      <div class="vignette"></div>
+    </section>
+
+    <section class="traversin">
+      <div class="traversin-top"></div>
+      <div class="traversin-inside"></div>
+      <div class="traversin-bottom"></div>
+    </section>
+  </header>
+  <main>
+    <p>test my csgo my bro</p>
+  </main>
+  <footer></footer>
+</body>
 </html>

@@ -59,6 +59,7 @@
       const apiKey = 'c6e5cf6d';
       const movieTitle = 'batman';
       const apiUrl = `https://www.omdbapi.com/?t=${movieTitle}&apikey=${apiKey}`;
+      const movieplot = 'plot';
 
       fetch(apiUrl)
           .then(response => response.json()) 
@@ -66,11 +67,13 @@
               if (data.Response === 'True') {
                   const movieName = data.Title;
                   const posterUrl = data.Poster;
+                  const moviePlot = data.Plot;
 
                   const movieInfoDiv = document.getElementById('movie-info');
                   movieInfoDiv.innerHTML = `
                       <h2>${movieName}</h2>
                       <img src="${posterUrl}" alt="${movieName} Poster">
+                      <p>${moviePlot}</p>
                   `;
               } else {
                   document.getElementById('movie-info').innerHTML = `<p>Movie not found!</p>`;

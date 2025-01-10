@@ -13,8 +13,8 @@
     <nav>
       <a href="work.html"><img width="200" height="60" alt="orlan"></a>
       <div class="nav-icons">
-        <div class="icon search"></div>
-        <div class="icon account"></div>
+        <div class="icon i-search"></div>
+        <div class="icon i-account"></div>
       </div>
     </nav>
 
@@ -23,16 +23,18 @@
       <div id="hero-content">
         <div class="hero-card hero-card-main">a</div>
         <div class="hero-card hero-card-right">b</div>
-        <div class="hero-card hidden">c</div>
-        <div class="hero-card hidden">d</div>
+        <div class="hero-card">c</div>
+        <div class="hero-card">d</div>
         <div class="hero-card hero-card-left">e</div>
       </div>
       <div class="hero-footer">
         <div class="controls">
-          <button class="icon pause"></button>
+          <button class="icon i-pause" id="hero-pause"></button>
         </div>
-        <div class="indicators">
-          <button class="indicator active"></button>
+        <div class="indicators" id="hero-indicators">
+          <button class="indicator"></button>
+          <button class="indicator"></button>
+          <button class="indicator"></button>
           <button class="indicator"></button>
           <button class="indicator"></button>
         </div>
@@ -54,7 +56,7 @@
   </main>
 
   <section>
-    <script>
+    <!--<script>
       const apiKey = 'c6e5cf6d';
       const movieTitle = 'batman';
       const apiUrl = `https://www.omdbapi.com/?t=${movieTitle}&apikey=${apiKey}`;
@@ -81,7 +83,7 @@
           .catch(error => {
               console.error('Error fetching data:', error);
           });
-  </script>
+  </script>-->
   <div id="movie-info"></div>
 
   </section>

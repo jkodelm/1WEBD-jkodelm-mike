@@ -48,9 +48,10 @@ button {outline: 0; border: 0; background-color: inherit;}
     cursor: pointer;
 }
   
-.search { background-image: url('../svg/search.svg'); }
-.account { background-image: url('../svg/account.svg'); }
-.pause { background-image: url('../svg/pause.svg'); }
+.i-search { background-image: url('../svg/search.svg'); }
+.i-account { background-image: url('../svg/account.svg'); }
+.i-pause { background-image: url('../svg/pause.svg'); }
+.i-play { background-image: url('../svg/play.svg'); }
 #arrow-left { background-image: url('../svg/arrowl.svg'); }
 #arrow-right { background-image: url('../svg/arrowr.svg'); }
 
@@ -95,8 +96,9 @@ button {outline: 0; border: 0; background-color: inherit;}
     border-radius: 1rem;
     aspect-ratio: 16/9;
     position: absolute;
-    transition: 1s all;
+    transition: 0.4s all;
     opacity: 0;
+    z-index: 2;
 }
 
 .hero-card-farleft { left: -55%; }
@@ -117,7 +119,7 @@ button {outline: 0; border: 0; background-color: inherit;}
     border-radius: 1rem;
 }
   
-.indicator.active {
+.indicator.indicator-active {
     width: 3rem;
     background-color: rgba(255, 255, 255, 0.3);
 }

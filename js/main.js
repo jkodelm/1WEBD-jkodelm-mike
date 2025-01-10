@@ -1,45 +1,59 @@
 class Carousel {
-    constructor(masterName, cardClass, data, slidesPerPage, leftButtonName, rightButtonName, arraySlideClasses) {
-        // Define necessary properties
-        this.parent = document.querySelector(`#${masterName}`);
-        this.slides = data; // Assuming data is an array of slides
-        this.slidesPerPage = slidesPerPage;
-        this.leftBtn = document.querySelector(`#${leftButtonName}`);
-        this.rightBtn = document.querySelector(`#${rightButtonName}`);
-        this.slideClasses = arraySlideClasses;
+    constructor(master, visibleSlides, attributes, leftBtn, rightBtn) {
+        this.parent = document.querySelector(`#${master}`)
+        this.onScreenSlides = visibleSlides
+        this.arrayAttributes = attributes
+        this.index = 0
 
-        // Initialize other properties
-        this.width = this.slides.length; // Assuming slides is an array
-        this.paused = false;
-        this.index = 0; // Shown left
-        this.slideStates = this.slideClasses.length;
+        this.slides = this.parent.children
+        this.nbSlides = this.slides.length
 
-        // Bind event listeners
-        this.leftBtn.addEventListener('click', (e) => { this.slideLeft(); });
-        this.rightBtn.addEventListener('click', (e) => { this.slideRight(); });
+        this.leftButton = document.querySelector(`#${leftBtn}`)
+        this.rightButton = document.querySelector(`#${rightBtn}`)
+        this.leftButton.addEventListener('click', () => {this.slideLeft()})
+        this.rightButton.addEventListener('click', () => {this.slideRight()})
+    }
+    
+    slideLeft() {
+        let a = this.correctIndex(this.index - 2);
+        console.log('1',a)
+        this.slides[a].style.backgroundColor = 'red'
+        this.slides[a].classList.add(this.arrayAttributes[1])
+        this.slides[a].classList.remove('hidden')
+
+        a = this.correctIndex(this.index - 1);
+        console.log('2',a)
+        this.slides[a].style.backgroundColor = 'green'
+        this.slides[a].classList.add(this.arrayAttributes[2])
+        this.slides[a].classList.remove(this.arrayAttributes[1])
+
+        console.log('3',this.index)
+        this.slides[this.index].style.backgroundColor = 'blue'
+        this.slides[this.index].classList.add(this.arrayAttributes[3])
+        this.slides[this.index].classList.remove(this.arrayAttributes[2])
+        
+        a = this.correctIndex(this.index + 1);
+        console.log('4',a)
+        this.slides[a].style.backgroundColor = 'yellow'
+        this.slides[a].classList.add(this.arrayAttributes[4])
+        this.slides[a].classList.remove(this.arrayAttributes[3])
+
+        
+        this.index = this.correctIndex(this.index - 1)
+
     }
 
     slideRight() {
-        console.log('going right');
-        const allSlides = this.parent.children; // Use 'this.parent'
-        
-        // Assuming you want to insert a new slide element
-        const newSlide = document.createElement('div');
-        newSlide.className = "hero-card hero-card-farright";
-        this.parent.appendChild(newSlide); // Append new slide
 
-        for (let i = 0; i < allSlides.length; i++) {
-            allSlides[i].classList.add(this.slideClasses[(i + 1) % 4]);
-            allSlides[i].classList.add(this.slideClasses[i]);
-        }
+    }
+    
+    correctIndex(index) {
+        return (index + this.nbSlides) % this.nbSlides;
     }
 
-    slideLeft() {
-        console.log('going left');
-    }
+
 }
-
-// On load, initialize carousel
+// Set timeout, si pas fini, set transition 0 et remet à 2
 function main() {
     const body = document.querySelector('body');
     const btnTheme = document.querySelector('#theme');
@@ -47,14 +61,10 @@ function main() {
     
     let heroCarouselInstance = new Carousel(
         'hero-content',
-        'hero-card',
-        JSON.parse('{}'), // Replace with actual data
-        3,
+        3,        
+        ['hero-card-farleft', 'hero-card-left', 'hero-card-main', 'hero-card-right', 'hero-card-farright'],
         'arrow-left',
         'arrow-right',
-        ['hero-card-farleft', 'hero-card-left', 'hero-card-main', 'hero-card-right', 'hero-card-farright']
     );
 }
-
-// Correctly assign the onload function
 window.onload = main;

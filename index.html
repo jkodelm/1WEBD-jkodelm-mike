@@ -21,11 +21,11 @@
     <section class="hero">
       <div class="hero-header"><h2 class="title">À ne pas manquer</h2></div>
       <div id="hero-content">
-        <div class="hero-card hero-card-farleft"></div>
-        <div class="hero-card hero-card-left"></div>
-        <div class="hero-card hero-card-main"></div>
-        <div class="hero-card hero-card-right"></div>
-        <div class="hero-card hero-card-farright"></div>
+        <div class="hero-card hero-card-main">a</div>
+        <div class="hero-card hero-card-right">b</div>
+        <div class="hero-card hidden">c</div>
+        <div class="hero-card hidden">d</div>
+        <div class="hero-card hero-card-left">e</div>
       </div>
       <div class="hero-footer">
         <div class="controls">
@@ -43,7 +43,6 @@
       </div>
       <div class="vignette"></div>
     </section>
-
     <section class="traversin">
       <div class="traversin-top"></div>
       <div class="traversin-inside"></div>
@@ -53,37 +52,6 @@
   <main>
     <p>test my csgo my bro</p>
   </main>
-
-  <section>
-    <script>
-      const apiKey = 'c6e5cf6d';
-      const movieTitle = 'batman';
-      const apiUrl = `https://www.omdbapi.com/?t=${movieTitle}&apikey=${apiKey}`;
-
-      fetch(apiUrl)
-          .then(response => response.json()) 
-          .then(data => {
-              if (data.Response === 'True') {
-                  const movieName = data.Title;
-                  const posterUrl = data.Poster;
-
-                  const movieInfoDiv = document.getElementById('movie-info');
-                  movieInfoDiv.innerHTML = `
-                      <h2>${movieName}</h2>
-                      <img src="${posterUrl}" alt="${movieName} Poster">
-                  `;
-              } else {
-                  document.getElementById('movie-info').innerHTML = `<p>Movie not found!</p>`;
-              }
-          })
-          .catch(error => {
-              console.error('Error fetching data:', error);
-          });
-  </script>
-  <div id="movie-info"></div>
-
-  </section>
-
   <footer></footer>
 </body>
 </html>

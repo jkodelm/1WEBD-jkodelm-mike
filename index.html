@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orléans Ciné</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Pridi:wght@400;600&display=swap" rel="stylesheet">
   <script src="js/main.js"></script>
 </head>
@@ -53,6 +53,37 @@
   <main>
     <p>test my csgo my bro</p>
   </main>
+
+  <section>
+    <script>
+      const apiKey = 'c6e5cf6d';
+      const movieTitle = 'batman';
+      const apiUrl = `https://www.omdbapi.com/?t=${movieTitle}&apikey=${apiKey}`;
+
+      fetch(apiUrl)
+          .then(response => response.json()) 
+          .then(data => {
+              if (data.Response === 'True') {
+                  const movieName = data.Title;
+                  const posterUrl = data.Poster;
+
+                  const movieInfoDiv = document.getElementById('movie-info');
+                  movieInfoDiv.innerHTML = `
+                      <h2>${movieName}</h2>
+                      <img src="${posterUrl}" alt="${movieName} Poster">
+                  `;
+              } else {
+                  document.getElementById('movie-info').innerHTML = `<p>Movie not found!</p>`;
+              }
+          })
+          .catch(error => {
+              console.error('Error fetching data:', error);
+          });
+  </script>
+  <div id="movie-info"></div>
+
+  </section>
+
   <footer></footer>
 </body>
 </html>

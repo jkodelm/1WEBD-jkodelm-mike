@@ -8,16 +8,18 @@
     --lshade: #f0f0f0;
     --llightshade: #f8f8f8;
 
+    --gray: #6a6a6a;
+
     --dark: #242424;
     --dlightshade: #181818;
     --dshade: #121212;
 
     --timeHeroAnimation: 400ms;
-    --timeAutoSlide: 5000ms;
+    --timeAutoSlide: 2000ms;
 
-    --halfMain: .5rem;
-    --main: 1rem;
-    --serpateSections: 4rem;
+    --halfMainSpacing: .5rem;
+    --mainSpacing: 1rem;
+    --serapateSections: 4rem;
 }
   
 body {
@@ -35,14 +37,14 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: var(--main);
+    margin-bottom: var(--mainSpacing);
 }
 
 button {outline: 0; border: 0; background-color: inherit;}
   
 .nav-icons {
     display: flex;
-    gap: var(--main);
+    gap: var(--mainSpacing);
 }
   
 .icon {
@@ -59,10 +61,10 @@ button {outline: 0; border: 0; background-color: inherit;}
 .i-account { background-image: url('../svg/account.svg'); }
 .i-pause { background-image: url('../svg/pause.svg'); }
 .i-play { background-image: url('../svg/play.svg'); }
-#arrow-left { background-image: url('../svg/arrowl.svg'); }
-#arrow-right { background-image: url('../svg/arrowr.svg'); }
+.i-left { background-image: url('../svg/arrowl.svg'); }
+.i-right { background-image: url('../svg/arrowr.svg'); }
 
-.title { margin: 0 var(--main); position: relative;}
+.title { margin: 0 var(--mainSpacing); position: relative;}
 .title::after { position: absolute; top: 0; left: 0; width: 80px; height: 80px; border-radius: 2px; background-color: red; z-index: 20}
 .hidden { display: none; }
 
@@ -73,7 +75,7 @@ button {outline: 0; border: 0; background-color: inherit;}
     position: relative;
     display: flex;
     flex-direction: column;
-    margin-bottom: var(--serpateSections);
+    margin-bottom: var(--serapateSections);
 }
   
 .hero-header, .hero-footer {
@@ -82,7 +84,7 @@ button {outline: 0; border: 0; background-color: inherit;}
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 var(--halfMain);
+    padding: 0 var(--halfMainSpacing);
     box-sizing: border-box;
     z-index: 11;
     font-size: 2rem;
@@ -100,7 +102,7 @@ button {outline: 0; border: 0; background-color: inherit;}
     border: 2px solid #181818;
     background-color: var(--dark);
     width: 30%;
-    border-radius: var(--main);
+    border-radius: var(--mainSpacing);
     aspect-ratio: 16/9;
     position: absolute;
     opacity: 0;
@@ -108,42 +110,44 @@ button {outline: 0; border: 0; background-color: inherit;}
     transition: var(--timeHeroAnimation) all;
 }
 
-.hero-card-farleft { left: -55%; z-index: 3; }
-.hero-card-left { left: -15%; opacity: 1; z-index: 4; }
-.hero-card-main { width: 60%; left: 20%; opacity: 1; z-index: 5; }
-.hero-card-right { left: 85%; opacity: 1; z-index: 4; }
-.hero-card-farright { left: 125%; z-index: 3; }
+.hero-farleft {left: -55%; opacity: 0; }
+.hero-left { left: -15%; opacity: 1; }
+.hero-main { width: 60%; left: 20%; opacity: 1; }
+.hero-right { left: 85%; opacity: 1; }
+.hero-farright { left: 125%; opacity: 0; }
+
+.hero-indicators { 
+    display: flex; 
+    gap: var(--halfMainSpacing); }
   
-.indicators {
-    display: flex;
-    gap: var(--halfMain);
-}
-  
-.indicator {
-    width: var(--main);
-    height: var(--main);
+.hero-indicator {
+    width: var(--mainSpacing);
+    height: var(--mainSpacing);
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: var(--main);
+    border-radius: var(--mainSpacing);
     transition: width var(--timeHeroAnimation) ease;
+    overflow: hidden;
+    padding: 0;
 }
   
-.indicator.indicator-active {
+.hero-indicator.indicator-active {
     width: 3rem;
 }
 
-.indicator-time {
+.hero-indicator-time {
     width: 0;
-    background-color: red;
-    transition: width var(--timeAutoSlide) ease;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: width var(--timeAutoSlide);
 }
 
-.indicator-moving {
+.hero-indicator-moving {
     width: 3rem;
 }
 
 .controls {
     width: 4.5rem;
-    gap: var(--halfMain);
+    gap: var(--halfMainSpacing);
     display: flex;
 }
   
@@ -186,9 +190,9 @@ button {outline: 0; border: 0; background-color: inherit;}
   
 @media (max-width: 480px) {
     .hero, nav {
-        width: calc(100% - calc(var(--halfMain) * 2));
-        margin-left: var(--halfMain);
-        margin-right: var(--halfMain);
+        width: calc(100% - calc(var(--halfMainSpacing) * 2));
+        margin-left: var(--halfMainSpacing);
+        margin-right: var(--halfMainSpacing);
     }
     .hero-card:not(.main) { display: none; }
     .hero-card.main { width: 80%; }

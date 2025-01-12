@@ -1,13 +1,6 @@
 /* Later:
 - Give color to classes for easier color changing*/
 
-.notransition {
-    -webkit-transition: none !important;
-    -moz-transition: none !important;
-    -o-transition: none !important;
-    transition: none !important;
-  }
-
 :root {
     --primary: #FF453E;
 
@@ -22,7 +15,7 @@
     --dshade: #121212;
 
     --timeHeroAnimation: 400ms;
-    --timeAutoSlide: 2000ms;
+    --timeAutoSlide: 5000ms;
 
     --halfMainSpacing: .5rem;
     --mainSpacing: 1rem;
@@ -164,10 +157,10 @@ button {outline: 0; border: 0; background-color: inherit;}
     display: flex;
 }
   
-.vignette {
+.hero-vignette {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, var(--dshade) 0%, transparent 20%, transparent 80%, var(--dshade) 100%);
+    background: linear-gradient(90deg, var(--dshade) 0%, transparent 15%, transparent 85%, var(--dshade) 100%);
     z-index: 10;
 }
   
@@ -207,8 +200,11 @@ button {outline: 0; border: 0; background-color: inherit;}
         margin-left: var(--halfMainSpacing);
         margin-right: var(--halfMainSpacing);
     }
-    .hero-card:not(.main) { display: none; }
-    .hero-card.main { width: 80%; }
+    .hero-vignette { display: none; }
+    .hero-left { left: -35%; }
+    .hero-main { width: 100%; left: 0%; }
+    .hero-right { left: 135%; }
+
     .traversin-top { background: linear-gradient(176deg, transparent 0%, transparent calc(50% - 0.2rem), var(--dark) calc(50% + 0.2rem), var(--dark) 100%); }
     .traversin-bottom { background: linear-gradient(176deg, var(--dark) 0%, var(--dark) calc(50% - 0.2rem), transparent calc(50% + 0.2rem), transparent 100%); }
 

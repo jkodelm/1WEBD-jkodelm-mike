@@ -134,7 +134,7 @@ button {outline: 0; border: 0; background-color: inherit;}
     height: var(--mainSpacing);
     background-color: var(--dark);
     border-radius: var(--mainSpacing);
-    transition: all var(--timeHeroAnimation);
+    transition: all var(--timeHeroAnimation) linear;
     overflow: hidden;
     padding: 0;
     display: flex;
@@ -144,11 +144,14 @@ button {outline: 0; border: 0; background-color: inherit;}
     width: 0;
     height: var(--mainSpacing);
     background-color: var(--gray);
-    transition: width var(--timeAutoSlide) linear;
 }
 
-.hero-indicator-moving {
-    width: 3rem;
+.hero-indicator-moving { width: 3rem; }
+.hero-indicator-moving .hero-indicator-time { animation: moveIndicator var(--timeAutoSlide) }
+
+@keyframes moveIndicator {
+    0% { width: 0; }
+    100% { width: 3rem; }
 }
 
 .controls {

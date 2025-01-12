@@ -140,6 +140,10 @@ button {outline: 0; border: 0; background-color: inherit;}
     display: flex;
 }
 
+.active-hero-indicator {
+    background-color: var(--gray);
+}
+
 .hero-indicator-time {
     width: 0;
     height: var(--mainSpacing);

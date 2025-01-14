@@ -1,10 +1,12 @@
 /* Si click enter avec search bar on focus, SEARCH,
 AJOUTER SEARCH DANS URL, si dans url quand load, affichier, sinon quand back vec téléphone, enlève search.
 padding
-Icon load faster w/ button?*/
+Icon load faster w/ button?
+overlay function*/
 
 let navSearch, navSearchInput, navSearchBtn
 let searchDeployed = false
+console.log('loaded')
 
 function search() {
     if (!searchDeployed && window.innerWidth < 480) {
@@ -12,8 +14,7 @@ function search() {
         deploySearch()
     } else {
         console.log('recherche',navSearchInput.value,'sur google')
-    }
-    
+    } 
 }
 
 function deploySearch () {
@@ -47,7 +48,6 @@ function main() {
     navSearchBtn = document.querySelector('#nav-search-button')
     navSearchBtn.addEventListener('click', search)
     window.onresize = () => { if (searchDeployed && window.innerWidth > 480) { undeploySearch() } }
-    
 }
 
 window.onload = main

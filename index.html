@@ -3,23 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orléans Ciné</title>
+  <title>Accueil</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/hero-carousel.css">
   <link href="https://fonts.googleapis.com/css2?family=Pridi:wght@400;600&display=swap" rel="stylesheet">
+  <script src="js/search.js"></script>
   <script src="js/hero-carousel.js"></script>
 </head>
 <body>
   <header>
-    <nav>
-      <a href="#"><img width="200" height="60" alt="orlan"></a>
-      <div class="nav-icons">
-        <div class="icon i-search"></div>
-        <div class="icon i-account"></div>
+    <nav class="side-padding">
+      <a href="#" style="width: 200px; height: 60px; background-color: purple"></a>
+      <div class="nav-right">
+        <div class="nav-search">
+            <input type="text" id="nav-search-input">
+            <button class="button-tran"><div class="icon i-search" id="nav-search-button"></div></button>
+        </div>
+        <button class="button-tran"><div class="icon i-account"></div></button>
       </div>
     </nav>
 
     <section class="hero">
-      <div class="hero-header"><h2 class="title">À ne pas manquer</h2></div>
+      <div class="side-padding hero-header "><h2>À ne pas manquer</h2></div>
       <div id="hero-content">
         <div class="hero-card">a</div>
         <div class="hero-card">b</div>
@@ -27,14 +32,14 @@
         <div class="hero-card">d</div>
         <div class="hero-card">e</div>
       </div>
-      <div class="hero-footer">
+      <div class="hero-footer side-padding">
         <div class="controls">
-          <button class="icon i-pause" id="hero-pause"></button>
+          <button class="button-tran"><div class="icon i-pause" id="hero-pause"></div></button>
         </div>
         <div id="hero-indicators"></div>
         <div class="controls">
-          <button class="icon i-left" id="hero-arrow-left"></button>
-          <button class="icon i-right" id="hero-arrow-right"></button>
+          <button class="button-tran"><div class="icon i-left" id="hero-arrow-left"></div></button>
+          <button class="button-tran"><div class="icon i-right" id="hero-arrow-right"></div></button>
         </div>
       </div>
       <div class="hero-vignette"></div>

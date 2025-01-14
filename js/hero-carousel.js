@@ -102,6 +102,7 @@ class heroCarousel {
         this.stopped = !this.stopped;
         this.pauseBtn.classList.toggle('i-play', this.stopped);
         this.pauseBtn.classList.toggle('i-pause', !this.stopped);
+        this.pauseBtn.parentNode.classList.toggle('active');
 
         this.indicators.forEach((indicator) => {
             const timeBar = indicator.firstElementChild;

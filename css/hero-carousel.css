@@ -1,0 +1,103 @@
+.hero {
+    height: 600px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--serapateSections);
+}
+  
+.hero-header, .hero-footer {
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 11;
+    font-size: 2rem;
+}
+  
+#hero-content {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+  
+.hero-card {
+    border: 2px solid #181818;
+    background-color: var(--dark);
+    width: 30%;
+    border-radius: var(--mainSpacing);
+    aspect-ratio: 16/9;
+    position: absolute;
+    opacity: 0;
+    z-index: 1;
+    transition: var(--timeHeroAnimation) all;
+}
+
+.hero-farleft {left: -55%; opacity: 0; }
+.hero-left { left: -15%; opacity: 1; }
+.hero-main { width: 60%; left: 20%; opacity: 1; }
+.hero-right { left: 85%; opacity: 1; }
+.hero-farright { left: 125%; opacity: 0; }
+
+#hero-indicators { 
+    display: flex;
+    flex-direction: row;
+    gap: var(--halfMainSpacing);
+}
+  
+.hero-indicator {
+    width: var(--mainSpacing);
+    height: var(--mainSpacing);
+    background-color: var(--dark);
+    border-radius: var(--mainSpacing);
+    transition: all var(--timeHeroAnimation) linear;
+    overflow: hidden;
+    padding: 0;
+    display: flex;
+}
+
+.active-hero-indicator {
+    background-color: var(--gray);
+}
+
+.hero-indicator-time {
+    width: 0;
+    height: var(--mainSpacing);
+    background-color: var(--gray);
+}
+
+.hero-indicator-moving { width: 3rem; }
+.hero-indicator-moving .hero-indicator-time { animation: moveIndicator var(--timeAutoSlide) }
+
+@keyframes moveIndicator {
+    0% { width: 0; }
+    100% { width: 3rem; }
+}
+
+.controls {
+    width: 88px;
+    gap: var(--halfMainSpacing);
+    display: flex;
+}
+  
+.hero-vignette {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--dshade) 0%, transparent 15%, transparent 85%, var(--dshade) 100%);
+    z-index: 10;
+}
+
+@media (max-width: 1080px) {
+    .hero { height: 400px; }
+    .hero-card.main { width: 60%; }
+    .hero-header { font-size: 1.5rem}
+}
+
+@media (max-width: 480px) {
+    .hero-vignette { display: none; }
+    .hero-left { left: -35%; }
+    .hero-main { width: 100%; left: 0%; }
+    .hero-right { left: 135%; }
+}  

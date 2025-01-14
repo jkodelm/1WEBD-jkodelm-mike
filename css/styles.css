@@ -22,6 +22,7 @@
     --mainSpacing: 1rem;
     --serapateSections: 4rem;
     --smallRounding: 5px;
+    --icons: 2.5rem;
 
     --bigtitle: 2rem;
     --title: 1.5rem;
@@ -45,7 +46,7 @@ body {
 }
   
 nav {
-    height: 60px;
+    height: 3.5rem;
     width: 70%;
     margin: 0 15%;
     background-color: var(--dshade);
@@ -65,7 +66,7 @@ button {outline: 0; border: 0; background-color: inherit;}
   
 .icon {
     width: 2.5rem;
-    height: 40px;
+    height: var(--icons);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -87,18 +88,18 @@ button {outline: 0; border: 0; background-color: inherit;}
 
 .nav-search {
     display: flex;
-    height: 40px;
+    height: var(--icons);
     align-items: flex-end;
     gap: var(--halfMainSpacing);
     top: 0;
     left: 0;
-    padding: 10px 0;
+    padding: var(--halfMainSpacing) 0;
     z-index: 5;
 }
 
 #nav-search-input {
     width: 10rem;
-    height: 40px;
+    height: var(--icons);
     background-color: var(--darklightshade);    
     border: 0;
     font-size: var(--title);
@@ -109,15 +110,14 @@ button {outline: 0; border: 0; background-color: inherit;}
 }
 
 .nav-search-deployed {
-    width: 100vh;
+    width: 100%;
     background-color: red;
     position: absolute;
-    padding: 0 calc(100% - calc(var(--halfMainSpacing) * 2));
 }
+.nav-search-deployed #nav-search-input { flex: 1; display: block; }
+.nav-search-deployed #nav-search-input { flex: 1; }
 
-.nav-search-input-deployed {
-    display: block;
-}
+#nav-search-input:hover { width: 20rem }
 
 .hero {
     width: 70%;
@@ -250,6 +250,7 @@ button {outline: 0; border: 0; background-color: inherit;}
     #nav-search-input {
         display: none;
     }
+    #nav-search-input:hover { width: 10rem }
 
 
     .hero, nav {

@@ -2,7 +2,7 @@
 - Give color to classes for easier color changing*/
 
 :root {
-    --primary: #FF453E;
+    --primary: #4BAC4B;
 
     --light: #fff;
     --lshade: #f0f0f0;
@@ -14,14 +14,29 @@
     --dlightshade: #181818;
     --dshade: #121212;
 
+    --objectTransition: 200ms;
     --timeHeroAnimation: 400ms;
     --timeAutoSlide: 5000ms;
 
     --halfMainSpacing: .5rem;
     --mainSpacing: 1rem;
     --serapateSections: 4rem;
+    --smallRounding: 5px;
+
+    --bigtitle: 2rem;
+    --title: 1.5rem;
+    --body: 1.125rem;
+    --small: 0.875rem;
 }
-  
+
+h1, h2, h3, h4, h5, h6 { margin: 0; text-decoration: none;}
+h1 { font-size: 4rem;}
+h2 { font-size: 2rem;}
+h3 { font-size: 1.5rem;}
+h4 { font-size: 1.125rem;}
+h5 { font-size: 1rem;}
+h6 { font-size: 0.875rem;}
+
 body {
     margin: 0;
     font-family: "Pridi", sans-serif;
@@ -35,6 +50,7 @@ nav {
     margin: 0 15%;
     background-color: var(--dshade);
     display: flex;
+    gap: var(--mainSpacing);
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--mainSpacing);
@@ -42,7 +58,7 @@ nav {
 
 button {outline: 0; border: 0; background-color: inherit;}
   
-.nav-icons {
+.nav-right {
     display: flex;
     gap: var(--mainSpacing);
 }
@@ -55,6 +71,8 @@ button {outline: 0; border: 0; background-color: inherit;}
     background-position: center;
     filter: brightness(0) invert(1);
     cursor: pointer;
+    display: flex;
+    justify-content: center;
 }
   
 .i-search { background-image: url('../svg/search.svg'); }
@@ -64,9 +82,42 @@ button {outline: 0; border: 0; background-color: inherit;}
 .i-left { background-image: url('../svg/arrowl.svg'); }
 .i-right { background-image: url('../svg/arrowr.svg'); }
 
-.title { margin: 0 var(--mainSpacing); position: relative;}
-.title::after { position: absolute; top: 0; left: 0; width: 80px; height: 80px; border-radius: 2px; background-color: red; z-index: 20}
+.title { margin: 0 var(--mainSpacing); position: relative; font-size: var(--bigtitle);}
 .hidden { display: none; }
+
+.nav-search {
+    display: flex;
+    height: 40px;
+    align-items: flex-end;
+    gap: var(--halfMainSpacing);
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    z-index: 5;
+}
+
+#nav-search-input {
+    width: 10rem;
+    height: 40px;
+    background-color: var(--darklightshade);    
+    border: 0;
+    font-size: var(--title);
+    color: var(--light);
+    font-family: "Pridi", sans-serif;
+    border-bottom: 2px solid var(--light);
+    transition: width var(--objectTransition) ease;
+}
+
+.nav-search-deployed {
+    width: 100vh;
+    background-color: red;
+    position: absolute;
+    padding: 0 calc(100% - calc(var(--halfMainSpacing) * 2));
+}
+
+.nav-search-input-deployed {
+    display: block;
+}
 
 .hero {
     width: 70%;
@@ -195,8 +246,14 @@ button {outline: 0; border: 0; background-color: inherit;}
 }
   
 @media (max-width: 480px) {
+
+    #nav-search-input {
+        display: none;
+    }
+
+
     .hero, nav {
-        width: calc(100% - calc(var(--halfMainSpacing) * 2));
+        width: calc(100% - calc(var(--halfMainSpacing) * 2)); 
         margin-left: var(--halfMainSpacing);
         margin-right: var(--halfMainSpacing);
     }

@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: var(--serapateSections);
+    overflow: hidden;
 }
   
 .hero-header, .hero-footer {
@@ -24,7 +25,7 @@
 }
   
 .hero-card {
-    border: 2px solid #181818;
+    border: 2px solid var(--dlightshade);
     background-color: var(--dark);
     width: 30%;
     border-radius: var(--mainSpacing);
@@ -32,7 +33,7 @@
     position: absolute;
     opacity: 0;
     z-index: 1;
-    transition: var(--timeHeroAnimation) all;
+    transition: width var(--timeHeroAnimation), left var(--timeHeroAnimation), opacity var(--timeHeroAnimation);
 }
 
 .hero-farleft {left: -55%; opacity: 0; }
@@ -85,9 +86,35 @@
 .hero-vignette {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, var(--dshade) 0%, transparent 15%, transparent 85%, var(--dshade) 100%);
+    box-shadow: inset 0 0 5vh 5vh var(--dshade);
     z-index: 10;
 }
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/data/cars.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(0.875rem) brightness(20%);
+}
+/* 
+.hero-strppp {
+    background-image: linear-gradient(
+    -45deg,
+    rgb(var(--primary-stripe-rgb) / var(--opacity)) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgb(var(--primary-stripe-rgb) / var(--opacity)) 50%,
+    rgb(var(--primary-stripe-rgb) / var(--opacity)) 75%,
+    transparent 75%,
+    transparent 100%
+  );
+  background-size: 8px 8px;
+} */
 
 @media (max-width: 1080px) {
     .hero { height: 400px; }
@@ -96,7 +123,7 @@
 }
 
 @media (max-width: 480px) {
-    .hero-vignette { display: none; }
+    .hero-vignette, .hero-background { display: none; }
     .hero-left { left: -35%; }
     .hero-main { width: 100%; left: 0%; }
     .hero-right { left: 135%; }

@@ -12,9 +12,9 @@
 
     --gray: #6a6a6a;
 
-    --dark: #242424;
-    --dlightshade: #181818;
-    --dshade: #121212;
+    --dark: #2b2d2f;
+    --dlightshade: rgba(43, 45, 47, 128);
+    --dshade: #222426;
 
     --objectTransition: 200ms;
     --timeHeroAnimation: 400ms;
@@ -101,6 +101,10 @@ nav {
     align-items: center;
     padding: 0 var(--mainSpacing);
     position: relative;
+}
+
+#nav-img {
+    height: 40px;
 }
   
 .logo {

@@ -8,9 +8,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Pridi:wght@400;600&display=swap" rel="stylesheet">
   <script src="js/search.js"></script>
 </head>
-<body style="padding: 20px; display: flex; gap: 16px;">
-  <button class="button-prim"><div class="icon i-pause"></div></button>
-  <button class="button-seco"><div class="icon i-pause"></div></button>
-  <button class="button-tran"><div class="icon i-pause"></div></button>
+<body >
+  <nav class="side-padding">
+    <a href="#" style="width: 200px; height: 60px; background-color: aqua"></a>
+  
+    <div class="nav-right">
+      <div class="nav-search">
+        <button class="button-tran back-btn hidden"><div class="icon i-left"></div></button>
+        <input type="text" id="nav-search-input" placeholder="Search...">
+        <button class="button-tran"><div class="icon i-search" id="nav-search-button"></div></button>
+      </div>
+      <button class="button-tran"><div class="icon i-account"></div></button>
+    </div>
+  </nav>
+  <div style="display: flex; justify-content: space-evenly; background-color: var(--dlightshade); margin-bottom: 1rem">
+    <a href="index.html">index.html</a>
+    <a href="search.html">search.html</a>
+    <a href="movie.html">movie.html</a>
+    <a href="style.html">style.html</a>
+  </div>
+  <section style="padding: 20px; display: flex; gap: 16px;">
+    <button class="button-prim"><div class="icon i-pause"></div></button>
+    <button class="button-seco"><div class="icon i-pause"></div></button>
+    <button class="button-tran"><div class="icon i-pause"></div></button>
+  </section>
 </body>
 </html>

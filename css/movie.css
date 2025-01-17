@@ -1,4 +1,4 @@
-.card {
+.movie {
     background-color: #000;
     border-radius: 0.5rem;
     box-shadow: 0 0 1rem rgba(255, 0, 0, 0.5);
@@ -11,7 +11,7 @@
     color: #fff;
 }
 
-.card-title {
+.movie-title {
     margin-top: 0;
     margin-bottom: 1.5rem;
     font-size: 2rem;
@@ -20,14 +20,14 @@
     text-transform: uppercase;
 }
 
-.card-img-left {
+.movie-img-left {
     max-width: 200px;
     margin-right: 1.5rem;
     border-radius: 0.5rem;
     border: 2px solid red;
 }
 
-.card-plot {
+.movie-plot {
     margin-top: 1.5rem;
     text-align: center;
     color: #fff;
@@ -35,17 +35,17 @@
     line-height: 1.6;
 }
 
-.card-genre, .card-actors {
+.movie-genre, .movie-actors {
     font-size: 1rem;
     color: #ff4d4d;
     text-align: center;
     margin-top: 0.5rem;
 }
 
-.card-genre {
+.movie-genre {
     font-style: italic;
 }
 
-.card-actors {
+.movie-actors {
     font-weight: bold;
 }

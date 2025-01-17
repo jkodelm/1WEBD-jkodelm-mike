@@ -39,20 +39,20 @@ const movieRatings = movie.Ratings;
 
 function createCard() {
   const card = document.createElement('div');
-  card.classList.add('card');
+  card.classList.add('movie');
   const ratingsHTML = movieRatings.map(rating => `
     <p><strong>${rating.Source}:</strong> ${rating.Value}</p>
   `).join('');
 
   card.innerHTML = `
-    <h5 class="card-title">${movieTitle}</h5>
+    <h5 class="movie-title">${movieTitle}</h5>
     <div style="display: flex; align-items: flex-start;">
-      <img src="${moviePoster}" class="card-img-left" alt="${movieTitle}">
+      <img src="${moviePoster}" class="movie-img-left" alt="${movieTitle}">
       <div>
-        <p class="card-plot">${moviePlot}</p>
-        <p class="card-genre"><small class="text-muted">${movieGenre}</small></p>
-        <p class="card-actors"><small class="text-muted">${movieActors}</small></p>
-        <div class="card-ratings">
+        <p class="movie-plot">${moviePlot}</p>
+        <p class="movie-genre"><small class="text-muted">${movieGenre}</small></p>
+        <p class="movie-actors"><small class="text-muted">${movieActors}</small></p>
+        <div class="movie-ratings">
           <h6>Ratings:</h6>
           ${ratingsHTML}
         </div>

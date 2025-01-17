@@ -1,4 +1,4 @@
-function main() {
+function mainSearch() {
     const navSearch = document.querySelector('.nav-search');
     const navSearchInput = document.querySelector('#nav-search-input');
     const navSearchBtn = document.querySelector('#nav-search-button');
@@ -36,4 +36,4 @@ function main() {
     });
 }
 
-window.onload = main;
+window.onload = mainSearch;

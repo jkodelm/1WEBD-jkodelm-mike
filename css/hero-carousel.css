@@ -28,7 +28,7 @@
     border: 2px solid var(--dlightshade);
     background-color: var(--dark);
     width: 30%;
-    border-radius: var(--mainSpacing);
+    border-radius: var(--topSpacing);
     aspect-ratio: 16/9;
     position: absolute;
     opacity: 0;
@@ -45,14 +45,14 @@
 #hero-indicators { 
     display: flex;
     flex-direction: row;
-    gap: var(--halfMainSpacing);
+    gap: var(--midSpacing);
 }
   
 .hero-indicator {
-    width: var(--mainSpacing);
-    height: var(--mainSpacing);
+    width: var(--topSpacing);
+    height: var(--topSpacing);
     background-color: var(--dark);
-    border-radius: var(--mainSpacing);
+    border-radius: var(--topSpacing);
     transition: all var(--timeHeroAnimation) linear;
     overflow: hidden;
     padding: 0;
@@ -65,7 +65,7 @@
 
 .hero-indicator-time {
     width: 0;
-    height: var(--mainSpacing);
+    height: var(--topSpacing);
     background-color: var(--gray);
 }
 
@@ -79,7 +79,7 @@
 
 .controls {
     width: 88px;
-    gap: var(--halfMainSpacing);
+    gap: var(--midSpacing);
     display: flex;
 }
   
@@ -96,7 +96,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("/data/cars.jpg");
+    background-image: url("/films/cars.jpg");
     background-size: cover;
     background-position: center;
     filter: blur(0.875rem) brightness(20%);

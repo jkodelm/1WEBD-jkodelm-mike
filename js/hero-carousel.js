@@ -92,6 +92,9 @@ class heroCarousel {
     };
 
     manageIndicators() {
+        console.log('inside',this.indicators)
+        if ( !this.indicators ) { return };
+        console.log('still inside')
         this.indicators.forEach((indicator, i) => {
             const timeBar = indicator.firstElementChild;
             indicator.style.backgroundColor = 'var(--dark)';
@@ -147,6 +150,7 @@ class heroCarousel {
 };
 
 function mainHC() {
-    new heroCarousel('hero-content', ['hero-farleft', 'hero-left', 'hero-main', 'hero-right', 'hero-farright'], 400, ['hero-arrow-left', 'hero-arrow-right'],  ['hero-indicators', 'hero-indicator', 'hero-indicator-time'], 5000, 'hero-pause')
+    /*new heroCarousel('hero-content', ['hero-farleft', 'hero-left', 'hero-main', 'hero-right', 'hero-farright'], 400, ['hero-arrow-left', 'hero-arrow-right'],  ['hero-indicators', 'hero-indicator', 'hero-indicator-time'], 5000, 'hero-pause') */
+    new heroCarousel('trending-cards', 'temp-card', 400, ['trending-left', 'trending-right'])
 }
 window.onload = mainHC;

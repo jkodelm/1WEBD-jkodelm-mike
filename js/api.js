@@ -1,57 +1,38 @@
-const movie = {
-  "Title": "Batman",
-  "Year": "1989",
-  "Rated": "PG-13",
-  "Released": "23 Jun 1989",
-  "Runtime": "126 min",
-  "Genre": "Action, Adventure",
-  "Director": "Tim Burton",
-  "Writer": "Bob Kane, Sam Hamm, Warren Skaaren",
-  "Actors": "Michael Keaton, Jack Nicholson, Kim Basinger",
-  "Plot": "The Dark Knight of Gotham City begins his war on crime with his first major enemy being Jack Napier, a criminal who becomes the clownishly homicidal Joker.",
-  "Language": "English, French, Spanish",
-  "Country": "United States, United Kingdom",
-  "Awards": "Won 1 Oscar. 11 wins & 28 nominations total",
-  "Poster": "https://m.media-amazon.com/images/M/MV5BYzZmZWViM2EtNzhlMi00NzBlLWE0MWEtZDFjMjk3YjIyNTBhXkEyXkFqcGc@._V1_SX300.jpg",
-  "Ratings": [
-    { "Source": "Internet Movie Database", "Value": "7.5/10" },
-    { "Source": "Rotten Tomatoes", "Value": "77%" },
-    { "Source": "Metacritic", "Value": "69/100" }
-  ],
-  "Metascore": "69",
-  "imdbRating": "7.5",
-  "imdbVotes": "414,807",
-  "imdbID": "tt0096895",
-  "Type": "movie",
-  "DVD": "N/A",
-  "BoxOffice": "$251,409,241",
-  "Production": "N/A",
-  "Website": "N/A",
-  "Response": "True"
-};
+const apiKey = 'c6e5cf6d'; 
 
-const movieTitle = movie.Title;
-const moviePoster = movie.Poster;
-const moviePlot = movie.Plot;
-const movieGenre = movie.Genre;
-const movieActors = movie.Actors;
-const movieRatings = movie.Ratings;
-
-function createCard() {
+function createCardWithLoading() {
   const card = document.createElement('div');
   card.classList.add('movie');
-  const ratingsHTML = movieRatings.map(rating => `
+  card.innerHTML = `
+    <h5 class="movie-title">Chargement en cours...</h5>
+    <div style="display: flex; align-items: flex-start;">
+      <div class="movie-img-left" style="background-color: #333; width: 200px; height: 300px;"></div>
+      <div>
+        <p class="movie-plot">Chargement du synopsis...</p>
+        <p class="movie-genre"><small class="text-muted">Chargement du genre...</small></p>
+        <p class="movie-actors"><small class="text-muted">Chargement des acteurs...</small></p>
+        <div class="movie-ratings">
+          <h6>Ratings:</h6>
+          <p>Chargement des évaluations...</p>
+        </div>
+      </div>
+    </div>
+  `;
+  return card;
+}
+function updateCardWithMovieData(card, movie) {
+  const ratingsHTML = movie.Ratings.map(rating => `
     <p><strong>${rating.Source}:</strong> ${rating.Value}</p>
   `).join('');
 
   card.innerHTML = `
-    <h5 class="movie-title">${movieTitle}</h5>
+    <h5 class="movie-title">${movie.Title}</h5>
     <div style="display: flex; align-items: flex-start;">
-      <img src="${moviePoster}" class="movie-img-left" alt="${movieTitle}">
+      <img src="${movie.Poster}" class="movie-img-left" alt="${movie.Title}">
       <div>
-        <p class="movie-plot">${moviePlot}</p>
-        <p class="movie-genre"><small class="text-muted">${movieGenre}</small></p>
-        <p class="movie-actors"><small class="text-muted">${movieActors}</small></p>
+        <p class="movie-plot">${movie.Plot}</p>
+        <p class="movie-genre"><small class="text-muted">${movie.Genre}</small></p>
+        <p class="movie-actors"><small class="text-muted">${movie.Actors}</small></p>
         <div class="movie-ratings">
           <h6>Ratings:</h6>
           ${ratingsHTML}
@@ -59,6 +40,58 @@ function createCard() {
       </div>
     </div>
   `;
-
-  return card;
 }
+
+async function fetchMovieData(title) {
+  try {
+    const response = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(title)}&apikey=${apiKey}`);
+    const data = await response.json();
+    if (data.Response === 'True') {
+      return data; 
+    } else {
+      console.error(`Film non trouvé : ${title}`);
+      return null;
+    }
+  } catch (error) {
+    console.error(`Erreur lors de la récupération des données pour ${title}:`, error);
+    return null;
+  }
+}
+
+//ca c est la  fonction pour afficher les cartes dans un parent 
+async function displayMovieCard(parent, title) {
+  const card = createCardWithLoading();
+  parent.appendChild(card);
+
+  const movieData = await fetchMovieData(title);
+
+  if (movieData) {
+    updateCardWithMovieData(card, movieData);
+  } else {
+    card.innerHTML = `<h5 class="movie-title">Film non trouvé : ${title}</h5>`;
+  }
+}
+
+async function loadInitialMovies() {
+  const container = document.getElementById('movie-card-container');
+  const movieTitles = ['Batman', 'The Dark Knight', 'Inception', 'Interstellar']; 
+
+  for (const title of movieTitles) {
+    await displayMovieCard(container, title); 
+  }
+}
+
+// ca c est la fonction pour chercher les flims(pour etre utliser dans search.html)
+async function searchMovie() {
+  const searchInput = document.getElementById('search-input').value;
+  if (searchInput) {
+    const container = document.getElementById('movie-card-container');
+    container.innerHTML = ''; 
+
+    await displayMovieCard(container, searchInput); 
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadInitialMovies);
+
+document.getElementById('search-button').addEventListener('click', searchMovie);

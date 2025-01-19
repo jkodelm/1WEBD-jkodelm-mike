@@ -39,7 +39,7 @@
       </div>
     </header>
     <main>
-      <div id='movie-card-container'></div>
+      <div id='movie-card-container' class="movie-grid"></div>
     </main>
     <section>
       <h1>Informations sur le film</h1>
@@ -52,8 +52,7 @@
     <script src='js/api.js'></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        const card = createCard();
-        document.getElementById('movie-card-container').appendChild(card);
+        loadMovies();
       });
     </script>
   </body>

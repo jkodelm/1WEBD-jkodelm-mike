@@ -35,11 +35,11 @@
       <div class='temp-card'>C</div>
       <div class='temp-card'>D</div>
       <div class='temp-card'>Eantalons</div>
-<!--       <div class='temp-card'>Fomme</div>
+      <div class='temp-card'>Fomme</div>
       <div class='temp-card'>Gn</div>
       <div class='temp-card'>Haisait</div>
       <div class='temp-card'>In</div>
-      <div class='temp-card'>Jrimaire</div> -->
+      <div class='temp-card'>Jrimaire</div>
     </div>
   </section>
   <button id="left">Leftg</button>
@@ -49,7 +49,7 @@
   <script>
     class cardCarousel {
       constructor(carouselName, cardName, gap, controlButtonName) {
-        this.cardName = cardName
+        this.cardName = cardName;
         this.carouselFrame = document.querySelector(`#${carouselName}`);
         this.carouselWidth = this.carouselFrame.offsetWidth;
         this.cardWidth = this.carouselFrame.querySelector(this.cardName).offsetWidth;
@@ -57,72 +57,63 @@
 
         this.gap = gap;
         this.position = 0;
-        this.prevCursor = 0;
+        this.isHolding = false;
+        this.posCursor = 0;
 
         const leftBtn = document.querySelector(`#${controlButtonName[0]}`);
         const rightBtn = document.querySelector(`#${controlButtonName[1]}`);
-        leftBtn.addEventListener('click', () => { this.moveCarousel('l') })
-        rightBtn.addEventListener('click',  () => { this.moveCarousel('r') })
-        this.carouselFrame.addEventListener('mousedown', () => { this.holding() });
+        leftBtn.addEventListener('click', () => { this.moveCarousel('l'); })
+        rightBtn.addEventListener('click', () => { this.moveCarousel('r'); })
+        this.carouselFrame.addEventListener('mousedown', (event) => { this.holding(event); });
 
         window.addEventListener('resize', () => {
           const newWidth = this.carouselFrame.offsetWidth;
           this.position += newWidth - this.carouselWidth;
-          // ABORT IF FULL LENGTH WITH CARDS IS LARGER
           this.carouselWidth = newWidth;
 
-          this.carouselFrame.style.transition = 'none';
-          this.setTransform();
-          window.setTimeout(() => {this.carouselFrame.style.transition = 'transform .2s ease-in-out'}, 10)
+          setTransform(true)
         });
-      };
+      }
 
-      setTransform() {
-        //const nbCards = (this.carouselFrame.querySelectorAll(this.cardName)).length;
-        
+      setTransform(noTransition=false) {
         if (this.position < this.maxWidth) { this.position = this.maxWidth; }
         if (this.position > 0) { this.position = 0; }
-        
-        this.carouselFrame.style.transform = `translateX(${this.position}px)`;
+
+        if (noTransition) {
+          this.carouselFrame.style.transition = 'none';
+          this.carouselFrame.style.transform = `translateX(${this.position}px)`;
+          setTimeout(() => { this.carouselFrame.style.transition = 'transform .2s ease-in-out'; }, 10);
+        } else {
+          this.carouselFrame.style.transform = `translateX(${this.position}px)`;
+        }
       }
-        
-      holding = (event) => {
-        console.log('facepalm');
+
+      holding(event) {
         this.isHolding = true;
         this.carouselFrame.style.backgroundColor = 'yellow';
         document.body.style.cursor = 'grabbing';
+        this.posCursor = event.clientX;
 
         window.addEventListener('mouseup', this.stopHolding);
-        this.carouselFrame.addEventListener('mouseleave', this.stopHolding);
         window.addEventListener('mousemove', this.dragCarousel);
-      };
-
+      }
 
       dragCarousel = (event) => {
         if (this.isHolding) {
-
-          //console.log(`Dragging at position: ${event.x}`);
-          if (event.x > this.prevCursor) {
-            console.log('-', this.prevCursor, 'n', event.x - this.prevCursor)
-            this.position = this.position - (event.x - this.prevCursor)
-          } else if (event.x < this.prevCursor) {
-            console.log('+', this.prevCursor, 'n', this.prevCursor - event.x)
-            this.position = this.position + (this.prevCursor - event.x)
-          } else { return }; // Le curseur n'a pas bougé
-          this.prevCursor = event.x
-          this.setTransform();
+          const newPos = event.clientX - this.posCursor;
+          this.posCursor = event.clientX;
+          this.position += newPos;
+          this.setTransform(true);
         }
       };
 
       stopHolding = () => {
-        console.log('you sotped')
         this.isHolding = false;
         this.carouselFrame.style.backgroundColor = 'red';
         document.body.style.cursor = 'default';
 
         window.removeEventListener('mouseup', this.stopHolding);
-        this.carouselFrame.removeEventListener('mouseleave', this.stopHolding);
-        this.carouselFrame.removeEventListener('mousemove', this.dragCarousel);
+        window.removeEventListener('mousemove', this.dragCarousel);
       };
 
       moveCarousel(direction) {
@@ -134,15 +125,10 @@
         else { this.position += scrollAmount; }
 
         this.setTransform();
-      };
-
-      holding() {
-        console.log('facepalm')
-        this.carouselFrame.removeEventListener('mousedown', () => { this.holding() })
       }
     }
 
-    new cardCarousel('trending-cards', '.temp-card', 10, ['left', 'right'])
+    new cardCarousel('trending-cards', '.temp-card', 10, ['left', 'right']);
   </script>
 </body>
 </html>

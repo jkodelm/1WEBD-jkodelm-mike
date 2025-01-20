@@ -10,17 +10,18 @@
         overflow: hidden;
         width: 70%;
         position: relative;
+        border-radius: 4px;
+        background-color: red;
     }
 
     .card-carousel {
       display: flex;
       gap: 10px;
-      transition: transform 0.3s ease-in-out;
-      padding-right: 10px;
+      transition: transform .2s ease-in-out;
     }
 
     .temp-card {
-        min-width: 100px;
+        min-width: 200px;
         height: 174px;
         background-color: green;
     }
@@ -34,11 +35,11 @@
       <div class='temp-card'>C</div>
       <div class='temp-card'>D</div>
       <div class='temp-card'>Eantalons</div>
-      <div class='temp-card'>Fomme</div>
+<!--       <div class='temp-card'>Fomme</div>
       <div class='temp-card'>Gn</div>
       <div class='temp-card'>Haisait</div>
       <div class='temp-card'>In</div>
-      <div class='temp-card'>Jrimaire</div>
+      <div class='temp-card'>Jrimaire</div> -->
     </div>
   </section>
   <button id="left">Leftg</button>
@@ -47,36 +48,57 @@
   <div id="overlay" class="hidden"></div>
   <script>
     class cardCarousel {
-      constructor() {
-        this.carouselFrame = document.querySelector('#trending-cards');
-        this.cardWidth = this.carouselFrame.querySelector('.temp-card').offsetWidth
-        this.gap = 10;
-        this.leftBtn = document.querySelector('#left');
-        this.rightBtn = document.querySelector('#right');
+      constructor(carouselName, cardName, gap, controlButtonName) {
+        this.cardName = cardName
+        this.carouselFrame = document.querySelector(`#${carouselName}`);
+        this.carouselWidth = this.carouselFrame.offsetWidth;
+        this.cardWidth = this.carouselFrame.querySelector(this.cardName).offsetWidth;
+
+        this.gap = gap;
         this.position = 0;
 
-        this.leftBtn.addEventListener('click', () => { this.moveCarousel('sub') })
-        this.rightBtn.addEventListener('click',  () => { this.moveCarousel('add') })
+        const leftBtn = document.querySelector(`#${controlButtonName[0]}`);
+        const rightBtn = document.querySelector(`#${controlButtonName[1]}`);
+        leftBtn.addEventListener('click', () => { this.moveCarousel('l') })
+        rightBtn.addEventListener('click',  () => { this.moveCarousel('r') })
+
+        window.addEventListener('resize', () => {
+          const newWidth = this.carouselFrame.offsetWidth;
+          this.position += newWidth - this.carouselWidth;
+          // ABORT IF FULL LENGTH WITH CARDS IS LARGER
+          this.carouselWidth = newWidth;
+
+          this.carouselFrame.style.transition = 'none';
+          this.carouselFrame.style.transform = `translateX(${this.position}px)`;
+          window.setTimeout(() => {this.carouselFrame.style.transition = 'transform .2s ease-in-out'}, 10)
+        });
+
+        this.carouselFrame.addEventListener('mousedown', () => { this.holding() });
       };
 
-      moveCarousel(operation) {
+      moveCarousel(direction) {
         const carouselWidth = this.carouselFrame.offsetWidth;
         const scrollAmount = (this.cardWidth + this.gap) * Math.floor(carouselWidth / (this.cardWidth + this.gap));
         console.log(carouselWidth, scrollAmount)
-        const nbCards = (this.carouselFrame.querySelectorAll('.temp-card')).length
-        const maxWidth = (this.cardWidth + this.gap) * this.gap;
+        const nbCards = (this.carouselFrame.querySelectorAll(this.cardName)).length;
+        const maxWidth = -(this.carouselFrame.scrollWidth - carouselWidth);
 
-        if (operation == 'add') { this.position -= scrollAmount }
-        else { this.position += scrollAmount }
+        if (direction === 'r') { this.position -= scrollAmount; }
+        else { this.position += scrollAmount; }
 
-        if (this.position > maxWidth) { this.position = maxWidth };
-        if (this.position < 0) { this.position = 0 };
+        if (this.position < maxWidth) { this.position = maxWidth; }
+        if (this.position > 0) { this.position = 0; }
 
         this.carouselFrame.style.transform = `translateX(${this.position}px)`;
       };
+
+      holding() {
+        console.log('facepalm')
+        this.carouselFrame.removeEventListener('mousedown', () => { this.holding() })
+      }
     }
 
-    new cardCarousel()
+    new cardCarousel('trending-cards', '.temp-card', 10, ['left', 'right'])
   </script>
 </body>
 </html>

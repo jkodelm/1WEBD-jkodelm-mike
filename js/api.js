@@ -20,6 +20,8 @@ function createCardWithLoading() {
   `;
   return card;
 }
+
+// Fonction pour mettre a jour une card avec les film
 function updateCardWithMovieData(card, movie) {
   const ratingsHTML = movie.Ratings.map(rating => `
     <p><strong>${rating.Source}:</strong> ${rating.Value}</p>
@@ -42,6 +44,7 @@ function updateCardWithMovieData(card, movie) {
   `;
 }
 
+// Fonction pour recupererer les donnees d'un film depuis l'API
 async function fetchMovieData(title) {
   try {
     const response = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(title)}&apikey=${apiKey}`);
@@ -58,7 +61,7 @@ async function fetchMovieData(title) {
   }
 }
 
-//ca c est la  fonction pour afficher les cartes dans un parent 
+// Fonction pour afficher une card film dans un parent
 async function displayMovieCard(parent, title) {
   const card = createCardWithLoading();
   parent.appendChild(card);
@@ -72,16 +75,47 @@ async function displayMovieCard(parent, title) {
   }
 }
 
+// Fonction pour créer une carte de poster
+function createPosterCard(movie) {
+  const card = document.createElement('div');
+  card.classList.add('movie-poster');
+  card.innerHTML = `
+    <img src="${movie.Poster}" alt="${movie.Title}" class="movie-poster-img">
+  `;
+  return card;
+}
+
+// Fonction pour afficher les cartes de posters
+async function displayPosterCards(parent, titles) {
+  for (const title of titles) {
+    const movieData = await fetchMovieData(title);
+    if (movieData && movieData.Poster) { 
+      const card = createPosterCard(movieData);
+      parent.appendChild(card);
+    }
+  }
+}
+
+// Fonction pour charger les films et les posters
 async function loadInitialMovies() {
   const container = document.getElementById('movie-card-container');
+  const posterContainer = document.getElementById('poster-container');
+  posterContainer.style.display = 'grid';
+  posterContainer.style.gridTemplateColumns = 'repeat(6, 1fr)'; // 6 colonnes
+  posterContainer.style.gap = '1rem'; 
+  posterContainer.style.marginTop = '2rem';
+
   const movieTitles = ['Batman', 'The Dark Knight', 'Inception', 'Interstellar']; 
+  const posterTitles = ['Dunkirk', 'Tenet', 'Memento', 'The Prestige', 'Insomnia', 'Following'];
 
   for (const title of movieTitles) {
     await displayMovieCard(container, title); 
   }
+
+  await displayPosterCards(posterContainer, posterTitles);
 }
 
-// ca c est la fonction pour chercher les flims(pour etre utliser dans search.html)
+// Fonction pour rechercher un film
 async function searchMovie() {
   const searchInput = document.getElementById('search-input').value;
   if (searchInput) {
@@ -92,6 +126,6 @@ async function searchMovie() {
   }
 }
 
+// Écouteurs d'événements
 document.addEventListener('DOMContentLoaded', loadInitialMovies);
-
 document.getElementById('search-button').addEventListener('click', searchMovie);

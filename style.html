@@ -4,44 +4,79 @@
   <meta charset='UTF-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <title>Orléans Ciné</title>
-  <link rel='stylesheet' href='./css/styles.css'>
   <link href='https://fonts.googleapis.com/css2?family=Pridi:wght@400;600&display=swap' rel='stylesheet'>
-  <script src='./js/main.js'></script>
+  <style>
+    .card-carousel-frame {
+        overflow: hidden;
+        width: 70%;
+        position: relative;
+    }
+
+    .card-carousel {
+      display: flex;
+      gap: 10px;
+      transition: transform 0.3s ease-in-out;
+      padding-right: 10px;
+    }
+
+    .temp-card {
+        min-width: 100px;
+        height: 174px;
+        background-color: green;
+    }
+  </style>
 </head>
-<body >
-  <nav class='side-padding'>
-    <a href='./index.html'><img id='nav-img' src='./data/logotemp.png'></a>
-  
-    <div class='nav-right'>
-      <div class='nav-search'>
-        <button class='button-tran back-btn hidden'><div class='icon i-left'></div></button>
-        <input type='text' id='nav-search-input' placeholder='Search...'>
-        <button class='button-tran'><div class='icon i-search' id='nav-search-button'></div></button>
-      </div>
-      <button class='button-tran'><div class='icon i-account'></div></button>
+<body>
+  <section class="card-carousel-frame">
+    <div class='card-carousel' id='trending-cards'>
+      <div class='temp-card'>A</div>
+      <div class='temp-card'>B</div>
+      <div class='temp-card'>C</div>
+      <div class='temp-card'>D</div>
+      <div class='temp-card'>Eantalons</div>
+      <div class='temp-card'>Fomme</div>
+      <div class='temp-card'>Gn</div>
+      <div class='temp-card'>Haisait</div>
+      <div class='temp-card'>In</div>
+      <div class='temp-card'>Jrimaire</div>
     </div>
-    <div id="nav-lower-frame" class="side-padding hidden">
-      <div id="nav-search-results">
-        <a href="#" class="nav-search-result side-padding"><img src="./films/cars.jpg"><h3 class="clamp-2">Cars</h3></a>
-        <a href="#" class="nav-search-result side-padding"><img src="./films/trans.jpg"><h3 class="clamp-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit ullam rem maiores quaerat laboriosam neque asperiores suscipit, qui, voluptatem minima provident facilis labore tempora eum quod enim accusantium cupiditate? Ea ratione accusantium ipsum nulla ullam voluptatem nam beatae eaque ab!</h3></a>
-        <a href="#" class="nav-search-result side-padding">d</a>
-        <a href="#" class="nav-search-result side-padding">e</a>
-        <a href="#" class="nav-search-result side-padding">d</a>
-      </div>
-    </div>
-  </nav>
-  <div style='display: flex; justify-content: space-evenly; margin-bottom: 1rem'>
-    <a href='./index.html'>index.html</a>
-    <a href='./search.html'>search.html</a>
-    <a href='./movie.html'>movie.html</a>
-    <a href='./style.html'>style.html</a>
-  </div>
-  <section style='padding: 20px; display: flex; gap: 16px;'>
-    <button class='button-prim'><div class='icon i-pause'></div></button>
-    <button class='button-seco'><div class='icon i-pause'></div></button>
-    <button class='button-tran'><div class='icon i-pause'></div></button>
   </section>
+  <button id="left">Leftg</button>
+  <button id="right">Raight</button>
 
   <div id="overlay" class="hidden"></div>
+  <script>
+    class cardCarousel {
+      constructor() {
+        this.carouselFrame = document.querySelector('#trending-cards');
+        this.cardWidth = this.carouselFrame.querySelector('.temp-card').offsetWidth
+        this.gap = 10;
+        this.leftBtn = document.querySelector('#left');
+        this.rightBtn = document.querySelector('#right');
+        this.position = 0;
+
+        this.leftBtn.addEventListener('click', () => { this.moveCarousel('sub') })
+        this.rightBtn.addEventListener('click',  () => { this.moveCarousel('add') })
+      };
+
+      moveCarousel(operation) {
+        const carouselWidth = this.carouselFrame.offsetWidth;
+        const scrollAmount = (this.cardWidth + this.gap) * Math.floor(carouselWidth / (this.cardWidth + this.gap));
+        console.log(carouselWidth, scrollAmount)
+        const nbCards = (this.carouselFrame.querySelectorAll('.temp-card')).length
+        const maxWidth = (this.cardWidth + this.gap) * this.gap;
+
+        if (operation == 'add') { this.position -= scrollAmount }
+        else { this.position += scrollAmount }
+
+        if (this.position > maxWidth) { this.position = maxWidth };
+        if (this.position < 0) { this.position = 0 };
+
+        this.carouselFrame.style.transform = `translateX(${this.position}px)`;
+      };
+    }
+
+    new cardCarousel()
+  </script>
 </body>
 </html>

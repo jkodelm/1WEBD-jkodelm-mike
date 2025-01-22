@@ -27,6 +27,91 @@ body { background-color: #222426}
     color: var(--gray)
 }
 
+.movie-tabs {
+    padding-left: var(--topSpacing);
+    display: flex;
+}
+
+.movie-tab { 
+    position: relative;
+    padding: var(--midSpacing) var(--topSpacing);
+    color: var(--font);
+    cursor: pointer;
+}
+
+.movie-tab-active { 
+    background-color: var(--dlightshade);
+    border-radius: var(--midSpacing) var(--midSpacing) 0 0;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.movie-tab-bot {
+    content: '';
+    display: none;
+    position: absolute;
+    left: calc(-1 * var(--midSpacing));
+    bottom: 0;
+    width: calc(100% + calc( var(--midSpacing) * 2));
+    background-color: var(--dlightshade);
+    height: var(--midSpacing)
+}
+.movie-tab-active .movie-tab-bot { display: block; }
+
+.movie-tab-bot:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: var(--dshade);
+    width: var(--midSpacing);
+    height: var(--midSpacing);
+    border-bottom-right-radius: var(--midSpacing);
+}
+
+.movie-tab-bot:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: var(--dshade);
+    width: var(--midSpacing);
+    height: var(--midSpacing);
+    border-bottom-left-radius: var(--midSpacing);
+}
+
+.movie-window {
+    padding: var(--topSpacing);
+    border-radius: var(--midSpacing);
+    background-color: var(--dlightshade);
+    display: flex;
+    flex-direction: column;
+    gap: var(--midSpacing);
+}
+
+.movie-profiles {
+    display: flex;
+   /*  flex: 0 0 160px; */
+}
+
+.movie-profile {
+    padding: var(--midSpacing);
+    border-radius: var(--midSpacing);
+    background-color: var(--dlightshade);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    max-width: 200px;
+}
+.movie-profile p {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.movie-profile img { width: 40px; height: 40px; border-radius: 3rem; margin-right: var(--midSpacing);}
+.movie-profile:hover { background-color: var(--dark)}
+
 @media (max-width: 720px) {
     .movie-container { flex-direction: column; align-items: center;}
     .movie-container img { height: 45%; width: auto; margin-bottom: var(--midSpacing)}
@@ -35,4 +120,5 @@ body { background-color: #222426}
   
 @media (max-width: 480px) {
     body { background-color: #080808; }
+    .movie-container h1 { font-size: 2rem; }
 }  

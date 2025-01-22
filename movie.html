@@ -5,6 +5,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>Movie</title>
     <link rel='stylesheet' href='./css/styles.css' />
+    <link href='https://fonts.googleapis.com/css2?family=Pridi:wght@400;600&display=swap' rel='stylesheet'>
     <!-- <link rel='stylesheet' href='./css/movie.css' /> -->
     <link rel='stylesheet' href='./css/movie2.css' />
   </head>
@@ -44,16 +45,17 @@
 
 
 
-      <div class="movie-container">
+      <section class="movie-container">
         <img src="./films/batman.jpg" alt="'Batman' film poster">
         <div class="movie-info">
           <h1>Batman, the last knight alive or idk what' shis name</h1>
-          <div class="gapHMS">
-            <div class="tag">Aventure</div>
-          </div>
           <div class="movie-details">
-            Durée : <b>2h06</b>・Sortie : <b>1989</b>・<a href="https://www.filmratings.com/">PGM13</a>
+            Durée : <b>2h06</b>・Sortie : <b>23 Juin 1989</b>・<a href="https://www.filmratings.com/">PGM13</a>
           </div>
+          <div class="gapHMS overflowhidden"> <!-- MONTRER SEULEMENT 3  -->
+            <div class="tag"><div class='icon i-search'></div>Aventure</div>           
+          </div>
+          
           <div class="movie-plot">
             The Dark Knight of Gotham City begins his war on crime with his first major enemy being Jack Napier, a criminal who becomes the clownishly homicidal Joker.
           </div>
@@ -62,8 +64,25 @@
             <button class='button-prim button-pad'>Réservation indisponible</button>
           </div>
         </div>
-        
-      </div>
+      </section>
+
+      <section>
+        <div class="movie-tabs">
+          <div class="movie-tab movie-tab-active"><div class="movie-tab-bot"></div>Casting</div> <!-- Director, actor, realisators -->
+          <div class="movie-tab"><div class="movie-tab-bot"></div>Ratings</div>
+          <div class="movie-tab"><div class="movie-tab-bot"></div>More info</div> <!-- Languages, awards -->
+        </div>
+        <div class="movie-window"> <!-- hidden si pas activ -->
+          <h3>Directeur</h3> <!-- avec des s si plusieurs virgules -->
+          <div class="movie-profiles">
+            <a href="#" class="movie-profile"><img src="./data/personnotfound.png"><p>Tim Burton</p></a>
+          </div>
+          <h3>Directeur</h3> <!-- avec des s si plusieurs virgules -->
+          <div class="movie-profiles">
+            <a href="#" class="movie-profile"><img src="./data/personnotfound.png"><p>Tim Burton</p></a>
+          </div>
+        </div>
+      </section>
 
 
 

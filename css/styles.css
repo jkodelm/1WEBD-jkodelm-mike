@@ -148,7 +148,7 @@ button {
 
 .tag {
     display: flex;
-    gap: var(--midSpacing);
+    gap: var(--botSpacing);
     padding: 0 var(--midSpacing);
     border: 2px solid var(--font);
     border-radius: 1rem;
@@ -248,15 +248,8 @@ nav {
 .nav-search-result img { height: 70px ; border-radius: var(--botSpacing);} /* 2 lines text*/
 .nav-search-result:hover { background-color: var(--dark); }
 
-
-
-
-
-
 section {
-    margin-bottom: 30rem;
-    background-color: red;
-    height: 10rem;
+    margin-bottom: var(--serapateSections);
 }
 
 .hero-header, .top-section {
@@ -267,9 +260,6 @@ section {
     z-index: 11;
     font-size: 2rem;
 }
-  
-
-
 
 .traversin {
     width: 100%;

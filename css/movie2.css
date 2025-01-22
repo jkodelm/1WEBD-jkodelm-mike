@@ -1,6 +1,24 @@
 main { padding-top: 3rem; }
 body { background-color: #222426}
 
+.movie-vignette {
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 5vh 5vh var(--dshade);
+    z-index: 2;
+    display: none;
+}
+
+.movie-poster-blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(0.9rem) brightness(50%);
+    overflow: hidden;
+}
+
 .movie-main {
     min-width: 100%;
     display: flex;
@@ -11,7 +29,8 @@ body { background-color: #222426}
     height: 400px;
     width: auto;
     border-radius: var(--smallRounding);
-    margin-right: var(--midSpacing)
+    margin-right: var(--topSpacing);
+    z-index: 10;
 }
 
 .movie-info {
@@ -19,17 +38,17 @@ body { background-color: #222426}
     flex-direction: column;
     flex: 1;
     gap: var(--midSpacing);
+    z-index: 10;
 }
 
 .movie-plot { flex: 1; }
 
-.movie-details {
-    color: var(--gray)
-}
+.movie-details { color: var(--gray) }
 
 .movie-tabs {
     padding-left: var(--topSpacing);
     display: flex;
+    user-select: none;
 }
 
 .movie-tab { 
@@ -88,13 +107,13 @@ body { background-color: #222426}
     flex-direction: column;
     gap: var(--midSpacing);
 }
-.movie-window.movie-tab-active {
+.movie-window.movie-tab-shown {
     display: flex;
 }
 
 .movie-profiles {
     display: flex;
-   /*  flex: 0 0 160px; */
+    flex-wrap: wrap;
 }
 
 .movie-profile {
@@ -105,6 +124,7 @@ body { background-color: #222426}
     align-items: center;
     overflow: hidden;
     max-width: 200px;
+    flex: 0 1 200px;
 }
 .movie-profile p {
     flex: 1;
@@ -118,10 +138,11 @@ body { background-color: #222426}
 @media (max-width: 720px) {
     .movie-main { flex-direction: column; align-items: center;}
     .movie-main img { height: 45%; width: auto; margin-bottom: var(--midSpacing)}
-    body { background-color: #161616; }
+/*     body { background-color: #161616; } */
+    .movie-vignette { display: block; }
 }
   
 @media (max-width: 480px) {
-    body { background-color: #080808; }
+/*     body { background-color: #080808; } */
     .movie-main h1 { font-size: 2rem; }
 }  

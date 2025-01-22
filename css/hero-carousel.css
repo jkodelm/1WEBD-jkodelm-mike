@@ -96,7 +96,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("/films/cars.jpg");
+    background-image: url("./films/cars.jpg");
     background-size: cover;
     background-position: center;
     filter: blur(0.875rem) brightness(20%);

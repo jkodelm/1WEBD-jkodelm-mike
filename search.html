@@ -6,7 +6,8 @@
   <title>Orléans Ciné</title>
   <link rel='stylesheet' href='./css/styles.css'>
   <link href='https://fonts.googleapis.com/css2?family=Pridi:wght@400;600&display=swap' rel='stylesheet'>
-  <script src='./js/main.js'></script>
+  <script src='./js/api.js'></script>
+  <script src='./js/search.js' defer></script>
 </head>
 <body>
   <header>
@@ -16,19 +17,10 @@
       <div class='nav-right'>
         <div class='nav-search'>
           <button class='button-tran back-btn hidden'><div class='icon i-left'></div></button>
-          <input type='text' id='nav-search-input' placeholder='Search...'>
-          <button class='button-tran'><div class='icon i-search' id='nav-search-button'></div></button>
+          <input type='text' id='search-input' placeholder='Search...'>
+          <button class='button-tran' id='search-button'><div class='icon i-search'></div></button>
         </div>
         <button class='button-tran'><div class='icon i-account'></div></button>
-      </div>
-      <div id="nav-lower-frame" class="side-padding hidden">
-        <div id="nav-search-results">
-          <a href="#" class="nav-search-result side-padding"><img src="./films/cars.jpg"><h3 class="clamp-2">Cars</h3></a>
-          <a href="#" class="nav-search-result side-padding"><img src="./films/trans.jpg"><h3 class="clamp-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit ullam rem maiores quaerat laboriosam neque asperiores suscipit, qui, voluptatem minima provident facilis labore tempora eum quod enim accusantium cupiditate? Ea ratione accusantium ipsum nulla ullam voluptatem nam beatae eaque ab!</h3></a>
-          <a href="#" class="nav-search-result side-padding">d</a>
-          <a href="#" class="nav-search-result side-padding">e</a>
-          <a href="#" class="nav-search-result side-padding">d</a>
-        </div>
       </div>
     </nav>
     <div style='display: flex; justify-content: space-evenly; margin-bottom: 1rem'>
@@ -38,6 +30,11 @@
       <a href='./style.html'>style.html</a>
     </div>
   </header>
+  <main>
+    <div id='search-results' class='movie-grid'></div>
+    <button id='load-more' class='hidden' style="color: red;">Charger plus de résultats</button>
+  </main>
+
   <footer></footer>
 
   <div id="overlay" class="hidden"></div>

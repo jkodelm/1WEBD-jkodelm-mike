@@ -1,5 +1,6 @@
 const apiKey = 'c6e5cf6d'; 
 
+// Fonction pour créer une carte de chargement
 function createCardWithLoading() {
   const card = document.createElement('div');
   card.classList.add('movie');
@@ -8,9 +9,10 @@ function createCardWithLoading() {
     <div style="display: flex; align-items: flex-start;">
       <div class="movie-img-left" style="background-color: #333; width: 200px; height: 300px;"></div>
       <div>
-        <p class="movie-plot">Chargement du synopsis...</p>
+        <p class="movie-plot">Chargement du grand résumé...</p>
         <p class="movie-genre"><small class="text-muted">Chargement du genre...</small></p>
         <p class="movie-actors"><small class="text-muted">Chargement des acteurs...</small></p>
+        <p class="movie-dvd"><small class="text-muted">Chargement de la date de sortie en DVD...</small></p>
         <div class="movie-ratings">
           <h6>Ratings:</h6>
           <p>Chargement des évaluations...</p>
@@ -21,20 +23,27 @@ function createCardWithLoading() {
   return card;
 }
 
-// Fonction pour mettre a jour une card avec les film
+// Fonction pour mettre à jour une carte avec les données du film
 function updateCardWithMovieData(card, movie) {
   const ratingsHTML = movie.Ratings.map(rating => `
     <p><strong>${rating.Source}:</strong> ${rating.Value}</p>
   `).join('');
+
+  // Utiliser le grand résumé (Fullplot) si disponible, sinon utiliser le synopsis (Plot)
+  const plotText = movie.Plot || 'Aucun résumé disponible.';
+
+  // Ajouter la date de sortie en DVD si disponible
+  const dvdDate = movie.DVD || 'Date de sortie en DVD non disponible.';
 
   card.innerHTML = `
     <h5 class="movie-title">${movie.Title}</h5>
     <div style="display: flex; align-items: flex-start;">
       <img src="${movie.Poster}" class="movie-img-left" alt="${movie.Title}">
       <div>
-        <p class="movie-plot">${movie.Plot}</p>
+        <p class="movie-plot">${plotText}</p>
         <p class="movie-genre"><small class="text-muted">${movie.Genre}</small></p>
         <p class="movie-actors"><small class="text-muted">${movie.Actors}</small></p>
+        <p class="movie-dvd"><small class="text-muted">Date de sortie en DVD : ${dvdDate}</small></p>
         <div class="movie-ratings">
           <h6>Ratings:</h6>
           ${ratingsHTML}
@@ -44,10 +53,10 @@ function updateCardWithMovieData(card, movie) {
   `;
 }
 
-// Fonction pour recupererer les donnees d'un film depuis l'API
+// Fonction pour récupérer les données d'un film depuis l'API avec le grand résumé
 async function fetchMovieData(title) {
   try {
-    const response = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(title)}&apikey=${apiKey}`);
+    const response = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(title)}&plot=full&apikey=${apiKey}`);
     const data = await response.json();
     if (data.Response === 'True') {
       return data; 
@@ -61,7 +70,7 @@ async function fetchMovieData(title) {
   }
 }
 
-// Fonction pour afficher une card film dans un parent
+// Fonction pour afficher une carte de film dans un conteneur parent
 async function displayMovieCard(parent, title) {
   const card = createCardWithLoading();
   parent.appendChild(card);
@@ -126,6 +135,58 @@ async function searchMovie() {
   }
 }
 
+// Fonction pour récupérer le paramètre "title" de l'URL
+function getTitleFromURL() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  return urlParams.get('title');
+}
+
+// Fonction pour afficher la grande carte du film sur movie.html
+async function displayMovie() {
+  const title = getTitleFromURL();
+  if (title) {
+    const container = document.getElementById('movie-card-container');
+    container.innerHTML = ''; // Clear previous content
+
+    const movieData = await fetchMovieData(title);
+    if (movieData) {
+      const card = document.createElement('div');
+      card.classList.add('movie'); // Utiliser la classe de la grande carte
+      card.innerHTML = `
+        <h5 class="movie-title">${movieData.Title}</h5>
+        <div style="display: flex; align-items: flex-start;">
+          <img src="${movieData.Poster}" class="movie-img-left" alt="${movieData.Title}">
+          <div>
+            <p class="movie-plot">${movieData.Plot || 'Aucun résumé disponible.'}</p>
+            <p class="movie-genre"><small class="text-muted">${movieData.Genre}</small></p>
+            <p class="movie-actors"><small class="text-muted">${movieData.Actors}</small></p>
+            <p class="movie-dvd"><small class="text-muted">Date de sortie en DVD : ${movieData.DVD || 'Non disponible'}</small></p>
+            <div class="movie-ratings">
+              <h6>Ratings:</h6>
+              ${movieData.Ratings.map(rating => `
+                <p><strong>${rating.Source}:</strong> ${rating.Value}</p>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    } else {
+      container.innerHTML = `<p>Film non trouvé : ${title}</p>`;
+    }
+  } else {
+    container.innerHTML = `<p>Aucun titre de film spécifié.</p>`;
+  }
+}
+
 // Écouteurs d'événements
-document.addEventListener('DOMContentLoaded', loadInitialMovies);
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.location.pathname.includes('movie.html')) {
+    displayMovie(); // Afficher la grande carte sur movie.html
+  } else {
+    loadInitialMovies(); // Charger les films initiaux sur la page d'accueil
+  }
+});
+
 document.getElementById('search-button').addEventListener('click', searchMovie);

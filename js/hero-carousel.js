@@ -90,7 +90,7 @@ class heroCarousel {
         if ( !this.indicators ) { return };
         this.indicators.forEach((indicator, i) => {
             const timeBar = indicator.firstElementChild;
-            indicator.style.backgroundColor = 'var(--dark)';
+            indicator.style.backgroundColor = 'var(--col)';
             indicator.style.width = '1rem';
             timeBar.style.animation = 'none';
         });

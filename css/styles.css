@@ -284,7 +284,6 @@ section {
   
 @media (max-width: 1080px) {
     .side-padding { width: 90%; padding-left: 5%; padding-right: 5%; height: auto;}
-    a { border: 2px dashed var(--gray) }
 }
   
 @media (max-width: 480px) {

@@ -37,9 +37,7 @@
       <a href='./index.html'>index.html</a>
       <a href='./search.html'>search.html</a>
       <a href='./movie.html'>movie.html</a>
-      <a href='./style.html'>style.html</a>
     </div>
-    <script>console.log('3')</script>
 
     <section class='hero'>
       <div class='side-padding hero-header '><h2>À ne pas manquer</h2></div>
@@ -91,7 +89,6 @@
       <div class='traversin-inside'></div>
       <div class='traversin-bottom'></div>
     </section>
-    <p>test my csgo my bro</p>
   </main>
   <script>
     new heroCarousel('trending-cards', 'temp-card', 400, ['trending-left', 'trending-right'])
@@ -101,32 +98,3 @@
   <div id="overlay" class="hidden"></div>
 </body>
 </html>
-
-<!--<script>
-      const apiKey = 'c6e5cf6d';
-      const movieTitle = 'batman';
-      const apiUrl = `https://www.omdbapi.com/?t=${movieTitle}&apikey=${apiKey}`;
-      const movieplot = 'plot';
-
-      fetch(apiUrl)
-          .then(response => response.json()) 
-          .then(data => {
-              if (data.Response === 'True') {
-                  const movieName = data.Title;
-                  const posterUrl = data.Poster;
-                  const moviePlot = data.Plot;
-
-                  const movieInfoDiv = document.getElementById('movie-info');
-                  movieInfoDiv.innerHTML = `
-                      <h2>${movieName}</h2>
-                      <img src='${posterUrl}' alt='${movieName} Poster'>
-                      <p>${moviePlot}</p>
-                  `;
-              } else {
-                  document.getElementById('movie-info').innerHTML = `<p>Movie not found!</p>`;
-              }
-          })
-          .catch(error => {
-              console.error('Error fetching data:', error);
-          });
-  </script>-->

@@ -66,15 +66,15 @@ function showMovie(movie) {
             <div class="movie-tab"><div class="movie-tab-bot"></div>Plus d'info</div>
             </div>
             <div class="movie-window" id="movie-casting">
-            <h3>Directeur</h3>
+            <h3>Directeur${detectComma(movie.Language)}</h3>
             <div class="movie-profiles">
                 ${stringToElements(movie.Director, fetchActor)}
             </div>
-            <h3>Rédacteurs</h3>
+            <h3>Rédacteur${detectComma(movie.Language)}</h3>
             <div class="movie-profiles">
                 ${stringToElements(movie.Writer, fetchActor)}
             </div>
-            <h3>Acteurs</h3>
+            <h3>Acteur${detectComma(movie.Language)}</h3>
             <div class="movie-profiles">
                 ${stringToElements(movie.Actors, fetchActor)}
             </div>
@@ -169,13 +169,3 @@ function manageTabs() {
     });
     switchTab(0, movTabArray, movSecondChild)
 };
-
-a = () => {
-showMovie(
-    {"Title":"Cars","Year":"2006","Rated":"G","Released":"09 Jun 2006","Runtime":"116 min","Genre":"Animation, Adventure, Comedy","Director":"John Lasseter, Joe Ranft","Writer":"John Lasseter, Joe Ranft, Jorgen Klubien","Actors":"Owen Wilson, Bonnie Hunt, Paul Newman","Plot":"On the way to the biggest race of his life, a hotshot rookie race car gets stranded in a rundown town and learns that winning isn't everything in life.","Language":"English, Italian, Japanese, Yiddish","Country":"United States","Awards":"Nominated for 2 Oscars. 28 wins & 34 nominations total","Poster":"https://m.media-amazon.com/images/M/MV5BMTg5NzY0MzA2MV5BMl5BanBnXkFtZTYwNDc3NTc2._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"7.3/10"},{"Source":"Rotten Tomatoes","Value":"74%"},{"Source":"Metacritic","Value":"73/100"}],"Metascore":"73","imdbRating":"7.3","imdbVotes":"490,857","imdbID":"tt0317219","Type":"movie","DVD":"N/A","BoxOffice":"$244,082,982","Production":"N/A","Website":"N/A","Response":"True"}
-)
-}
-
-// {"Title":"Lightyear","Year":"2022","Rated":"PG","Released":"03 Aug 2022","Runtime":"105 min","Genre":"Animation, Action, Adventure","Director":"Angus MacLane","Writer":"Angus MacLane, Matthew Aldrich, Jason Headley","Actors":"Chris Evans, Keke Palmer, Peter Sohn","Plot":"While spending years attempting to return home, marooned Space Ranger Buzz Lightyear encounters an army of ruthless robots commanded by Zurg who are attempting to steal the fuel source of his ship.","Language":"English","Country":"United States, Canada","Awards":"2 wins & 23 nominations total","Poster":"https://m.media-amazon.com/images/M/MV5BZGI3ZjUyM2ItNmFjYy00NGE3LTg2OTYtMTI2MDk0MjIxNDA1XkEyXkFqcGc@._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"6.1/10"},{"Source":"Rotten Tomatoes","Value":"74%"},{"Source":"Metacritic","Value":"60/100"}],"Metascore":"60","imdbRating":"6.1","imdbVotes":"128,632","imdbID":"tt10298810","Type":"movie","DVD":"N/A","BoxOffice":"$118,307,188","Production":"N/A","Website":"N/A","Response":"True"}
-// {"Title":"Batman","Year":"1989","Rated":"PG-13","Released":"23 Jun 1989","Runtime":"126 min","Genre":"Action, Adventure","Director":"Tim Burton","Writer":"Bob Kane, Sam Hamm, Warren Skaaren","Actors":"Michael Keaton, Jack Nicholson, Kim Basinger","Plot":"The Dark Knight of Gotham City begins his war on crime with his first major enemy being Jack Napier, a criminal who becomes the clownishly homicidal Joker.","Language":"English, French, Spanish","Country":"United States, United Kingdom","Awards":"Won 1 Oscar. 11 wins & 28 nominations total","Poster":"https://m.media-amazon.com/images/M/MV5BYzZmZWViM2EtNzhlMi00NzBlLWE0MWEtZDFjMjk3YjIyNTBhXkEyXkFqcGc@._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"7.5/10"},{"Source":"Rotten Tomatoes","Value":"77%"},{"Source":"Metacritic","Value":"69/100"}],"Metascore":"69","imdbRating":"7.5","imdbVotes":"414,807","imdbID":"tt0096895","Type":"movie","DVD":"N/A","BoxOffice":"$251,409,241","Production":"N/A","Website":"N/A","Response":"True"}
-// {"Title":"Cars","Year":"2006","Rated":"G","Released":"09 Jun 2006","Runtime":"116 min","Genre":"Animation, Adventure, Comedy","Director":"John Lasseter, Joe Ranft","Writer":"John Lasseter, Joe Ranft, Jorgen Klubien","Actors":"Owen Wilson, Bonnie Hunt, Paul Newman","Plot":"On the way to the biggest race of his life, a hotshot rookie race car gets stranded in a rundown town and learns that winning isn't everything in life.","Language":"English, Italian, Japanese, Yiddish","Country":"United States","Awards":"Nominated for 2 Oscars. 28 wins & 34 nominations total","Poster":"https://m.media-amazon.com/images/M/MV5BMTg5NzY0MzA2MV5BMl5BanBnXkFtZTYwNDc3NTc2._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"7.3/10"},{"Source":"Rotten Tomatoes","Value":"74%"},{"Source":"Metacritic","Value":"73/100"}],"Metascore":"73","imdbRating":"7.3","imdbVotes":"490,857","imdbID":"tt0317219","Type":"movie","DVD":"N/A","BoxOffice":"$244,082,982","Production":"N/A","Website":"N/A","Response":"True"}

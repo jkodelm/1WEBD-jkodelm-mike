@@ -3,11 +3,14 @@
 <head>
   <meta charset='UTF-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-  <title>Accueil</title>
-  <link rel='stylesheet' href='./css/styles.css'>
-  <link rel='stylesheet' href='./css/hero-carousel.css'>
+  <title>Accueil ~ Orléans Ciné</title>
   <link href='https://fonts.googleapis.com/css2?family=Pridi:wght@400;600&display=swap' rel='stylesheet'>
+  <link rel='stylesheet' href='./css/styles.css'>
+  <link rel='stylesheet' href='./css/card.css'>
+  <link rel='stylesheet' href='./css/card-carousel.css'>
+  <link rel='stylesheet' href='./css/hero-carousel.css'>
   <script src='./js/main.js'></script>
+  <script src='./js/card-carousel.js'></script>
   <script src='./js/hero-carousel.js'></script>
 </head>
 <body>
@@ -23,14 +26,8 @@
         </div>
         <button class='button-tran'><div class='icon i-account'></div></button>
       </div>
-      <div id="nav-lower-frame" class="side-padding hidden">
-        <div id="nav-search-results">
-          <a href="#" class="nav-search-result side-padding"><img src="./films/cars.jpg"><h3 class="clamp-2">Cars</h3></a>
-          <a href="#" class="nav-search-result side-padding"><img src="./films/trans.jpg"><h3 class="clamp-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit ullam rem maiores quaerat laboriosam neque asperiores suscipit, qui, voluptatem minima provident facilis labore tempora eum quod enim accusantium cupiditate? Ea ratione accusantium ipsum nulla ullam voluptatem nam beatae eaque ab!</h3></a>
-          <a href="#" class="nav-search-result side-padding">d</a>
-          <a href="#" class="nav-search-result side-padding">e</a>
-          <a href="#" class="nav-search-result side-padding">d</a>
-        </div>
+      <div id='nav-lower-frame' class='side-padding hidden'>
+        <div id='nav-search-results'></div>
       </div>
     </nav>
     <div style='display: flex; justify-content: space-evenly; margin-bottom: 1rem'>
@@ -64,37 +61,42 @@
   </header>
 
   <main>
-    
-    <section class='side-padding'>
-      <div class='top-section'>
+    <section class='traversin'>
+      <div class='top-section bot-mar-HMS side-padding'>
         <h2>Tendances</h2>
         <div class='gapHMS'>
           <button class='button-tran'><div class='icon i-longleft' id='trending-left'></div></button>
           <button class='button-tran'><div class='icon i-longright' id='trending-right'></div></button>
         </div>
       </div>
-      <div class='gapHMS overflowhidden' id='trending-cards'>
-        <div class='temp-card'></div>
-        <div class='temp-card'></div>
-        <div class='temp-card'></div>
-        <div class='temp-card'></div>
-        <div class='temp-card'></div>
-        <div class='temp-card'></div>
-        <div class='temp-card'></div>
-      </div>
-    </section>
-
-    <section class='traversin'>
       <div class='traversin-top'></div>
-      <div class='traversin-inside'></div>
+      <div class='traversin-inside  side-padding'>
+        <div class='card-carousel-frame'>
+          <div class='card-carousel' id='trending-cards'>
+            <div class='temp-card'>A</div>
+            <div class='temp-card'>B</div>
+            <div class='temp-card'>C</div>
+            <div class='temp-card'>D</div>
+            <div class='temp-card'>Eantalons</div>
+            <div class='temp-card'>Fomme</div>
+            <div class='temp-card'>Gn</div>
+            <div class='temp-card'>Haisait</div>
+            <div class='temp-card'>In</div>
+            <div class='temp-card'>Jrimaire</div>
+          </div>
+          <div class='card-carousel-vignette' id='trending-cards-vignette'></div>
+        </div>
+        
+      </div>
       <div class='traversin-bottom'></div>
     </section>
   </main>
-  <script>
-    new heroCarousel('trending-cards', 'temp-card', 400, ['trending-left', 'trending-right'])
-  </script>
   <footer></footer>
 
-  <div id="overlay" class="hidden"></div>
+  <div id='overlay' class='hidden'></div>
+  <script>
+    new heroCarousel('hero-content', ['hero-farleft', 'hero-left', 'hero-main', 'hero-right', 'hero-farright'], 400, ['hero-arrow-left', 'hero-arrow-right'],  ['hero-indicators', 'hero-indicator', 'hero-indicator-time'], 5000, 'hero-pause')
+    new cardCarousel('trending-cards', 'temp-card', 8, ['trending-left', 'trending-right'], 'trending-cards-vignette')
+  </script>
 </body>
 </html>

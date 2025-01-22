@@ -19,10 +19,12 @@ class heroCarousel {
         this.index = this.nbCards - 1 ;
         this.isStopped = false;
         this.isSliding = false;
-
-        console.log(indicArray)
         if (indicArray) {
-            this.createIndicators(indicArray)
+            this.indicators = this.createIndicators(indicArray)
+
+            this.indicators.forEach((indicator, i) => {
+                indicator.addEventListener('click', () => { this.goToSlide(i) });
+            });
         } else { this.indicators = false }
 
         if (pauseName) {
@@ -43,10 +45,7 @@ class heroCarousel {
     };
 
     createIndicators(indicArray){
-
-        console.log('exec sgtygihg')
-        
-        if (indicArray.length !== 3) { return; }
+        if (indicArray.length !== 3) { return false; }
         const indicatorsDiv = document.querySelector(`#${indicArray[0]}`);
         for(let i = 0; i < this.nbCards; i++) {
             let heroIndicator = document.createElement('div');
@@ -57,11 +56,7 @@ class heroCarousel {
             indicatorsDiv.appendChild(heroIndicator)
         }
 
-        this.indicators = [...document.querySelector('#hero-indicators').children];
-        
-        this.indicators.forEach((indicator, i) => {
-            indicator.addEventListener('click', () => { this.goToSlide(i) });
-        });
+        return [...document.querySelector('#hero-indicators').children];
     }
 
     slide(direction = 'r', newIndex = null) {
@@ -92,9 +87,7 @@ class heroCarousel {
     };
 
     manageIndicators() {
-        console.log('inside',this.indicators)
         if ( !this.indicators ) { return };
-        console.log('still inside')
         this.indicators.forEach((indicator, i) => {
             const timeBar = indicator.firstElementChild;
             indicator.style.backgroundColor = 'var(--dark)';
@@ -112,7 +105,6 @@ class heroCarousel {
             timeBar.style.animation = `moveIndicator ${this.autoSlideTime}ms linear forwards`;
             timeBar.style.animationPlayState = this.isStopped ? 'paused' : 'running';
         }
-        
     };
 
     togglePause() {
@@ -136,7 +128,6 @@ class heroCarousel {
 
     startAutoSlide() {
         if (this.isStopped) { return };
-
         this.indicators[this.index].firstChild.onanimationend = () => {
             if (!this.isStopped) {
                 this.slide();
@@ -150,6 +141,5 @@ class heroCarousel {
 };
 
 /* function mainHC() {
-    /*new heroCarousel('hero-content', ['hero-farleft', 'hero-left', 'hero-main', 'hero-right', 'hero-farright'], 400, ['hero-arrow-left', 'hero-arrow-right'],  ['hero-indicators', 'hero-indicator', 'hero-indicator-time'], 5000, 'hero-pause')
-}
+    /*
 window.onload = mainHC; */

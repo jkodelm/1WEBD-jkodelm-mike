@@ -2,6 +2,7 @@ function showMovie(movie) {
 
     const userLogged = false
     const main = document.querySelector('main')
+    document.title = `${movie.Title} ~ Orléans Ciné`
 
     let runTime = '';
     let lengthInt = parseInt(movie.Runtime.split(" ")[0], 10);
@@ -80,7 +81,7 @@ function showMovie(movie) {
             </div>
             </div>
             <div class="movie-window" id="movie-ratings">
-            <div class="space-between">
+            <div class="space-between flex-wrap">
                 <div class="movie-rate-card">
                 <div class="movie-rate-image">
                     <a target="_blank" href="${'imdbID' in movie ? `https://www.imdb.com/title/${movie.imdbID}` : 'https://www.imdb.com'}"><img src="./data/imdb.png"></a>

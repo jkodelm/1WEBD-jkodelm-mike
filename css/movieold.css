@@ -1,0 +1,82 @@
+/* Styles pour les cartes de films détaillées */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 1rem; 
+    margin-bottom: 2rem;
+}
+
+.movie {
+    background-color: #000;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem rgba(255, 0, 0, 0.5);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid red;
+    color: #fff;
+}
+
+.movie-title {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: red;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.movie-img-left {
+    max-width: 200px;
+    margin-right: 1.5rem;
+    border-radius: 0.5rem;
+    border: 2px solid red;
+}
+
+.movie-plot {
+    margin-top: 1.5rem;
+    text-align: center;
+    color: #fff;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.movie-genre, .movie-actors {
+    font-size: 1rem;
+    color: #ff4d4d;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.movie-genre {
+    font-style: italic;
+}
+
+.movie-actors {
+    font-weight: bold;
+}
+
+/* Styles pour les cartes de posters */
+.movie-poster {
+    background-color: #000;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem rgba(255, 0, 0, 0.5);
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid red;
+}
+
+.movie-poster-img {
+    max-width: 100%;
+    border-radius: 0.5rem;
+}
+
+#poster-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 colonnes */
+    gap: 1rem; /* Espacement entre les posters */
+    margin-top: 2rem;
+}

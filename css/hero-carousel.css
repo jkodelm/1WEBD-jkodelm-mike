@@ -1,5 +1,5 @@
 .hero {
-    height: 600px;
+    height: calc((70vw * 9 / 16) + 4rem);;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -25,7 +25,6 @@
 }
   
 .hero-card {
-    border: 2px solid var(--dlightshade);
     background-color: var(--dark);
     width: 30%;
     border-radius: var(--topSpacing);
@@ -33,7 +32,7 @@
     position: absolute;
     opacity: 0;
     z-index: 1;
-    transition: width var(--timeHeroAnimation), left var(--timeHeroAnimation), opacity var(--timeHeroAnimation);
+    transition: width var(--timeHeroSlide), left var(--timeHeroSlide), opacity var(--timeHeroSlide);
 }
 
 .hero-farleft {left: -55%; opacity: 0; }
@@ -53,7 +52,7 @@
     height: var(--topSpacing);
     background-color: var(--dark);
     border-radius: var(--topSpacing);
-    transition: all var(--timeHeroAnimation) linear;
+    transition: width var(--timeHeroSlide) linear;
     overflow: hidden;
     padding: 0;
     display: flex;
@@ -78,16 +77,9 @@
 }
 
 .controls {
-    width: 88px;
+    width: 5.5rem;
     gap: var(--midSpacing);
     display: flex;
-}
-  
-.hero-vignette {
-    position: absolute;
-    inset: 0;
-    box-shadow: inset 0 0 5vh 5vh var(--dshade);
-    z-index: 10;
 }
 
 .hero-background {
@@ -96,33 +88,18 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("./films/cars.jpg");
+    background-image: url('./films/cars.jpg');
     background-size: cover;
     background-position: center;
     filter: blur(0.875rem) brightness(20%);
 }
-/* 
-.hero-strppp {
-    background-image: linear-gradient(
-    -45deg,
-    rgb(var(--primary-stripe-rgb) / var(--opacity)) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgb(var(--primary-stripe-rgb) / var(--opacity)) 50%,
-    rgb(var(--primary-stripe-rgb) / var(--opacity)) 75%,
-    transparent 75%,
-    transparent 100%
-  );
-  background-size: 8px 8px;
-} */
 
 @media (max-width: 1080px) {
-    .hero { height: 400px; }
-    .hero-card.main { width: 60%; }
     .hero-header { font-size: 1.5rem}
 }
 
 @media (max-width: 480px) {
+    .hero { height: calc((80vh * 9 / 16) + 2rem); }
     .hero-vignette, .hero-background { display: none; }
     .hero-left { left: -35%; }
     .hero-main { width: 100%; left: 0%; }

@@ -5,10 +5,11 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>Movie</title>
     <link rel='stylesheet' href='./css/styles.css' />
-    <link rel='stylesheet' href='./css/movie.css' />
+    <!-- <link rel='stylesheet' href='./css/movie.css' /> -->
+    <link rel='stylesheet' href='./css/movie2.css' />
   </head>
   <body>
-    <header>
+    <!-- <header>
       <nav class='side-padding'>
         <a href='./index.html'><img id='nav-img' src='./data/logotemp.png'></a>
       
@@ -36,17 +37,44 @@
         <a href='./movie.html'>movie.html</a>
         <a href='./style.html'>style.html</a>
       </div>
-    </header>
-    <main>
+    </header> -->
+    <main class="side-padding">
 
-      <div id='movie-card-container' class="movie-grid"></div>
 
-      <div id='poster-container'></div>
+
+
+
+      <div class="movie-container">
+        <img src="./films/batman.jpg" alt="'Batman' film poster">
+        <div class="movie-info">
+          <h1>Batman, the last knight alive or idk what' shis name</h1>
+          <div class="gapHMS">
+            <div class="tag">Aventure</div>
+          </div>
+          <div class="movie-details">
+            Durée : <b>2h06</b>・Sortie : <b>1989</b>・<a href="https://www.filmratings.com/">PGM13</a>
+          </div>
+          <div class="movie-plot">
+            The Dark Knight of Gotham City begins his war on crime with his first major enemy being Jack Napier, a criminal who becomes the clownishly homicidal Joker.
+          </div>
+          <div class="gapHMS space-between">
+            <a href="./account/login.html"><button class='button-tran'><div class='icon i-heart'></div></button></a>
+            <button class='button-prim button-pad'>Réservation indisponible</button>
+          </div>
+        </div>
+        
+      </div>
+
+
+
+
+
+
     </main>
-    <footer></footer>
+    <!--<footer></footer>
 
     <div id="overlay" class="hidden"></div>
 
-    <script src='./js/api.js'></script>
+     <script src='./js/api.js'></script> -->
   </body>
 </html>

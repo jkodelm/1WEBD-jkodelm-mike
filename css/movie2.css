@@ -1,0 +1,38 @@
+main { padding-top: 3rem; }
+body { background-color: #222426}
+
+.movie-container {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.movie-container img {
+    height: 400px;
+    width: auto;
+    border-radius: var(--smallRounding);
+    margin-right: var(--midSpacing)
+}
+
+.movie-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: var(--midSpacing);
+}
+
+.movie-plot { flex: 1; }
+
+.movie-details {
+    color: var(--gray)
+}
+
+@media (max-width: 720px) {
+    .movie-container { flex-direction: column; align-items: center;}
+    .movie-container img { height: 45%; width: auto; margin-bottom: var(--midSpacing)}
+    body { background-color: #161616; }
+}
+  
+@media (max-width: 480px) {
+    body { background-color: #080808; }
+}  

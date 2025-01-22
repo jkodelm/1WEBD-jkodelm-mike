@@ -5,12 +5,13 @@
     --primary: #66d2c0;
     --darkprimary: #4ca89a;
     --secondary: #007ab5;
+    --font: white;
 
     --light: #fff;
     --lshade: #f0f0f0;
     --llightshade: #f8f8f8;
 
-    --gray: #6a6a6a;
+    --gray: #808080;
 
     --dark: #2c2e30;
     --dlightshade: #27292b;
@@ -34,7 +35,7 @@
 }
 
 h1, h2, h3, h4, p, h6 { margin: 0; text-decoration: none;}
-h1 { font-size: 4rem;}
+h1 { font-size: 3rem; line-height: 1}
 h2 { font-size: 2rem;}
 h3 { font-size: 1.5rem;}
 h4 { font-size: 1.125rem;}
@@ -45,18 +46,23 @@ body {
     margin: 0;
     font-family: "Pridi", sans-serif;
     background-color: var(--dshade);
-    color: var(--light);
+    color: var(--font);
     overflow-x: hidden;
+    line-height: 1.4;
+    font-size: 1rem;
 }
 
 button {outline: 0; padding: 0; border: 2px solid transparent; background-color: inherit;}
 .hidden { display: none; }
-a { text-decoration: none; }
-a:visited {color: var(--secondary)}
+a { text-decoration: none; cursor: pointer}
+a:hover { text-decoration: underline; }
+a:visited { color: inherit }
 
 .flex { display: flex; }
 .gapHMS { display: flex; gap: var(--midSpacing);}
 .overflowhidden { overflow: hidden; }
+.button-pad { padding-left: var(--topSpacing); padding-right: var(--topSpacing);}
+.space-between { display: flex; justify-content: space-between;}
 .hor-scroll {
     overflow-x: scroll;
     overflow-y: hidden;
@@ -82,6 +88,7 @@ a:visited {color: var(--secondary)}
 
 .i-search { background-image: url('../svg/search.svg'); }
 .i-account { background-image: url('../svg/account.svg'); }
+.i-heart { background-image: url('../svg/heart.svg'); }
 .i-pause { background-image: url('../svg/pause.svg'); }
 .i-play { background-image: url('../svg/play.svg'); }
 .i-left { background-image: url('../svg/arrowl.svg'); }
@@ -100,10 +107,12 @@ button {
     justify-content: center;
     align-items: center;
     transition: all .2s ease;
+    font-family: "Pridi", sans-serif;
 }
 
-.button-prim { background-color: var(--primary); border: 2px solid var(--primary); color: var(--light)}
+.button-prim { background-color: var(--primary); border: 2px solid var(--primary); color: var(--font); font-size: 1.5rem;}
 .button-seco { background-color: var(--darkshade); border: 2px solid var(--primary); color: var(--primary)}
+.button-text { padding: var(--topSpacing)}
 
 .button-prim:hover { border: 2px solid var(--darkprimary); background-color: var(--darkprimary) }
 .button-seco:hover { border: 2px solid var(--darkprimary); }
@@ -137,8 +146,19 @@ button {
     user-select: none;
 }
 
-
-
+.tag {
+    display: flex;
+    gap: var(--midSpacing);
+    padding: 0 var(--midSpacing);
+    border: 2px solid var(--font);
+    border-radius: 1rem;
+    user-select: none;
+    transition: all var(--objectTransition) ease
+}
+.tag .icon {
+    width: 20px;
+    height: 20px;
+}
 
 nav {
     min-height: 3.75rem;
@@ -182,10 +202,10 @@ nav {
     height: var(--icons);
     background-color: var(--dshade);
     border: 0;
-    color: var(--light);
+    color: var(--font);
     font-size: var(--title);
     font-family: "Pridi", sans-serif;
-    border-bottom: 2px solid var(--light);
+    border-bottom: 2px solid var(--font);
 }
 
 .nav-search.nav-search-deployed {
@@ -200,7 +220,7 @@ nav {
 
 .nav-search-deployed #nav-search-input { display: block; width: 0; outline: 0; flex: 1; }
 .back-btn { display: block; }
-.back-btn.hidden {  display: none; } /* Why needes*/
+.back-btn.hidden {  display: none; }
 
 #nav-lower-frame {
     position: absolute;
@@ -272,6 +292,7 @@ section {
   
 @media (max-width: 1080px) {
     .side-padding { width: 90%; padding-left: 5%; padding-right: 5%; height: auto;}
+    a { border: 2px dashed var(--gray) }
 }
   
 @media (max-width: 480px) {

@@ -1,6 +1,3 @@
-/* Later:
-- Give color to classes for easier color changing*/
-
 :root {
     --primary: #66d2c0;
     --darkprimary: #4ca89a;
@@ -21,19 +18,35 @@
     --timeAutoSlide: 5000ms;
 }
 
-body.light .col100 { background-color: #2c2e30; };
-body.light .col200 { background-color: #27292b; };
-body.light .col300 { background-color: #222426; };
-body.light .col100hov:hover { background-color: #2c2e30 }
-body.light .icon { filter: brightness(0) invert(1); }
-body.light .colFont { color: white; }
+body {
+    margin: 0;
+    font-family: "Pridi", sans-serif;
+    color: var(--font);
+    overflow-x: hidden;
+    line-height: 1.5;
+    font-size: 1rem;
+}
 
-.col100 { background-color: white };
-.col200 { background-color: #f8f8f8 };
-.col300 { background-color: #f0f0f0 };
-.col100hov:hover { background-color: white }
-.icon { filter: brightness(0); }
-.colFont { color: black; }
+.col100 { background-color: #2c2e30; };
+.col200 { background-color: #27292b; };
+.col300 { background-color: #222426; };
+.colFont { color: white; }
+.col200hov { background-color:inherit; transition: background-color var(--objectTransition) ease }
+.col200hov:hover { background-color:#27292b }
+.icon, body.dark #nav-img { filter: brightness(0) invert(1) }
+input { background-color: #222426; color: white; border-bottom: var(--border) solid white;}
+.side-vignette-background { background: linear-gradient(90deg, #2c2e30 0, transparent 1rem, transparent calc(100% - 1rem), #2c2e30 100%); }
+
+body.light .col100 { background-color: white };
+body.light .col200 { background-color: #f8f8f8 };
+body.light .col300 { background-color: #f0f0f0 };
+body.light .colFont { color: black; }
+body.light .col200hov:hover { background-color:#f8f8f8 }
+body.light .icon, body.light #nav-img { filter: brightness(0) }
+body.light input { background-color: #f0f0f0; color: black; border-bottom: var(--border) solid black;}
+body.light .side-vignette-background { background: linear-gradient(90deg, white 0, transparent 1rem, transparent calc(100% - 1rem), white 100%); }
+
+.colGray { background-color: var(--gray); }
 
 h1, h2, h3, h4, p, h6 { margin: 0; padding: 0; text-decoration: none;}
 h1 { font-size: 3rem; line-height: 1}
@@ -43,22 +56,12 @@ h4 { font-size: 1.125rem;}
 p { font-size: 1rem}
 h6 { font-size: 0.875rem;}
 
-body {
-    margin: 0;
-    font-family: "Pridi", sans-serif;
-/*     background-color: #222426; */
-    color: var(--font);
-    overflow-x: hidden;
-    line-height: 1.5;
-    font-size: 1rem;
-}
-
-button {outline: 0; padding: 0; border: var(--border) solid transparent; background-color: inherit;}
 .hidden { display: none; }
 a { text-decoration: none; cursor: pointer; color: inherit}
 a:hover { text-decoration: underline; }
 a:visited { color: inherit }
 img { user-select: none;}
+input { height: 2.5rem; border: 0; font-family: "Pridi", sans-serif; font-size: 1.5rem; }
 
 .flex { display: flex; }
 .gapHMS { display: flex; gap: var(--midSpacing);}
@@ -89,6 +92,10 @@ img { user-select: none;}
 .i-longright { background-image: url('../svg/arrowlongr.svg'); }
 
 button {
+    outline: 0;
+    padding: 0;
+    border: var(--border) solid transparent;
+    background-color: transparent;
     min-width: 2.5rem;
     min-height: 2.5rem;
     cursor: pointer;
@@ -113,7 +120,6 @@ button {
 .button-seco .icon,
 .button-tran.active .icon,
 .button-tran:hover .icon { filter: brightness(0) saturate(100%) invert(81%) sepia(48%) saturate(394%) hue-rotate(111deg) brightness(86%) contrast(89%); }
-
 
 .clamp-2 {
     display: -webkit-box;
@@ -153,7 +159,6 @@ button {
 nav {
     min-height: 3.75rem;
     max-height: 3.75rem;
-    background-color: var(--darkshade);
     display: flex;
     align-items: center;
     padding: 0 var(--topSpacing);
@@ -162,7 +167,6 @@ nav {
 
 #nav-img {
     height: 2.5rem;
-    background-color: purple;
 }
   
 .logo {
@@ -186,16 +190,11 @@ nav {
     transition: transform var(--objectTransition) ease;
     z-index: 10;
 }
+
+
   
 #nav-search-input {
     width: 10rem;
-    height: 2.5rem;
-    /* background-color: var(--col300); */
-    border: 0;
-    color: var(--font);
-    font-size: var(--smalltitle);
-    font-family: "Pridi", sans-serif;
-    border-bottom: var(--border) solid var(--font);
 }
 
 .nav-search.nav-search-deployed {
@@ -263,6 +262,7 @@ section { margin-bottom: var(--serapateSections); }
 .traversin-bottom { clip-path: polygon(100% 0, 0 0, 0% 100%); }
 .traversin-inside {
     /* background-color: var(--col); */
+    width: 100%;
     height: 300px;
     padding: var(--topSpacing) 0;
 } 

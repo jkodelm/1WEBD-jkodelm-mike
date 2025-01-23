@@ -140,9 +140,9 @@ function fetchActor(name) {
     // Fetch image of actor using API
     const data = {image: "", link:""}
     if (data.image) {
-        return `<a href="${data.link}" class="movie-profile col200 col100hov"><img src="${data.image}"><p>${name}</p></a>`
+        return `<a href="${data.link}" class="movie-profile col200 col200hov"><img src="${data.image}"><p>${name}</p></a>`
     } else {
-        return `<a href="#" class="movie-profile col200 col100hov"><img src="./data/personnotfound.png"><p>${name}</p></a>`
+        return `<a href="#" class="movie-profile col200 col200hov"><img src="./data/personnotfound.png"><p>${name}</p></a>`
     }
 }
 

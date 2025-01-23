@@ -1,5 +1,27 @@
 function main() {
 
+// THEME
+
+function changeTheme() {
+    document.body.classList.toggle('dark');
+    document.body.classList.toggle('light');
+    updateTheme()
+}
+
+function updateTheme() {
+    if (document.body.classList.contains('dark')) {
+        document.body.style.backgroundColor = '#222426';
+        document.body.style.color = 'white';
+        storeLS('theme', 'dark')
+    } else {
+        document.body.style.backgroundColor = '#f0f0f0';
+        document.body.style.color = 'black';
+        storeLS('theme', 'light')
+    }
+}
+document.body.classList.add(getLS('theme') || 'dark');
+updateTheme()
+
 //VARIABLES
 
 const overlay = document.querySelector('#overlay');
@@ -24,20 +46,7 @@ function hideOverlay() {
     overlay.classList.add('hidden')
 }
 
-// THEME
 
-function changeTheme() {
-    document.body.classList.toggle('light');
-    if (document.body.classList.contains('light')) {
-        document.body.style.backgroundColor = '#222426';
-        document.body.style.color = 'white';
-    } else {
-        document.body.style.backgroundColor = '#f0f0f0';
-        document.body.style.color = 'black';
-        //icon s
-    }
-}
-    
 
 
 // SEARCHBAR
@@ -90,11 +99,11 @@ document.querySelector('#theme').addEventListener('click', changeTheme)
 
 }
 
-function storeCurrentMovie(data) {
-    localStorage.setItem("currMovie", data)
+function storeLS(name, data) {
+    localStorage.setItem(name, data)
 }
-function getStoredMovie() {
-    return localStorage.getItem("currMovie")
+function getLS(name) {
+    return localStorage.getItem(name)
 }
 
 document.addEventListener("DOMContentLoaded", main)

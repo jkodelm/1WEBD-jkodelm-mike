@@ -5,8 +5,9 @@
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <title>Recherche ~ Orléans Ciné</title>
   <link href='https://fonts.googleapis.com/css2?family=Pridi:wght@400;600&display=swap' rel='stylesheet'>
-  <link rel='stylesheet' href='./css/styles.css'>
-  <script src='./js/main.js'></script>
+  <link rel='stylesheet' href='./css/styles.css' />
+  <script src='./js/api.js'></script>
+  <script src='./js/search.js' defer></script>
 </head>
 <body class="col300">
   <header>
@@ -17,6 +18,11 @@
       <a href='./movie.html'>movie.html</a>
     </div>
   </header>
+  <main>
+    <div id='search-results' class='movie-grid'></div>
+    <button id='load-more' class='hidden' style="color: red;">Charger plus de résultats</button>
+  </main>
+
   <footer></footer>
 
   <div id="overlay" class="hidden"></div>

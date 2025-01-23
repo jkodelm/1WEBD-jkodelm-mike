@@ -1,5 +1,6 @@
 class cardCarousel {
   constructor(carouselName, cardName, gap, controlButtonName) {
+    console.log(carouselName)
     this.carouselFrame = document.querySelector(`#${carouselName}`);
     this.carouselWidth = this.carouselFrame.offsetWidth;
     this.cardWidth = this.carouselFrame.querySelector(`.${cardName}`).offsetWidth;

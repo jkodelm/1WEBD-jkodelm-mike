@@ -1,6 +1,6 @@
 .card-carousel-frame {
   overflow: hidden;
-  width: 100%;
+  flex: 1;
   position: relative;
   padding: 0 1rem;
 }

@@ -2,24 +2,32 @@ function main() {
 
 // THEME
 
+const themeBtn = document.querySelector('#theme')
+themeBtn.addEventListener('click', changeTheme)
+
 function changeTheme() {
     document.body.classList.toggle('dark');
     document.body.classList.toggle('light');
+    const themeIcon = themeBtn.firstElementChild
+    themeIcon.backgroundColor = 'red'
+    themeIcon.classList.toggle('i-sun')
+    themeIcon.classList.toggle('i-moon')
     updateTheme()
 }
 
 function updateTheme() {
+    
     if (document.body.classList.contains('dark')) {
         document.body.style.backgroundColor = '#222426';
         document.body.style.color = 'white';
-        storeLS('theme', 'dark')
+        localStorage.setItem('theme', 'dark')
     } else {
         document.body.style.backgroundColor = '#f0f0f0';
         document.body.style.color = 'black';
-        storeLS('theme', 'light')
+        localStorage.setItem('theme', './svg/light')
     }
 }
-document.body.classList.add(getLS('theme') || 'dark');
+document.body.classList.add(localStorage.getItem('theme') || 'dark');
 updateTheme()
 
 //VARIABLES
@@ -45,9 +53,6 @@ function showOverlay(onClickFunc) {
 function hideOverlay() {
     overlay.classList.add('hidden')
 }
-
-
-
 
 // SEARCHBAR
 
@@ -95,15 +100,6 @@ function toggleNavResults() {
     }
 }
 
-document.querySelector('#theme').addEventListener('click', changeTheme)
-
-}
-
-function storeLS(name, data) {
-    localStorage.setItem(name, data)
-}
-function getLS(name) {
-    return localStorage.getItem(name)
 }
 
 document.addEventListener("DOMContentLoaded", main)

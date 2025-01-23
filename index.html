@@ -18,7 +18,6 @@
   <header>
     <nav class='side-padding col300'>
       <a href='./index.html'><img id='nav-img' src='./data/logo.svg'></a>
-      <p id="theme">Change theme</p>
     
       <div class='nav-right'>
         <div class='nav-search col300'>
@@ -26,10 +25,7 @@
           <input type='text' id='nav-search-input' class="col300" placeholder='Search...'>
           <button class='button-tran'><div class='icon i-search' id='nav-search-button'></div></button>
         </div>
-        <button class='button-tran'><div class='icon i-account'></div></button>
-      </div>
-      <div id='nav-lower-frame' class='side-padding hidden'>
-        <div id='nav-search-results'></div>
+        <button class='button-tran' id="theme"><div class='icon i-sun'></div></button>
       </div>
     </nav>
     <section class='hero'>
@@ -69,8 +65,8 @@
       <div class='traversin-inside side-padding col100'>
         <div class='card-carousel-frame'>
           <div class='card-carousel' id='trending-cards'></div>
-          <div class='left-vignette-background'></div>
-          <div class='right-vignette-background'></div>
+          <div class='left-vignette-background-light'></div>
+          <div class='right-vignette-background-light'></div>
         </div>
       </div>
       <div class='traversin-bottom col100'></div>
@@ -80,12 +76,12 @@
       <div class='top-section bot-mar-HMS side-padding'>
         <h2>2024 en beauté</h2>
         <div class='gapHMS'>
-          <button class='button-tran'><div class='icon i-longleft' id='2024-left'></div></button>
-          <button class='button-tran'><div class='icon i-longright' id='2024-right'></div></button>
+          <button class='button-tran'><div class='icon i-longleft' id='year-left'></div></button>
+          <button class='button-tran'><div class='icon i-longright' id='year-right'></div></button>
         </div>
       </div>
-      <div class='card-carousel-frame'>
-        <div class='card-carousel side-padding' id='2024-cards'></div>
+      <div class='card-carousel-frame'> <!-- PROBLEM -->
+        <div class='card-carousel side-padding' id='year-cards'></div>
         <div class='left-vignette-background'></div>
         <div class='right-vignette-background'></div>
       </div>
@@ -99,7 +95,7 @@
     new heroCarousel('hero-content', ['hero-farleft', 'hero-left', 'hero-main', 'hero-right', 'hero-farright'], 400, ['hero-arrow-left', 'hero-arrow-right'], ['hero-indicators', 'hero-indicator', 'hero-indicator-time'], 5000, 'hero-pause');
     const movieTitles = ['','','','','','','']; //'Batman', 'The Dark Knight', 'Inception', 'Interstellar', 'Tenet', 'Dunkirk', 'Memento', 'The Prestige', 'Insomnia', 'Following', 'Kromoleo'
     setupCardCarousel('trending-cards', 'card', movieTitles, 16, ['trending-left', 'trending-right'])
-    setupCardCarousel('2024-cards', 'card', movieTitles, 16, ['2024-left', '2024-right'])
+    setupCardCarousel('year-cards', 'card', movieTitles, 16, ['year-left', 'year-right'])
   </script>
 </body>
 </html>

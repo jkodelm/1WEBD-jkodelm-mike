@@ -4,6 +4,8 @@
   <meta charset='UTF-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <title>Accueil ~ Orléans Ciné</title>
+  <meta name="description" content="Trouvez une large variété de cinémas populaires dans votre ciné local préféré !"> <!--Add-->
+  <link rel="icon" href="./data/logosmall.png">
   <link href='https://fonts.googleapis.com/css2?family=Pridi:wght@400;600&display=swap' rel='stylesheet'>
   <link rel='stylesheet' href='./css/styles.css'>
   <link rel='stylesheet' href='./css/card.css'>
@@ -16,18 +18,18 @@
 <body>
   <header>
     <nav class='side-padding col300'>
-      <a href='./index.html'><img id='nav-img' src='./data/logotemp.png'></a>
+      <a href='./index.html'><img id='nav-img' src='logo.svg'></a>
       <p id="theme">Change theme</p>
     
       <div class='nav-right'>
         <div class='nav-search col300'>
-          <button class='button-tran back-btn hidden col100hov'><div class='icon i-left'></div></button>
-          <input type='text' id='nav-search-input' class="col300" placeholder='Search...'>
-          <button class='button-tran col100hov'><div class='icon i-search' id='nav-search-button'></div></button>
+          <button class='button-tran back-btn hidden col200hov'><div class='icon i-left'></div></button>
+          <input type='text' class="colFont" id='nav-search-input'  placeholder='Search...'>
+          <button class='button-tran col200hov'><div class='icon i-search' id='nav-search-button'></div></button>
         </div>
-        <button class='button-tran col100hov'><div class='icon i-account'></div></button>
+        <button class='button-tran col200hov'><div class='icon i-account'></div></button>
       </div>
-      <div id='nav-lower-frame' class='side-padding hidden'>
+      <div id='nav-lower-frame' class='side-padding hidden col300'>
         <div id='nav-search-results'></div>
       </div>
     </nav>
@@ -48,16 +50,16 @@
       </div>
       <div class='hero-footer side-padding'>
         <div class='controls'>
-          <button class='button-tran col100hov'><div class='icon i-pause' id='hero-pause'></div></button>
+          <button class='button-tran col200hov'><div class='icon i-pause' id='hero-pause'></div></button>
         </div>
         <div id='hero-indicators'></div>
         <div class='controls'>
-          <button class='button-tran col100hov'><div class='icon i-left' id='hero-arrow-left'></div></button>
-          <button class='button-tran col100hov'><div class='icon i-right' id='hero-arrow-right'></div></button>
+          <button class='button-tran col200hov'><div class='icon i-left' id='hero-arrow-left'></div></button>
+          <button class='button-tran col200hov'><div class='icon i-right' id='hero-arrow-right'></div></button>
         </div>
       </div>
       <div class='hero-vignette'></div>
-      <!-- <div class='hero-background'></div>-->
+      <div class='hero-background'></div>
     </section>
   </header>
 
@@ -66,15 +68,15 @@
       <div class='top-section bot-mar-HMS side-padding'>
         <h2>Tendances</h2>
         <div class='gapHMS'>
-          <button class='button-tran col100hov'><div class='icon i-longleft' id='trending-left'></div></button>
-          <button class='button-tran col100hov'><div class='icon i-longright' id='trending-right'></div></button>
+          <button class='button-tran col200hov'><div class='icon i-longleft' id='trending-left'></div></button>
+          <button class='button-tran col200hov'><div class='icon i-longright' id='trending-right'></div></button>
         </div>
       </div>
       <div class='traversin-top col100'></div>
       <div class='traversin-inside side-padding col100'>
         <div class='card-carousel-frame'>
           <div class='card-carousel' id='trending-cards'>
-            <div class='temp-card'><a href="movie.html" onClick="">Go to film</a></div>
+            <div class='temp-card'><a href="movie.html" onclick="">Go to film</a></div>
             <div class='temp-card'>B</div>
             <div class='temp-card'>C</div>
             <div class='temp-card'>D</div>
@@ -85,7 +87,7 @@
             <div class='temp-card'>In</div>
             <div class='temp-card'>Jrimaire</div>
           </div>
-          <div class='card-carousel-vignette' id='trending-cards-vignette'></div>
+          <div class='card-carousel-vignette side-vignette-background' id='trending-cards-vignette'></div>
         </div>
       </div>
       <div class='traversin-bottom col100'></div>

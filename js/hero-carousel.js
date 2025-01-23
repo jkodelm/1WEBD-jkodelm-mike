@@ -89,6 +89,7 @@ class heroCarousel {
         this.indicators.forEach((indicator, i) => {
             const timeBar = indicator.firstElementChild;
             indicator.classList.add('col100')
+            indicator.classList.remove('colGray')
             indicator.style.width = '1rem';
             timeBar.style.animation = 'none';
         });
@@ -98,6 +99,7 @@ class heroCarousel {
 
         if (this.isStopped) {
             indicator.classList.remove('col100')
+            indicator.classList.add('colGray')
         } else {
             indicator.style.width = '3rem';
             timeBar.style.animation = `moveIndicator ${this.autoSlideTime}ms linear forwards`;

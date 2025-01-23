@@ -75,7 +75,8 @@
       <div class='traversin-inside side-padding col100'>
         <div class='card-carousel-frame'>
           <div class='card-carousel' id='trending-cards'></div>
-          <div class='card-carousel-vignette' id='trending-cards-vignette'></div>
+          <div class='left-vignette-background'></div>
+          <div class='right-vignette-background'></div>
         </div>
       </div>
       <div class='traversin-bottom col100'></div>
@@ -87,7 +88,7 @@
   <script>
     new heroCarousel('hero-content', ['hero-farleft', 'hero-left', 'hero-main', 'hero-right', 'hero-farright'], 400, ['hero-arrow-left', 'hero-arrow-right'], ['hero-indicators', 'hero-indicator', 'hero-indicator-time'], 5000, 'hero-pause');
     const movieTitles = ['','','','','','','']; //'Batman', 'The Dark Knight', 'Inception', 'Interstellar', 'Tenet', 'Dunkirk', 'Memento', 'The Prestige', 'Insomnia', 'Following', 'Kromoleo'
-    setupCardCarousel('trending-cards', 'temp-card', movieTitles, 16, ['trending-left', 'trending-right'])
+    setupCardCarousel('trending-cards', 'temp-card', movieTitles, 16, ['trending-left', 'trending-right'], 'trending-cards-vignette')
   </script>
 </body>
 </html>

@@ -21,7 +21,7 @@ class cardCarousel {
       this.position += newWidth - this.carouselWidth;
       this.carouselWidth = newWidth;
 
-      setTransform(true)
+      this.setTransform(true)
     });
   }
 
@@ -93,27 +93,31 @@ async function createMovieCard(title) {
 
   if (movieData) {
       card.innerHTML = `
-          <img src="${movieData.Poster}" alt="${movieData.Title}" class="movie-poster">
-          <h3>${movieData.Title}</h3>
-          <p>${movieData.Plot || 'Aucun résumé disponible.'}</p>
+            <div class="card">
+              <img src="${movieData.Poster}" alt="${movieData.Title}" class="movie-poster">
+              <div class="card-info">
+                  <h3>${movieData.Title}</h3>
+                  <p>${movieData.Plot || 'Aucun résumé disponible.'}</p>
+              </div>
+              <button class='button-prim'>Découvrir</button>
+          </div>
       `;
   } else {
-      card.innerHTML = `<p>Film non trouvé : ${title}</p>`;
+      return null;
   }
 
   return card;
 }
 
 // Fonction pour initialiser le carrousel avec les cartes de film
-async function setupCardCarousel(carouselName, cardName, movies, gap, controlButtonName) {
+async function setupCardCarousel(carouselName, cardName, movies, gap, controlButtonName, vignette) {
   const parent = document.getElementById(carouselName);
   parent.innerHTML = '';
 
-  console.log('asousl',movies)
   for (const title of movies) {
     const card = await createMovieCard(title);
     parent.appendChild(card);
   }
 
-  new cardCarousel(carouselName, cardName, gap, controlButtonName)
+  new cardCarousel(carouselName, cardName, gap, controlButtonName, vignette)
 }

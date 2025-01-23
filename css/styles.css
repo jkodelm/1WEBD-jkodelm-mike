@@ -35,7 +35,8 @@ body {
 .col200hov:hover { background-color:#27292b }
 .icon, body.dark #nav-img { filter: brightness(0) invert(1) }
 input { background-color: #222426; color: white; border-bottom: var(--border) solid white;}
-.side-vignette-background { background: linear-gradient(90deg, #2c2e30 0, transparent 1rem, transparent calc(100% - 1rem), #2c2e30 100%); }
+.left-vignette-background { background: linear-gradient(90deg, #2c2e30 0, transparent 1rem); }
+.right-vignette-background { background: linear-gradient(270deg, #2c2e30 0, transparent 1rem); }
 
 body.light .col100 { background-color: white };
 body.light .col200 { background-color: #f8f8f8 };
@@ -44,7 +45,8 @@ body.light .colFont { color: black; }
 body.light .col200hov:hover { background-color:#f8f8f8 }
 body.light .icon, body.light #nav-img { filter: brightness(0) }
 body.light input { background-color: #f0f0f0; color: black; border-bottom: var(--border) solid black;}
-body.light .side-vignette-background { background: linear-gradient(90deg, white 0, transparent 1rem, transparent calc(100% - 1rem), white 100%); }
+body.light .left-vignette-background { background: linear-gradient(90deg, white 0, transparent 1rem); }
+body.light .right-vignette-background { background: linear-gradient(270deg, white 0, transparent 1rem); }
 
 .colGray { background-color: var(--gray); }
 
@@ -84,6 +86,7 @@ input { height: 2.5rem; border: 0; font-family: "Pridi", sans-serif; font-size: 
 .i-search { background-image: url('../svg/search.svg'); }
 .i-account { background-image: url('../svg/account.svg'); }
 .i-heart { background-image: url('../svg/heart.svg'); }
+.i-open { background-image: url('../svg/open.svg'); }
 .i-pause { background-image: url('../svg/pause.svg'); }
 .i-play { background-image: url('../svg/play.svg'); }
 .i-left { background-image: url('../svg/arrowl.svg'); }
@@ -191,8 +194,6 @@ nav {
     z-index: 10;
 }
 
-
-  
 #nav-search-input {
     width: 10rem;
 }
@@ -254,7 +255,7 @@ section { margin-bottom: var(--serapateSections); }
 }
   
 .traversin-top, .traversin-bottom {
-    height: 1rem;
+    height: 3rem;
     width: 100%;
     /* background: var(--col); */
     clip-path: polygon(100% 0, 100% 100%, 0% 100%);
@@ -262,8 +263,8 @@ section { margin-bottom: var(--serapateSections); }
 .traversin-bottom { clip-path: polygon(100% 0, 0 0, 0% 100%); }
 .traversin-inside {
     /* background-color: var(--col); */
-    width: 100%;
-    padding: var(--topSpacing) 0;
+    padding-top: var(--topSpacing);
+    padding-bottom: var(--topSpacing);
 } 
   
 @media (max-width: 1080px) {

@@ -1,0 +1,78 @@
+.card {
+    position: relative;
+    border-radius: var(--botSpacing);
+    overflow: hidden;
+    margin-right: 1rem;
+    height: 308px;
+    width: 208px;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    user-select: none;
+    pointer-events: none;
+}
+
+.card-info {
+    position: absolute;
+    top: -1rem;
+    left: 0;
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    opacity: 0;
+    background: linear-gradient(0deg, transparent 0%, rgba(0, 0, 0, 0.9) 100%);
+    transition: top var(--objectTransition) ease, opacity var(--objectTransition) ease-in;
+    color: white;
+}
+
+.card:hover .card-info {
+    top: 0;
+    opacity: 1;
+}
+
+.card h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    user-select: none;
+}
+
+.card-info p {
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    user-select: none;
+}
+
+p:hover {
+    line-clamp: 4;
+    -webkit-line-clamp: 4;
+}
+
+.card button {
+    font-size: 1rem;
+    height: auto;
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    padding: 0 var(--topSpacing);
+}
+.card:hover button { opacity: 1; }
+
+.card .icon {
+    width: 1rem;
+    margin-right: var(--botSpacing);
+}

@@ -2,6 +2,7 @@
   overflow: hidden;
   width: 100%;
   position: relative;
+  padding: 0 1rem;
 }
 
 .card-carousel {
@@ -11,15 +12,17 @@
   width: 100%;
 }
 
-.temp-card {
-  margin-right: 1rem;
-}
-
-.card-carousel-vignette {
+.left-vignette-background,
+.right-vignette-background {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  width: 1rem;
   height: 100%;
   z-index: 5;
 }
+
+.left-vignette-background { left: 0; }
+
+.right-vignette-background { right: 0; }
+
+

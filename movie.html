@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/1WEBD-jkodelm-mike/css/movie.css" />
     <link rel="stylesheet" href="./css/styles.css" />
     <link rel="stylesheet" href="./css/movie.css" />
-    <script src="./js/api.js"></script> <!-- Assurez-vous que le fichier JS est correctement lié -->
+    <script src="./js/api.js"></script> <!-- Fichier JavaScript combiné -->
   </head>
   <body class="col300">
     <header>
@@ -21,7 +21,7 @@
       <div id="movie-card-container"></div> <!-- Conteneur pour les cartes de films -->
     </main>
     <div>
-      <button id="load-more-2024" style="color: aqua;">Charger plus de films de 2024</button>
+      <button class="button-seco" id="load-more-2024">Charger plus de films de 2024</button>
     </div>
     <footer style="background-color: #333; color: #fff; padding: 20px; text-align: center;">
       <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
@@ -33,5 +33,62 @@
       </div>
       <p style="margin: 0; font-size: 14px;">&copy; 2025 Orléans Ciné ® SUPINFO</p>
     </footer>
+
+    <script>
+      // Fonction pour afficher un film spécifique (utilisée sur movie.html)
+      async function displayMovie() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const title = urlParams.get('title');
+
+        if (title) {
+          const movieData = await fetchMovieData(title);
+          const container = document.getElementById('movie-card-container');
+
+          if (movieData) {
+            const card = document.createElement('div');
+            card.classList.add('movie');
+            updateCardWithMovieData(card, movieData);
+            container.appendChild(card);
+          } else {
+            container.innerHTML = `<p>Film non trouvé : ${title}</p>`;
+          }
+        }
+      }
+
+      // Fonction pour charger les films initiaux (utilisée sur index.html)
+      async function loadInitialMovies() {
+        const container = document.getElementById('movie-card-container');
+        const initialMovies = ['Cars', 'Inception', 'The Dark Knight']; // Exemples de films
+
+        for (const title of initialMovies) {
+          const card = await createMovieCard(title);
+          container.appendChild(card);
+        }
+      }
+
+      // Événement DOMContentLoaded pour charger les films initiaux ou afficher un film spécifique
+      document.addEventListener('DOMContentLoaded', () => {
+        if (window.location.pathname.includes('movie.html')) {
+          displayMovie();
+        } else {
+          loadInitialMovies();
+        }
+      });
+
+      // Événement pour le bouton "Charger plus de films de 2024"
+      document.getElementById('load-more-2024').addEventListener('click', async () => {
+        const container = document.getElementById('movie-card-container');
+        const moviesFrom2024 = await fetchMoviesFrom2024();
+
+        if (moviesFrom2024.length > 0) {
+          for (const title of moviesFrom2024) {
+            const card = await createMovieCard(title);
+            container.appendChild(card);
+          }
+        } else {
+          alert('Aucun film trouvé pour 2024.');
+        }
+      });
+    </script>
   </body>
 </html>

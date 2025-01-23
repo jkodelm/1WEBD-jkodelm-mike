@@ -1,6 +1,20 @@
 const apiKey = 'c6e5cf6d';
 
-// Fonction pour créer une carte de chargement
+
+async function fetchMoviesFrom2024() {
+
+  const moviesFrom2024 = [
+    'Dune: Part Two',
+    'The Batman',
+    'Avatar: The Way of Water',
+    'Spider-Man: Across the Spider-Verse',
+    'Mission: Impossible 8'
+  ];
+
+  return moviesFrom2024;
+}
+
+
 function createCardWithLoading() {
   const card = document.createElement('div');
   card.classList.add('movie');
@@ -23,16 +37,12 @@ function createCardWithLoading() {
   return card;
 }
 
-// Fonction pour mettre à jour une carte avec les données du film
 function updateCardWithMovieData(card, movie) {
   const ratingsHTML = movie.Ratings.map(rating => `
     <p><strong>${rating.Source}:</strong> ${rating.Value}</p>
   `).join('');
 
-  // Utiliser le grand résumé (Fullplot) si disponible, sinon utiliser le synopsis (Plot)
   const plotText = movie.Plot || 'Aucun résumé disponible.';
-
-  // Ajouter la date de sortie en DVD si disponible
   const dvdDate = movie.DVD || 'Date de sortie en DVD non disponible.';
 
   card.innerHTML = `
@@ -53,19 +63,16 @@ function updateCardWithMovieData(card, movie) {
   `;
 }
 
-// Fonction pour récupérer les données d'un film depuis l'API avec le grand résumé
 async function fetchMovieData(title) {
-  // Vérifier si les données sont déjà dans sessionStorage
   const cachedMovie = sessionStorage.getItem(title);
   if (cachedMovie) {
-    return JSON.parse(cachedMovie); // Renvoyer les données stockées
+    return JSON.parse(cachedMovie);
   }
 
   try {
     const response = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(title)}&plot=full&apikey=${apiKey}`);
     const data = await response.json();
     if (data.Response === 'True') {
-      // Stocker les données dans sessionStorage pour une utilisation future
       sessionStorage.setItem(title, JSON.stringify(data));
       return data;
     } else {
@@ -78,154 +85,145 @@ async function fetchMovieData(title) {
   }
 }
 
-// Fonction pour afficher une carte de film dans un conteneur parent
-async function displayMovieCard(parent, title) {
-  const card = createCardWithLoading();
-  parent.appendChild(card);
+async function createMovieCard(title) {
+  const card = document.createElement('div');
+  card.classList.add('card');
 
   const movieData = await fetchMovieData(title);
 
   if (movieData) {
-    updateCardWithMovieData(card, movieData);
-  } else {
-    card.innerHTML = `<h5 class="movie-title">Film non trouvé : ${title}</h5>`;
-  }
-}
+    card.innerHTML = `
+      <img src="${movieData.Poster}" alt="${movieData.Title}" class="movie-poster">
+      <div class="card-info">
+        <h3>${movieData.Title}</h3>
+        <p>${movieData.Plot || 'Aucun résumé disponible.'}</p>
+      </div>
+      <button class='button-prim'>Découvrir</button>
+    `;
 
-// Fonction pour créer une carte de poster
-function createPosterCard(movie) {
-  const card = document.createElement('div');
-  card.classList.add('movie-poster');
-  card.innerHTML = `
-    <img src="${movie.Poster}" alt="${movie.Title}" class="movie-poster-img">
-  `;
+    const discoverButton = card.querySelector('.button-prim');
+    discoverButton.addEventListener('click', () => {
+      window.location.href = `movie.html?title=${encodeURIComponent(movieData.Title)}`;
+    });
+  } else {
+    card.innerHTML = `<p>Film non trouvé : ${title}</p>`;
+  }
+
   return card;
 }
 
-// Fonction pour afficher les cartes de posters
-async function displayPosterCards(parent, titles) {
-  for (const title of titles) {
-    const movieData = await fetchMovieData(title);
-    if (movieData && movieData.Poster) {
-      const card = createPosterCard(movieData);
-      parent.appendChild(card);
-    }
-  }
-}
 
-// Fonction pour charger les films et les posters
-async function loadInitialMovies() {
-  const container = document.getElementById('movie-card-container');
-  const posterContainer = document.getElementById('poster-container');
-  posterContainer.style.display = 'grid';
-  posterContainer.style.gridTemplateColumns = 'repeat(6, 1fr)'; // 6 colonnes
-  posterContainer.style.gap = '1rem';
-  posterContainer.style.marginTop = '2rem';
-
-  const movieTitles = ['Batman', 'The Dark Knight', 'Inception', 'Interstellar', 'Dunkirk', 'Tenet', 'Memento', 'The Prestige', 'Insomnia', 'Following'];
-
-  for (const title of movieTitles) {
-    await displayMovieCard(container, title);
-  }
-
-  await displayPosterCards(posterContainer, movieTitles);
-}
-
-// Fonction pour rechercher un film
-async function searchMovie() {
-  const searchInput = document.getElementById('search-input').value;
-  if (searchInput) {
-    const container = document.getElementById('movie-card-container');
-    container.innerHTML = '';
-
-    await displayMovieCard(container, searchInput);
-  }
-}
-
-// Fonction pour récupérer le paramètre "title" de l'URL
-function getTitleFromURL() {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  return urlParams.get('title');
-}
-
-// Fonction pour afficher la grande carte du film sur movie.html
-async function displayMovie() {
-  const title = getTitleFromURL();
-  if (title) {
-    const container = document.getElementById('movie-card-container');
-    container.innerHTML = ''; // Clear previous content
-
-    const movieData = await fetchMovieData(title);
-    if (movieData) {
-      const card = document.createElement('div');
-      card.classList.add('movie'); // Utiliser la classe de la grande carte
-      card.innerHTML = `
-        <h5 class="movie-title">${movieData.Title}</h5>
-        <div style="display: flex; align-items: flex-start;">
-          <img src="${movieData.Poster}" class="movie-img-left" alt="${movieData.Title}">
-          <div>
-            <p class="movie-plot">${movieData.Plot || 'Aucun résumé disponible.'}</p>
-            <p class="movie-genre"><small class="text-muted">${movieData.Genre}</small></p>
-            <p class="movie-actors"><small class="text-muted">${movieData.Actors}</small></p>
-            <p class="movie-dvd"><small class="text-muted">Date de sortie en DVD : ${movieData.DVD || 'Non disponible'}</small></p>
-            <div class="movie-ratings">
-              <h6>Ratings:</h6>
-              ${movieData.Ratings.map(rating => `
-                <p><strong>${rating.Source}:</strong> ${rating.Value}</p>
-              `).join('')}
-            </div>
-          </div>
-        </div>
-      `;
-      container.appendChild(card);
-    } else {
-      container.innerHTML = `<p>Film non trouvé : ${title}</p>`;
-    }
-  } else {
-    container.innerHTML = `<p>Aucun titre de film spécifié.</p>`;
-  }
-}
-
-// Fonction pour récupérer les films de 2024
-async function fetchMoviesFrom2024() {
-  try {
-    const response = await fetch(`https://www.omdbapi.com/?y=2024&apikey=${apiKey}`);
-    const data = await response.json();
-    if (data.Response === 'True') {
-      // Retourner uniquement les titres des films
-      return data.Search.map(movie => movie.Title);
-    } else {
-      console.error('Aucun film trouvé pour 2024');
-      return [];
-    }
-  } catch (error) {
-    console.error('Erreur lors de la récupération des films de 2024 :', error);
-    return [];
-  }
-}
-
-// Fonction pour charger plus de films de 2024
 async function loadMoreMoviesFrom2024() {
   const container = document.getElementById('movie-card-container');
   const moviesFrom2024 = await fetchMoviesFrom2024();
 
   if (moviesFrom2024.length > 0) {
     for (const title of moviesFrom2024) {
-      await displayMovieCard(container, title);
+      const card = await createMovieCard(title);
+      container.appendChild(card);
     }
   } else {
     alert('Aucun film trouvé pour 2024.');
   }
 }
 
-// Écouteurs d'événements
+
+class CardCarousel {
+  constructor(carouselName, cardName, gap, controlButtonName) {
+    this.carouselFrame = document.querySelector(`#${carouselName}`);
+    this.carouselWidth = this.carouselFrame.offsetWidth;
+    this.cardWidth = this.carouselFrame.querySelector(`.${cardName}`).offsetWidth;
+    this.maxWidth = -(this.carouselFrame.scrollWidth - this.carouselFrame.offsetWidth);
+
+    this.gap = gap;
+    this.position = 0;
+    this.isHolding = false;
+    this.posCursor = 0;
+
+    const leftBtn = document.querySelector(`#${controlButtonName[0]}`);
+    const rightBtn = document.querySelector(`#${controlButtonName[1]}`);
+    leftBtn.addEventListener('click', () => { this.moveCarousel('l'); });
+    rightBtn.addEventListener('click', () => { this.moveCarousel('r'); });
+    this.carouselFrame.addEventListener('mousedown', (event) => { this.holding(event); });
+
+    window.addEventListener('resize', () => {
+      const newWidth = this.carouselFrame.offsetWidth;
+      this.position += newWidth - this.carouselWidth;
+      this.carouselWidth = newWidth;
+      this.setTransform(true);
+    });
+  }
+
+  setTransform(noTransition = false) {
+    if (this.position < this.maxWidth) this.position = this.maxWidth;
+    if (this.position > 0) this.position = 0;
+
+    if (noTransition) {
+      this.carouselFrame.style.transition = 'none';
+      this.carouselFrame.style.transform = `translateX(${this.position}px)`;
+      setTimeout(() => { this.carouselFrame.style.transition = 'transform .2s ease-in-out'; }, 10);
+    } else {
+      this.carouselFrame.style.transform = `translateX(${this.position}px)`;
+    }
+  }
+
+  holding(event) {
+    this.isHolding = true;
+    document.body.style.cursor = 'grabbing';
+    this.posCursor = event.clientX;
+
+    window.addEventListener('mouseup', this.stopHolding);
+    window.addEventListener('mousemove', this.dragCarousel);
+  }
+
+  dragCarousel = (event) => {
+    if (this.isHolding) {
+      const newPos = event.clientX - this.posCursor;
+      this.posCursor = event.clientX;
+      this.position += newPos;
+      this.setTransform(true);
+    }
+  };
+
+  stopHolding = () => {
+    this.isHolding = false;
+    document.body.style.cursor = 'default';
+    window.removeEventListener('mouseup', this.stopHolding);
+    window.removeEventListener('mousemove', this.dragCarousel);
+  };
+
+  moveCarousel(direction) {
+    const carouselWidth = this.carouselFrame.offsetWidth;
+    const scrollAmount = (this.cardWidth + this.gap) * Math.floor(carouselWidth / (this.cardWidth + this.gap));
+    this.maxWidth = -(this.carouselFrame.scrollWidth - this.carouselFrame.offsetWidth);
+
+    if (direction === 'r') this.position -= scrollAmount;
+    else this.position += scrollAmount;
+
+    this.setTransform();
+  }
+}
+
+async function setupCardCarousel(carouselName, cardName, movies, gap, controlButtonName) {
+  const parent = document.getElementById(carouselName);
+  parent.innerHTML = '';
+
+  for (const title of movies) {
+    const card = await createMovieCard(title);
+    parent.appendChild(card);
+  }
+
+  new CardCarousel(carouselName, cardName, gap, controlButtonName);
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
   if (window.location.pathname.includes('movie.html')) {
-    displayMovie(); // Afficher la grande carte sur movie.html
+    displayMovie();
   } else {
-    loadInitialMovies(); // Charger les films initiaux sur la page d'accueil
+    loadInitialMovies();
   }
 });
 
-document.getElementById('search-button').addEventListener('click', searchMovie);
+
+document.getElementById('load-more-2024').addEventListener('click', loadMoreMoviesFrom2024);

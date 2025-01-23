@@ -17,7 +17,7 @@
 <body>
   <header>
     <nav class='side-padding col300'>
-      <a href='./index.html'><img id='nav-img' src='./data/logotemp.png'></a>
+      <a href='./index.html'><img id='nav-img' src='./data/logo.svg'></a>
       <p id="theme">Change theme</p>
     
       <div class='nav-right'>
@@ -74,22 +74,7 @@
       <div class='traversin-top col100'></div>
       <div class='traversin-inside side-padding col100'>
         <div class='card-carousel-frame'>
-          <div class='card-carousel' id='trending-cards'>
-            <div class='temp-card'><a href="movie.html" onClick="">Go to film</a></div>
-            <div class='temp-card'>B</div>
-            <div class='temp-card'>C</div>
-            <div class='temp-card'>D</div>
-            <div class='temp-card'>Eantalons</div>
-            <div class='temp-card'>Fomme</div>
-            <div class='temp-card'>Gn</div>
-            <div class='temp-card'>Haisait</div>
-            <div class='temp-card'>In</div>
-            <div class='temp-card'>Jrimaire</div>
-            <script>
-              new heroCarousel('hero-content', ['hero-farleft', 'hero-left', 'hero-main', 'hero-right', 'hero-farright'], 400, ['hero-arrow-left', 'hero-arrow-right'], ['hero-indicators', 'hero-indicator', 'hero-indicator-time'], 5000, 'hero-pause');
-              initCardCarousel('trending-cards', 'temp-card', movieTitles);
-          </script>
-          </div>
+          <div class='card-carousel' id='trending-cards'></div>
           <div class='card-carousel-vignette' id='trending-cards-vignette'></div>
         </div>
       </div>
@@ -100,8 +85,9 @@
 
   <div id='overlay' class='hidden'></div>
   <script>
-    new heroCarousel('hero-content', ['hero-farleft', 'hero-left', 'hero-main', 'hero-right', 'hero-farright'], 400, ['hero-arrow-left', 'hero-arrow-right'],  ['hero-indicators', 'hero-indicator', 'hero-indicator-time'], 5000, 'hero-pause')
-    new cardCarousel('trending-cards', 'temp-card', 8, ['trending-left', 'trending-right'], 'trending-cards-vignette')
+    new heroCarousel('hero-content', ['hero-farleft', 'hero-left', 'hero-main', 'hero-right', 'hero-farright'], 400, ['hero-arrow-left', 'hero-arrow-right'], ['hero-indicators', 'hero-indicator', 'hero-indicator-time'], 5000, 'hero-pause');
+    const movieTitles = ['','','','','','','']; //'Batman', 'The Dark Knight', 'Inception', 'Interstellar', 'Tenet', 'Dunkirk', 'Memento', 'The Prestige', 'Insomnia', 'Following', 'Kromoleo'
+    setupCardCarousel('trending-cards', 'temp-card', movieTitles, 16, ['trending-left', 'trending-right'])
   </script>
 </body>
 </html>

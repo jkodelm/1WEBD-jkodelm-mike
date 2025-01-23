@@ -1,13 +1,18 @@
 .card-carousel-frame {
   overflow: hidden;
+  width: 100%;
   position: relative;
-  padding: 0 1rem;
 }
 
 .card-carousel {
   display: flex;
-  gap: var(--midSpacing);
-  transition: transform var(--objectTransition) ease-in-out;
+  gap: 10px;
+  transition: transform .2s ease-in-out;
+  width: 100%;
+}
+
+.temp-card {
+  margin-right: 1rem;
 }
 
 .card-carousel-vignette {

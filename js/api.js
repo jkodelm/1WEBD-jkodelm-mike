@@ -182,11 +182,7 @@ async function displayMovie() {
 
 // Écouteurs d'événements
 document.addEventListener('DOMContentLoaded', () => {
-  if (window.location.pathname.includes('movie.html')) {
-    displayMovie(); // Afficher la grande carte sur movie.html
-  } else {
-    loadInitialMovies(); // Charger les films initiaux sur la page d'accueil
-  }
+
+  document.getElementById('nav-search-button').addEventListener('click', searchMovie);
 });
 
-document.getElementById('search-button').addEventListener('click', searchMovie);

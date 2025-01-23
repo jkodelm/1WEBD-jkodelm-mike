@@ -229,6 +229,3 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.getElementById('search-button').addEventListener('click', searchMovie);
-
-// Écouteur d'événements pour le bouton "Charger plus de films de 2024"
-document.getElementById('load-more-2024').addEventListener('click', loadMoreMoviesFrom2024);

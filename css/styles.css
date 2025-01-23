@@ -21,30 +21,33 @@
 body {
     margin: 0;
     font-family: "Pridi", sans-serif;
-    color: var(--font);
     overflow-x: hidden;
     line-height: 1.5;
     font-size: 1rem;
 }
+input { border: 0;}
 
 .col100 { background-color: #2c2e30; };
 .col200 { background-color: #27292b; };
 .col300 { background-color: #222426; };
 .colFont { color: white; }
-.col200hov { background-color:inherit; transition: background-color var(--objectTransition) ease }
-.col200hov:hover { background-color:#27292b }
 .icon, body.dark #nav-img { filter: brightness(0) invert(1) }
 input { background-color: #222426; color: white; border-bottom: var(--border) solid white;}
-.side-vignette-background { background: linear-gradient(90deg, #2c2e30 0, transparent 1rem, transparent calc(100% - 1rem), #2c2e30 100%); }
+.left-vignette-background.light { background: linear-gradient(90deg, #2c2e30 0, transparent 1rem); }
+.right-vignette-background.light { background: linear-gradient(270deg, #2c2e30 0, transparent 1rem); }
+.left-vignette-background { background: linear-gradient(90deg, #222426 0, transparent 1rem); }
+.right-vignette-background { background: linear-gradient(270deg, #222426 0, transparent 1rem); }
+
 
 body.light .col100 { background-color: white };
 body.light .col200 { background-color: #f8f8f8 };
 body.light .col300 { background-color: #f0f0f0 };
-body.light .colFont { color: black; }
-body.light .col200hov:hover { background-color:#f8f8f8 }
 body.light .icon, body.light #nav-img { filter: brightness(0) }
 body.light input { background-color: #f0f0f0; color: black; border-bottom: var(--border) solid black;}
-body.light .side-vignette-background { background: linear-gradient(90deg, white 0, transparent 1rem, transparent calc(100% - 1rem), white 100%); }
+body.light .left-vignette-background.light { background: linear-gradient(90deg, white 0, transparent 1rem); }
+body.light .right-vignette-backgroun.lightd { background: linear-gradient(270deg, white 0, transparent 1rem); }
+body.light .left-vignette-background { background: linear-gradient(90deg, #f0f0f0 0, transparent 1rem); }
+body.light .right-vignette-background { background: linear-gradient(270deg, #f0f0f0 0, transparent 1rem); }
 
 .colGray { background-color: var(--gray); }
 
@@ -61,7 +64,7 @@ a { text-decoration: none; cursor: pointer; color: inherit}
 a:hover { text-decoration: underline; }
 a:visited { color: inherit }
 img { user-select: none;}
-input { height: 2.5rem; border: 0; font-family: "Pridi", sans-serif; font-size: 1.5rem; }
+input { height: 2.5rem; font-family: "Pridi", sans-serif; font-size: 1.5rem; }
 
 .flex { display: flex; }
 .gapHMS { display: flex; gap: var(--midSpacing);}
@@ -81,11 +84,15 @@ input { height: 2.5rem; border: 0; font-family: "Pridi", sans-serif; font-size: 
     /* transition: filter 0.2s ease; */
 }
 
-.i-search { background-image: url('../svg/search.svg'); }
+
 .i-account { background-image: url('../svg/account.svg'); }
+.i-moon { background-image: url('../svg/moon.svg'); }
+.i-sun { background-image: url('../svg/sun.svg'); }
 .i-heart { background-image: url('../svg/heart.svg'); }
+.i-open { background-image: url('../svg/open.svg'); }
 .i-pause { background-image: url('../svg/pause.svg'); }
 .i-play { background-image: url('../svg/play.svg'); }
+.i-search { background-image: url('../svg/search.svg'); }
 .i-left { background-image: url('../svg/arrowl.svg'); }
 .i-right { background-image: url('../svg/arrowr.svg'); }
 .i-longleft { background-image: url('../svg/arrowlongl.svg'); }
@@ -191,11 +198,8 @@ nav {
     z-index: 10;
 }
 
-
-  
-#nav-search-input {
-    width: 10rem;
-}
+#nav-search-input { width: 10rem; }
+#nav-search-input:focus { width: 20rem}
 
 .nav-search.nav-search-deployed {
     position: absolute;
@@ -262,13 +266,16 @@ section { margin-bottom: var(--serapateSections); }
 .traversin-bottom { clip-path: polygon(100% 0, 0 0, 0% 100%); }
 .traversin-inside {
     /* background-color: var(--col); */
-    width: 100%;
-    height: 300px;
-    padding: var(--topSpacing) 0;
+    padding-top: var(--topSpacing);
+    padding-bottom: var(--topSpacing);
 } 
   
 @media (max-width: 1080px) {
     .side-padding { width: 90%; padding-left: 5%; padding-right: 5%; height: auto;}
+}
+
+@media (max-width: 720px) {
+    #nav-search-input:focus { width: 10rem}
 }
   
 @media (max-width: 480px) {

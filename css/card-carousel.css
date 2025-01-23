@@ -1,20 +1,28 @@
 .card-carousel-frame {
   overflow: hidden;
+  flex: 1;
   position: relative;
   padding: 0 1rem;
 }
 
 .card-carousel {
   display: flex;
-  gap: var(--midSpacing);
-  transition: transform var(--objectTransition) ease-in-out;
+  gap: 10px;
+  transition: transform .2s ease-in-out;
+  width: 100%;
 }
 
-.card-carousel-vignette {
+.left-vignette-background,
+.right-vignette-background {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  width: 1rem;
   height: 100%;
   z-index: 5;
 }
+
+.left-vignette-background { left: 0; }
+
+.right-vignette-background { right: 0; }
+
+

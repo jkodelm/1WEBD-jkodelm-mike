@@ -1,4 +1,19 @@
-const apiKey = 'c6e5cf6d'; 
+const apiKey = 'c6e5cf6d';
+
+
+async function fetchMoviesFrom2024() {
+
+  const moviesFrom2024 = [
+    'Dune: Part Two',
+    'The Batman',
+    'Avatar: The Way of Water',
+    'Spider-Man: Across the Spider-Verse',
+    'Mission: Impossible 8'
+  ];
+
+  return moviesFrom2024;
+}
+
 
 function createCardWithLoading() {
   const card = document.createElement('div');
@@ -28,7 +43,6 @@ function updateCardWithMovieData(card, movie) {
   `).join('');
 
   const plotText = movie.Plot || 'Aucun résumé disponible.';
-
   const dvdDate = movie.DVD || 'Date de sortie en DVD non disponible.';
 
   card.innerHTML = `
@@ -50,17 +64,16 @@ function updateCardWithMovieData(card, movie) {
 }
 
 async function fetchMovieData(title) {
-
-  const cachedData = sessionStorage.getItem(`movie_${title}`);
-  if (cachedData) {
-    return JSON.parse(cachedData);
+  const cachedMovie = sessionStorage.getItem(title);
+  if (cachedMovie) {
+    return JSON.parse(cachedMovie);
   }
-// a rajouter plus tard await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(title)}&plot=full&apikey=${apiKey}`);
+
   try {
-    const response = {"Title":"Cars","Year":"2006","Rated":"G","Released":"09 Jun 2006","Runtime":"116 min","Genre":"Animation, Adventure, Comedy","Director":"John Lasseter, Joe Ranft","Writer":"John Lasseter, Joe Ranft, Jorgen Klubien","Actors":"Owen Wilson, Bonnie Hunt, Paul Newman","Plot":"On the way to the biggest race of his life, a hotshot rookie race car gets stranded in a rundown town and learns that winning isn't everything in life.","Language":"English, Italian, Japanese, Yiddish","Country":"United States","Awards":"Nominated for 2 Oscars. 28 wins & 34 nominations total","Poster":"https://m.media-amazon.com/images/M/MV5BMTg5NzY0MzA2MV5BMl5BanBnXkFtZTYwNDc3NTc2._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"7.3/10"},{"Source":"Rotten Tomatoes","Value":"74%"},{"Source":"Metacritic","Value":"73/100"}],"Metascore":"73","imdbRating":"7.3","imdbVotes":"490,857","imdbID":"tt0317219","Type":"movie","DVD":"N/A","BoxOffice":"$244,082,982","Production":"N/A","Website":"N/A","Response":"True"}
+    const response = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(title)}&plot=full&apikey=${apiKey}`);
     const data = await response.json();
     if (data.Response === 'True') {
-      sessionStorage.setItem(`movie_${title}`, JSON.stringify(data));
+      sessionStorage.setItem(title, JSON.stringify(data));
       return data;
     } else {
       console.error(`Film non trouvé : ${title}`);
@@ -71,110 +84,146 @@ async function fetchMovieData(title) {
     return null;
   }
 }
-async function displayMovieCard(parent, title) {
-  const card = createCardWithLoading();
-  parent.appendChild(card);
+
+async function createMovieCard(title) {
+  const card = document.createElement('div');
+  card.classList.add('card');
 
   const movieData = await fetchMovieData(title);
 
   if (movieData) {
-    updateCardWithMovieData(card, movieData);
+    card.innerHTML = `
+      <img src="${movieData.Poster}" alt="${movieData.Title}" class="movie-poster">
+      <div class="card-info">
+        <h3>${movieData.Title}</h3>
+        <p>${movieData.Plot || 'Aucun résumé disponible.'}</p>
+      </div>
+      <button class='button-prim'>Découvrir</button>
+    `;
+
+    const discoverButton = card.querySelector('.button-prim');
+    discoverButton.addEventListener('click', () => {
+      window.location.href = `movie.html?title=${encodeURIComponent(movieData.Title)}`;
+    });
   } else {
-    card.innerHTML = `<h5 class="movie-title">Film non trouvé : ${title}</h5>`;
+    card.innerHTML = `<p>Film non trouvé : ${title}</p>`;
   }
-}
-function createPosterCard(movie) {
-  const card = document.createElement('div');
-  card.classList.add('movie-poster');
-  card.innerHTML = `
-    <img src="${movie.Poster}" alt="${movie.Title}" class="movie-poster-img">
-  `;
+
   return card;
 }
-async function displayPosterCards(parent, titles) {
-  for (const title of titles) {
-    const movieData = await fetchMovieData(title);
-    if (movieData && movieData.Poster) {
-      const card = createPosterCard(movieData);
-      parent.appendChild(card);
-    }
-  }
-}
-async function loadInitialMovies() {
+
+
+async function loadMoreMoviesFrom2024() {
   const container = document.getElementById('movie-card-container');
-  const posterContainer = document.getElementById('poster-container');
-  posterContainer.style.display = 'grid';
-  posterContainer.style.gridTemplateColumns = 'repeat(6, 1fr)'; 
-  posterContainer.style.gap = '1rem';
-  posterContainer.style.marginTop = '2rem';
+  const moviesFrom2024 = await fetchMoviesFrom2024();
 
-  const movieTitles = ['Batman', 'The Dark Knight', 'Inception', 'Interstellar'];
-  const posterTitles = ['Dunkirk', 'Tenet', 'Memento', 'The Prestige', 'Insomnia', 'Following'];
-
-  for (const title of movieTitles) {
-    await displayMovieCard(container, title);
-  }
-
-  await displayPosterCards(posterContainer, posterTitles);
-}
-
-async function searchMovie() {
-  const searchInput = document.getElementById('search-input').value;
-  if (searchInput) {
-    const container = document.getElementById('movie-card-container');
-    container.innerHTML = '';
-
-    await displayMovieCard(container, searchInput);
-  }
-}
-
-function getTitleFromURL() {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  return urlParams.get('title');
-}
-
-async function displayMovie() {
-  const title = getTitleFromURL();
-  if (title) {
-    const container = document.getElementById('movie-card-container');
-    container.innerHTML = ''; 
-
-    const movieData = await fetchMovieData(title);
-    if (movieData) {
-      const card = document.createElement('div');
-      card.classList.add('movie'); 
-      card.innerHTML = `
-        <h5 class="movie-title">${movieData.Title}</h5>
-        <div style="display: flex; align-items: flex-start;">
-          <img src="${movieData.Poster}" class="movie-img-left" alt="${movieData.Title}">
-          <div>
-            <p class="movie-plot">${movieData.Plot || 'Aucun résumé disponible.'}</p>
-            <p class="movie-genre"><small class="text-muted">${movieData.Genre}</small></p>
-            <p class="movie-actors"><small class="text-muted">${movieData.Actors}</small></p>
-            <p class="movie-dvd"><small class="text-muted">Date de sortie en DVD : ${movieData.DVD || 'Non disponible'}</small></p>
-            <div class="movie-ratings">
-              <h6>Ratings:</h6>
-              ${movieData.Ratings.map(rating => `
-                <p><strong>${rating.Source}:</strong> ${rating.Value}</p>
-              `).join('')}
-            </div>
-          </div>
-        </div>
-      `;
+  if (moviesFrom2024.length > 0) {
+    for (const title of moviesFrom2024) {
+      const card = await createMovieCard(title);
       container.appendChild(card);
-    } else {
-      container.innerHTML = `<p>Film non trouvé : ${title}</p>`;
     }
   } else {
-    container.innerHTML = `<p>Aucun titre de film spécifié.</p>`;
+    alert('Aucun film trouvé pour 2024.');
   }
 }
+
+
+class CardCarousel {
+  constructor(carouselName, cardName, gap, controlButtonName) {
+    this.carouselFrame = document.querySelector(`#${carouselName}`);
+    this.carouselWidth = this.carouselFrame.offsetWidth;
+    this.cardWidth = this.carouselFrame.querySelector(`.${cardName}`).offsetWidth;
+    this.maxWidth = -(this.carouselFrame.scrollWidth - this.carouselFrame.offsetWidth);
+
+    this.gap = gap;
+    this.position = 0;
+    this.isHolding = false;
+    this.posCursor = 0;
+
+    const leftBtn = document.querySelector(`#${controlButtonName[0]}`);
+    const rightBtn = document.querySelector(`#${controlButtonName[1]}`);
+    leftBtn.addEventListener('click', () => { this.moveCarousel('l'); });
+    rightBtn.addEventListener('click', () => { this.moveCarousel('r'); });
+    this.carouselFrame.addEventListener('mousedown', (event) => { this.holding(event); });
+
+    window.addEventListener('resize', () => {
+      const newWidth = this.carouselFrame.offsetWidth;
+      this.position += newWidth - this.carouselWidth;
+      this.carouselWidth = newWidth;
+      this.setTransform(true);
+    });
+  }
+
+  setTransform(noTransition = false) {
+    if (this.position < this.maxWidth) this.position = this.maxWidth;
+    if (this.position > 0) this.position = 0;
+
+    if (noTransition) {
+      this.carouselFrame.style.transition = 'none';
+      this.carouselFrame.style.transform = `translateX(${this.position}px)`;
+      setTimeout(() => { this.carouselFrame.style.transition = 'transform .2s ease-in-out'; }, 10);
+    } else {
+      this.carouselFrame.style.transform = `translateX(${this.position}px)`;
+    }
+  }
+
+  holding(event) {
+    this.isHolding = true;
+    document.body.style.cursor = 'grabbing';
+    this.posCursor = event.clientX;
+
+    window.addEventListener('mouseup', this.stopHolding);
+    window.addEventListener('mousemove', this.dragCarousel);
+  }
+
+  dragCarousel = (event) => {
+    if (this.isHolding) {
+      const newPos = event.clientX - this.posCursor;
+      this.posCursor = event.clientX;
+      this.position += newPos;
+      this.setTransform(true);
+    }
+  };
+
+  stopHolding = () => {
+    this.isHolding = false;
+    document.body.style.cursor = 'default';
+    window.removeEventListener('mouseup', this.stopHolding);
+    window.removeEventListener('mousemove', this.dragCarousel);
+  };
+
+  moveCarousel(direction) {
+    const carouselWidth = this.carouselFrame.offsetWidth;
+    const scrollAmount = (this.cardWidth + this.gap) * Math.floor(carouselWidth / (this.cardWidth + this.gap));
+    this.maxWidth = -(this.carouselFrame.scrollWidth - this.carouselFrame.offsetWidth);
+
+    if (direction === 'r') this.position -= scrollAmount;
+    else this.position += scrollAmount;
+
+    this.setTransform();
+  }
+}
+
+async function setupCardCarousel(carouselName, cardName, movies, gap, controlButtonName) {
+  const parent = document.getElementById(carouselName);
+  parent.innerHTML = '';
+
+  for (const title of movies) {
+    const card = await createMovieCard(title);
+    parent.appendChild(card);
+  }
+
+  new CardCarousel(carouselName, cardName, gap, controlButtonName);
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
   if (window.location.pathname.includes('movie.html')) {
-    displayMovie(); 
+    displayMovie();
   } else {
-    loadInitialMovies(); 
+    loadInitialMovies();
   }
 });
+
+
+document.getElementById('load-more-2024').addEventListener('click', loadMoreMoviesFrom2024);

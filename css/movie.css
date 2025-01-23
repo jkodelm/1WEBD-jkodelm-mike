@@ -159,3 +159,19 @@
 @media (max-width: 480px) {
     .movie-main h1 { font-size: 2rem; }
 }  
+
+@font-face {
+    font-family: 'Pridi';
+    src: url('/1WEBD-jkodelm-mike/font/Pridi-Regular.ttf') format('ttf'),
+         url('/1WEBD-jkodelm-mike/font/Pridi-Regular.ttf') format('tff');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Pridi';
+    src: url('/1WEBD-jkodelm-mike/font/Pridi-Bold.ttf') format('ttf'),
+         url('/1WEBD-jkodelm-mike/font/Pridi-Bold.ttf') format('ttf');
+    font-weight: 600;
+    font-style: normal;
+  }

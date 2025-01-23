@@ -10,9 +10,9 @@
   <link rel='stylesheet' href='./css/card-carousel.css'>
   <link rel='stylesheet' href='./css/hero-carousel.css'>
   <script src='./js/main.js'></script>
+  <script src="./js/api.js"></script>
   <script src='./js/card-carousel.js'></script>
   <script src='./js/hero-carousel.js'></script>
-  <script src="./js/api.js"></script>
 </head>
 <body>
   <header>
@@ -22,22 +22,16 @@
     
       <div class='nav-right'>
         <div class='nav-search col300'>
-          <button class='button-tran back-btn hidden col100hov'><div class='icon i-left'></div></button>
+          <button class='button-tran back-btn hidden'><div class='icon i-left'></div></button>
           <input type='text' id='nav-search-input' class="col300" placeholder='Search...'>
-          <button class='button-tran col100hov'><div class='icon i-search' id='nav-search-button'></div></button>
+          <button class='button-tran'><div class='icon i-search' id='nav-search-button'></div></button>
         </div>
-        <button class='button-tran col100hov'><div class='icon i-account'></div></button>
+        <button class='button-tran'><div class='icon i-account'></div></button>
       </div>
       <div id='nav-lower-frame' class='side-padding hidden'>
         <div id='nav-search-results'></div>
       </div>
     </nav>
-    <div style='display: flex; justify-content: space-evenly; margin-bottom: 1rem'>
-      <a href='./index.html'>index.html</a>
-      <a href='./search.html'>search.html</a>
-      <a href='./movie.html'>movie.html</a>
-    </div>
-
     <section class='hero'>
       <div class='side-padding hero-header '><h2>À ne pas manquer</h2></div>
       <div id='hero-content'>
@@ -49,12 +43,12 @@
       </div>
       <div class='hero-footer side-padding'>
         <div class='controls'>
-          <button class='button-tran col100hov'><div class='icon i-pause' id='hero-pause'></div></button>
+          <button class='button-tran '><div class='icon i-pause' id='hero-pause'></div></button>
         </div>
         <div id='hero-indicators'></div>
         <div class='controls'>
-          <button class='button-tran col100hov'><div class='icon i-left' id='hero-arrow-left'></div></button>
-          <button class='button-tran col100hov'><div class='icon i-right' id='hero-arrow-right'></div></button>
+          <button class='button-tran '><div class='icon i-left' id='hero-arrow-left'></div></button>
+          <button class='button-tran '><div class='icon i-right' id='hero-arrow-right'></div></button>
         </div>
       </div>
       <div class='hero-vignette'></div>
@@ -67,8 +61,8 @@
       <div class='top-section bot-mar-HMS side-padding'>
         <h2>Tendances</h2>
         <div class='gapHMS'>
-          <button class='button-tran col100hov'><div class='icon i-longleft' id='trending-left'></div></button>
-          <button class='button-tran col100hov'><div class='icon i-longright' id='trending-right'></div></button>
+          <button class='button-tran '><div class='icon i-longleft' id='trending-left'></div></button>
+          <button class='button-tran '><div class='icon i-longright' id='trending-right'></div></button>
         </div>
       </div>
       <div class='traversin-top col100'></div>
@@ -81,6 +75,22 @@
       </div>
       <div class='traversin-bottom col100'></div>
     </section>
+
+    <section>
+      <div class='top-section bot-mar-HMS side-padding'>
+        <h2>2024 en beauté</h2>
+        <div class='gapHMS'>
+          <button class='button-tran'><div class='icon i-longleft' id='2024-left'></div></button>
+          <button class='button-tran'><div class='icon i-longright' id='2024-right'></div></button>
+        </div>
+      </div>
+      <div class='card-carousel-frame'>
+        <div class='card-carousel side-padding' id='2024-cards'></div>
+        <div class='left-vignette-background'></div>
+        <div class='right-vignette-background'></div>
+      </div>
+    </div>
+    </section>
   </main>
   <footer></footer>
 
@@ -88,7 +98,8 @@
   <script>
     new heroCarousel('hero-content', ['hero-farleft', 'hero-left', 'hero-main', 'hero-right', 'hero-farright'], 400, ['hero-arrow-left', 'hero-arrow-right'], ['hero-indicators', 'hero-indicator', 'hero-indicator-time'], 5000, 'hero-pause');
     const movieTitles = ['','','','','','','']; //'Batman', 'The Dark Knight', 'Inception', 'Interstellar', 'Tenet', 'Dunkirk', 'Memento', 'The Prestige', 'Insomnia', 'Following', 'Kromoleo'
-    setupCardCarousel('trending-cards', 'temp-card', movieTitles, 16, ['trending-left', 'trending-right'], 'trending-cards-vignette')
+    setupCardCarousel('trending-cards', 'card', movieTitles, 16, ['trending-left', 'trending-right'])
+    setupCardCarousel('2024-cards', 'card', movieTitles, 16, ['2024-left', '2024-right'])
   </script>
 </body>
 </html>

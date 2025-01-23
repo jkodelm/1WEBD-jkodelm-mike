@@ -115,6 +115,6 @@ async function initCardCarousel(parentId, cardClass, titles) {
 
 // Exemple d'utilisation
 document.addEventListener('DOMContentLoaded', () => {
-  const movieTitles = ['Batman', 'The Dark Knight', 'Inception', 'Interstellar', 'Tenet', 'Dunkirk', 'Memento', 'The Prestige', 'Insomnia', 'Following'];
+  const movieTitles = ['Batman', 'The Dark Knight', 'Inception', 'Interstellar', 'Tenet', 'Dunkirk', 'Memento', 'The Prestige', 'Insomnia', 'Following', 'Kromoleo'];
   initCardCarousel('trending-cards', 'temp-card', movieTitles);
 });

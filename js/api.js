@@ -1,5 +1,6 @@
-const apiKey = 'c6e5cf6d'; 
+const apiKey = 'c6e5cf6d';
 
+// Fonction pour créer une carte de chargement
 function createCardWithLoading() {
   const card = document.createElement('div');
   card.classList.add('movie');
@@ -22,13 +23,16 @@ function createCardWithLoading() {
   return card;
 }
 
+// Fonction pour mettre à jour une carte avec les données du film
 function updateCardWithMovieData(card, movie) {
   const ratingsHTML = movie.Ratings.map(rating => `
     <p><strong>${rating.Source}:</strong> ${rating.Value}</p>
   `).join('');
 
+  // Utiliser le grand résumé (Fullplot) si disponible, sinon utiliser le synopsis (Plot)
   const plotText = movie.Plot || 'Aucun résumé disponible.';
 
+  // Ajouter la date de sortie en DVD si disponible
   const dvdDate = movie.DVD || 'Date de sortie en DVD non disponible.';
 
   card.innerHTML = `
@@ -49,18 +53,20 @@ function updateCardWithMovieData(card, movie) {
   `;
 }
 
+// Fonction pour récupérer les données d'un film depuis l'API avec le grand résumé
 async function fetchMovieData(title) {
-
-  const cachedData = sessionStorage.getItem(`movie_${title}`);
-  if (cachedData) {
-    return JSON.parse(cachedData);
+  // Vérifier si les données sont déjà dans sessionStorage
+  const cachedMovie = sessionStorage.getItem(title);
+  if (cachedMovie) {
+    return JSON.parse(cachedMovie); // Renvoyer les données stockées
   }
-// a rajouter plus tard await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(title)}&plot=full&apikey=${apiKey}`);
+
   try {
-    const response = {"Title":"Cars","Year":"2006","Rated":"G","Released":"09 Jun 2006","Runtime":"116 min","Genre":"Animation, Adventure, Comedy","Director":"John Lasseter, Joe Ranft","Writer":"John Lasseter, Joe Ranft, Jorgen Klubien","Actors":"Owen Wilson, Bonnie Hunt, Paul Newman","Plot":"On the way to the biggest race of his life, a hotshot rookie race car gets stranded in a rundown town and learns that winning isn't everything in life.","Language":"English, Italian, Japanese, Yiddish","Country":"United States","Awards":"Nominated for 2 Oscars. 28 wins & 34 nominations total","Poster":"https://m.media-amazon.com/images/M/MV5BMTg5NzY0MzA2MV5BMl5BanBnXkFtZTYwNDc3NTc2._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"7.3/10"},{"Source":"Rotten Tomatoes","Value":"74%"},{"Source":"Metacritic","Value":"73/100"}],"Metascore":"73","imdbRating":"7.3","imdbVotes":"490,857","imdbID":"tt0317219","Type":"movie","DVD":"N/A","BoxOffice":"$244,082,982","Production":"N/A","Website":"N/A","Response":"True"}
+    const response = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(title)}&plot=full&apikey=${apiKey}`);
     const data = await response.json();
     if (data.Response === 'True') {
-      sessionStorage.setItem(`movie_${title}`, JSON.stringify(data));
+      // Stocker les données dans sessionStorage pour une utilisation future
+      sessionStorage.setItem(title, JSON.stringify(data));
       return data;
     } else {
       console.error(`Film non trouvé : ${title}`);
@@ -71,6 +77,8 @@ async function fetchMovieData(title) {
     return null;
   }
 }
+
+// Fonction pour afficher une carte de film dans un conteneur parent
 async function displayMovieCard(parent, title) {
   const card = createCardWithLoading();
   parent.appendChild(card);
@@ -83,6 +91,8 @@ async function displayMovieCard(parent, title) {
     card.innerHTML = `<h5 class="movie-title">Film non trouvé : ${title}</h5>`;
   }
 }
+
+// Fonction pour créer une carte de poster
 function createPosterCard(movie) {
   const card = document.createElement('div');
   card.classList.add('movie-poster');
@@ -91,6 +101,8 @@ function createPosterCard(movie) {
   `;
   return card;
 }
+
+// Fonction pour afficher les cartes de posters
 async function displayPosterCards(parent, titles) {
   for (const title of titles) {
     const movieData = await fetchMovieData(title);
@@ -100,24 +112,26 @@ async function displayPosterCards(parent, titles) {
     }
   }
 }
+
+// Fonction pour charger les films et les posters
 async function loadInitialMovies() {
   const container = document.getElementById('movie-card-container');
   const posterContainer = document.getElementById('poster-container');
   posterContainer.style.display = 'grid';
-  posterContainer.style.gridTemplateColumns = 'repeat(6, 1fr)'; 
+  posterContainer.style.gridTemplateColumns = 'repeat(6, 1fr)'; // 6 colonnes
   posterContainer.style.gap = '1rem';
   posterContainer.style.marginTop = '2rem';
 
-  const movieTitles = ['Batman', 'The Dark Knight', 'Inception', 'Interstellar'];
-  const posterTitles = ['Dunkirk', 'Tenet', 'Memento', 'The Prestige', 'Insomnia', 'Following'];
+  const movieTitles = ['Batman', 'The Dark Knight', 'Inception', 'Interstellar', 'Dunkirk', 'Tenet', 'Memento', 'The Prestige', 'Insomnia', 'Following'];
 
   for (const title of movieTitles) {
     await displayMovieCard(container, title);
   }
 
-  await displayPosterCards(posterContainer, posterTitles);
+  await displayPosterCards(posterContainer, movieTitles);
 }
 
+// Fonction pour rechercher un film
 async function searchMovie() {
   const searchInput = document.getElementById('search-input').value;
   if (searchInput) {
@@ -128,22 +142,24 @@ async function searchMovie() {
   }
 }
 
+// Fonction pour récupérer le paramètre "title" de l'URL
 function getTitleFromURL() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get('title');
 }
 
+// Fonction pour afficher la grande carte du film sur movie.html
 async function displayMovie() {
   const title = getTitleFromURL();
   if (title) {
     const container = document.getElementById('movie-card-container');
-    container.innerHTML = ''; 
+    container.innerHTML = ''; // Clear previous content
 
     const movieData = await fetchMovieData(title);
     if (movieData) {
       const card = document.createElement('div');
-      card.classList.add('movie'); 
+      card.classList.add('movie'); // Utiliser la classe de la grande carte
       card.innerHTML = `
         <h5 class="movie-title">${movieData.Title}</h5>
         <div style="display: flex; align-items: flex-start;">
@@ -171,12 +187,48 @@ async function displayMovie() {
   }
 }
 
+// Fonction pour récupérer les films de 2024
+async function fetchMoviesFrom2024() {
+  try {
+    const response = await fetch(`https://www.omdbapi.com/?y=2024&apikey=${apiKey}`);
+    const data = await response.json();
+    if (data.Response === 'True') {
+      // Retourner uniquement les titres des films
+      return data.Search.map(movie => movie.Title);
+    } else {
+      console.error('Aucun film trouvé pour 2024');
+      return [];
+    }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des films de 2024 :', error);
+    return [];
+  }
+}
+
+// Fonction pour charger plus de films de 2024
+async function loadMoreMoviesFrom2024() {
+  const container = document.getElementById('movie-card-container');
+  const moviesFrom2024 = await fetchMoviesFrom2024();
+
+  if (moviesFrom2024.length > 0) {
+    for (const title of moviesFrom2024) {
+      await displayMovieCard(container, title);
+    }
+  } else {
+    alert('Aucun film trouvé pour 2024.');
+  }
+}
+
+// Écouteurs d'événements
 document.addEventListener('DOMContentLoaded', () => {
   if (window.location.pathname.includes('movie.html')) {
-    displayMovie(); 
+    displayMovie(); // Afficher la grande carte sur movie.html
   } else {
-    loadInitialMovies(); 
+    loadInitialMovies(); // Charger les films initiaux sur la page d'accueil
   }
 });
 
 document.getElementById('search-button').addEventListener('click', searchMovie);
+
+// Écouteur d'événements pour le bouton "Charger plus de films de 2024"
+document.getElementById('load-more-2024').addEventListener('click', loadMoreMoviesFrom2024);

@@ -25,7 +25,7 @@
 }
   
 .hero-card {
-    background-color: var(--col);
+    /* background-color: var(--col); */
     width: 30%;
     border-radius: var(--topSpacing);
     aspect-ratio: 16/9;
@@ -50,7 +50,7 @@
 .hero-indicator {
     width: var(--topSpacing);
     height: var(--topSpacing);
-    background-color: var(--col);
+    /* background-color: var(--col); */
     border-radius: var(--topSpacing);
     transition: width var(--timeHeroSlide) linear;
     overflow: hidden;

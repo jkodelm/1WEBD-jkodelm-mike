@@ -48,41 +48,39 @@
 }
 
 .movie-tab-active { 
-    background-color: var(--col200);
+    /* background-color: var(--col200); */
     border-radius: var(--midSpacing) var(--midSpacing) 0 0;
     color: var(--primary);
     font-weight: bold;
 }
 
 .movie-tab-bot {
-    content: '';
     display: none;
-    position: absolute;
+    /* position: absolute; */
+    position: relative;
     left: calc(-1 * var(--midSpacing));
     bottom: 0;
     width: calc(100% + calc( var(--midSpacing) * 2));
-    background-color: var(--col200);
+    /* background-color: var(--col200); */
     height: var(--midSpacing)
 }
 .movie-tab-active .movie-tab-bot { display: block; }
 
-.movie-tab-bot:before {
-    content: '';
+.movie-tab-bot-left {
     position: absolute;
     left: 0;
     top: 0;
-    background-color: var(--col300);
+    /* background-color: var(--col300); */
     width: var(--midSpacing);
     height: var(--midSpacing);
     border-bottom-right-radius: var(--midSpacing);
 }
 
-.movie-tab-bot:after {
-    content: '';
+.movie-tab-bot-right {
     position: absolute;
     right: 0;
     top: 0;
-    background-color: var(--col300);
+    /* background-color: var(--col300); */
     width: var(--midSpacing);
     height: var(--midSpacing);
     border-bottom-left-radius: var(--midSpacing);
@@ -91,7 +89,7 @@
 .movie-window {
     padding: var(--topSpacing);
     border-radius: var(--midSpacing);
-    background-color: var(--col200);
+    /* background-color: var(--col200); */
     display: none;
     flex-direction: column;
     gap: var(--midSpacing);
@@ -108,7 +106,7 @@
 .movie-profile {
     padding: var(--midSpacing);
     border-radius: var(--midSpacing);
-    background-color: var(--col200);
+    /* background-color: var(--col200); */
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -122,7 +120,7 @@
     text-overflow: ellipsis;
 }
 .movie-profile img { width: 2.5rem; height: 2.5rem; border-radius: 3rem; margin-right: var(--midSpacing);}
-.movie-profile:hover { background-color: var(--col)}
+/* .movie-profile:hover { background-color: var(--col)} */
 
 .movie-rate-image { /* Limite la hauteur de l'image */
     display: flex;

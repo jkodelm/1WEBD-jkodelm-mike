@@ -1,6 +1,3 @@
-/* TO DO:
-Better responsive height*/
-
 class heroCarousel {
     constructor(parentName, cardClasses, slidingTime, controlButtonName, indicArray = false, autoSlideTime= 0, pauseName = false) {
         this.cards = [...document.querySelector(`#${parentName}`).children]; //javascript... we need .arrayfy()...
@@ -50,6 +47,7 @@ class heroCarousel {
         for(let i = 0; i < this.nbCards; i++) {
             let heroIndicator = document.createElement('div');
             heroIndicator.classList.add(indicArray[1]);
+            heroIndicator.classList.add('col100');
             let heroIndicatorTime = document.createElement('div');
             heroIndicatorTime.classList.add(indicArray[2]);
             heroIndicator.appendChild(heroIndicatorTime);
@@ -71,7 +69,7 @@ class heroCarousel {
 
         this.cards.forEach((card, i) => {
             i = (i - 3 + this.nbCards) % this.nbCards;
-            card.className = `hero-card ${this.cardClasses[(i - this.index + this.nbCards) % this.nbCards]}`;
+            card.className = `hero-card col100 ${this.cardClasses[(i - this.index + this.nbCards) % this.nbCards]}`;
         });
 
         this.manageIndicators();
@@ -90,7 +88,7 @@ class heroCarousel {
         if ( !this.indicators ) { return };
         this.indicators.forEach((indicator, i) => {
             const timeBar = indicator.firstElementChild;
-            indicator.style.backgroundColor = 'var(--col)';
+            indicator.classList.add('col100')
             indicator.style.width = '1rem';
             timeBar.style.animation = 'none';
         });
@@ -99,7 +97,7 @@ class heroCarousel {
         const timeBar = indicator.firstElementChild;
 
         if (this.isStopped) {
-            indicator.style.backgroundColor = 'var(--gray)';
+            indicator.classList.remove('col100')
         } else {
             indicator.style.width = '3rem';
             timeBar.style.animation = `moveIndicator ${this.autoSlideTime}ms linear forwards`;

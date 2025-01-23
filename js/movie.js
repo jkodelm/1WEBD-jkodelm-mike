@@ -62,11 +62,11 @@ function showMovie(movie) {
 
         <section id="movie-second">
             <div class="movie-tabs">
-            <div class="movie-tab"><div class="movie-tab-bot"></div>Cast</div>
-            <div class="movie-tab"><div class="movie-tab-bot"></div>Notes</div>
-            <div class="movie-tab"><div class="movie-tab-bot"></div>Plus d'info</div>
+            <div class="movie-tab"><div class="movie-tab-bot col200"><div class="movie-tab-bot-left col300"></div><div class="movie-tab-bot-right col300"></div></div>Cast</div>
+            <div class="movie-tab"><div class="movie-tab-bot col200"><div class="movie-tab-bot-left col300"></div><div class="movie-tab-bot-right col300"></div></div></div>Notes</div>
+            <div class="movie-tab"><div class="movie-tab-bot col200"><div class="movie-tab-bot-left col300"></div><div class="movie-tab-bot-right col300"></div></div></div>Plus d'info</div>
             </div>
-            <div class="movie-window" id="movie-casting">
+            <div class="movie-window col200" id="movie-casting">
             <h3>Directeur${detectComma(movie.Language)}</h3>
             <div class="movie-profiles">
                 ${stringToElements(movie.Director, fetchActor)}
@@ -80,7 +80,7 @@ function showMovie(movie) {
                 ${stringToElements(movie.Actors, fetchActor)}
             </div>
             </div>
-            <div class="movie-window" id="movie-ratings">
+            <div class="movie-window col200" id="movie-ratings">
             <div class="space-between flex-wrap">
                 <div class="movie-rate-card">
                 <div class="movie-rate-image">
@@ -103,7 +103,7 @@ function showMovie(movie) {
                 </div>
             </div>
             </div>
-            <div class="movie-window" id="movie-more-info">
+            <div class="movie-window col200" id="movie-more-info">
             <ul>
                 <li><p>Doublage${detectComma(movie.Language)} : ${movie.Language}</p>
                 <li><p>Récompense${detectPlural(movie.Awards)} : ${movie.Awards ? movie.Awards : 'Aucune'}</p>
@@ -128,21 +128,21 @@ function customTag(name) { return `<div class="tag">${name}</div>` }
 
 function heartMovie(userLogged) {
     if (userLogged) {
-        return `<a onClick="addLike()"><button class='button-tran'><div class='icon i-heart'></div></button></a>`
+        return `<a onClick="addLike()"><button class='button-tran coll100hov'><div class='icon i-heart'></div></button></a>`
     } else {
-        return `<a href="./account/login.html"><button class='button-tran'><div class='icon i-heart'></div></button></a>`
+        return `<a href="./account/login.html"><button class='button-tran coll100hov'><div class='icon i-heart'></div></button></a>`
     }
 }
 
 function strArrayfy(string) { return string.split(", ").map(value => value.trim()) }
 
 function fetchActor(name) {
-    const data = {image: "", link:""}
     // Fetch image of actor using API
+    const data = {image: "", link:""}
     if (data.image) {
-        return `<a href="${data.link}" class="movie-profile"><img src="${data.image}"><p>${name}</p></a>`
+        return `<a href="${data.link}" class="movie-profile col200 col100hov"><img src="${data.image}"><p>${name}</p></a>`
     } else {
-        return `<a href="#" class="movie-profile"><img src="./data/personnotfound.png"><p>${name}</p></a>`
+        return `<a href="#" class="movie-profile col200 col100hov"><img src="./data/personnotfound.png"><p>${name}</p></a>`
     }
 }
 
@@ -153,9 +153,11 @@ function switchTab(index, movTabArray, movSecondChild) {
     for (let i = 0; i < 3; i++) {
       if (i === index) {
         movTabArray[i].classList.add('movie-tab-active')
+        movTabArray[i].classList.add('col200')
         movSecondChild[i + 1].classList.add('movie-tab-shown')
       } else {
         movTabArray[i].classList.remove('movie-tab-active')
+        movTabArray[i].classList.remove('col200')
         movSecondChild[i + 1].classList.remove('movie-tab-shown')
       }
     }

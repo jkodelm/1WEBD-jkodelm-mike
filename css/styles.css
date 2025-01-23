@@ -5,23 +5,8 @@
     --primary: #66d2c0;
     --darkprimary: #4ca89a;
     --secondary: #007ab5;
-    --font: white;
-    --gray: #808080;
-
-    --col: #2c2e30;
-    --col200: #27292b;
-    --col300: #222426;
-
-/* 
-    --light: #fff;
-    --light200: #f0f0f0;
-    --light300: #f8f8f8;
-
     
-
-    --dark: #2c2e30;
-    --dark200: #27292b;
-    --dark300: #222426; */
+    --gray: #808080;
 
     --botSpacing: .25rem;
     --midSpacing: .5rem;
@@ -36,6 +21,20 @@
     --timeAutoSlide: 5000ms;
 }
 
+body.light .col100 { background-color: #2c2e30; };
+body.light .col200 { background-color: #27292b; };
+body.light .col300 { background-color: #222426; };
+body.light .col100hov:hover { background-color: #2c2e30 }
+body.light .icon { filter: brightness(0) invert(1); }
+body.light .colFont { color: white; }
+
+.col100 { background-color: white };
+.col200 { background-color: #f8f8f8 };
+.col300 { background-color: #f0f0f0 };
+.col100hov:hover { background-color: white }
+.icon { filter: brightness(0); }
+.colFont { color: black; }
+
 h1, h2, h3, h4, p, h6 { margin: 0; padding: 0; text-decoration: none;}
 h1 { font-size: 3rem; line-height: 1}
 h2 { font-size: 2rem;}
@@ -47,7 +46,7 @@ h6 { font-size: 0.875rem;}
 body {
     margin: 0;
     font-family: "Pridi", sans-serif;
-    background-color: var(--col300);
+/*     background-color: #222426; */
     color: var(--font);
     overflow-x: hidden;
     line-height: 1.5;
@@ -76,8 +75,7 @@ img { user-select: none;}
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    filter: brightness(0) invert(1);
-    transition: filter 0.2s ease;
+    /* transition: filter 0.2s ease; */
 }
 
 .i-search { background-image: url('../svg/search.svg'); }
@@ -110,7 +108,7 @@ button {
 .button-prim:hover { border: var(--border) solid var(--darkprimary); background-color: var(--darkprimary) }
 .button-seco:hover { border: var(--border) solid var(--darkprimary); }
 .button-seco:hover .icon { filter: brightness(0) saturate(100%) invert(60%) sepia(45%) saturate(408%) hue-rotate(121deg) brightness(89%) contrast(94%); }
-.button-tran:hover { background-color: var(--col);}
+/* .button-tran:hover { background-color: var(--col);} */
 
 .button-seco .icon,
 .button-tran.active .icon,
@@ -192,7 +190,7 @@ nav {
 #nav-search-input {
     width: 10rem;
     height: 2.5rem;
-    background-color: var(--col300);
+    /* background-color: var(--col300); */
     border: 0;
     color: var(--font);
     font-size: var(--smalltitle);
@@ -206,7 +204,7 @@ nav {
     left: 0;
     padding-top: var(--midSpacing);
     padding-bottom: var(--midSpacing);
-    background-color: var(--col300);
+    /* background-color: var(--col300); */
     z-index: 51;
 }
 
@@ -231,16 +229,14 @@ nav {
     padding: var(--botSpacing) var(--botSpacing);
     display: flex;
     gap: var(--midSpacing);
-    background-color: var(--col200);
+    background-color: var(--var(--col300)); /* TO DO*/
     cursor: pointer;
     transition: background-color var(--objectTransition) ease;
 }
 .nav-search-result img { height: 4.375rem ; border-radius: var(--botSpacing);} /* 2 lines text*/
-.nav-search-result:hover { background-color: var(--col); }
+.nav-search-result:hover { background-color: var(--col); } /* TO DO*/
 
-section {
-    margin-bottom: var(--serapateSections);
-}
+section { margin-bottom: var(--serapateSections); }
 
 .hero-header, .top-section {
     height: 2.5rem;
@@ -261,12 +257,12 @@ section {
 .traversin-top, .traversin-bottom {
     height: 1rem;
     width: 100%;
-    background: var(--col);
+    /* background: var(--col); */
     clip-path: polygon(100% 0, 100% 100%, 0% 100%);
 }
 .traversin-bottom { clip-path: polygon(100% 0, 0 0, 0% 100%); }
 .traversin-inside {
-    background-color: var(--col);
+    /* background-color: var(--col); */
     height: 300px;
     padding: var(--topSpacing) 0;
 } 

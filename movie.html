@@ -4,26 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Accueil ~ Orléans Ciné</title>
-    <link rel="stylesheet" href= "/1WEBD-jkodelm-mike/css/movie.css" />
+    <link rel="stylesheet" href="/1WEBD-jkodelm-mike/css/movie.css" />
     <link rel="stylesheet" href="./css/styles.css" />
     <link rel="stylesheet" href="./css/movie.css" />
-    <script src="./js/main.js"></script>
-    <script src="js/movie.js"></script>
+    <script src="./js/api.js"></script> <!-- Fichier JavaScript combiné -->
   </head>
   <body class="col300">
+    <header>
+      <div style="display: flex; justify-content: space-evenly; margin-bottom: 1rem;">
+        <a href="./index.html">index.html</a>
+        <a href="./search.html">search.html</a>
+        <a href="./movie.html">movie.html</a>
+      </div>
+    </header>
     <main class="side-padding">
-      <script>
-        showMovie(getStoredMovie()); //{"Title":"Cars","Year":"2006","Rated":"G","Released":"09 Jun 2006","Runtime":"116 min","Genre":"Animation, Adventure, Comedy","Director":"John Lasseter, Joe Ranft","Writer":"John Lasseter, Joe Ranft, Jorgen Klubien","Actors":"Owen Wilson, Bonnie Hunt, Paul Newman","Plot":"On the way to the biggest race of his life, a hotshot rookie race car gets stranded in a rundown town and learns that winning isn't everything in life.","Language":"English, Italian, Japanese, Yiddish","Country":"United States","Awards":"Nominated for 2 Oscars. 28 wins & 34 nominations total","Poster":"https://m.media-amazon.com/images/M/MV5BMTg5NzY0MzA2MV5BMl5BanBnXkFtZTYwNDc3NTc2._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"7.3/10"},{"Source":"Rotten Tomatoes","Value":"74%"},{"Source":"Metacritic","Value":"73/100"}],"Metascore":"73","imdbRating":"7.3","imdbVotes":"490,857","imdbID":"tt0317219","Type":"movie","DVD":"N/A","BoxOffice":"$244,082,982","Production":"N/A","Website":"N/A","Response":"True"}
-        manageTabs();
-      </script>
+      <div id="movie-card-container"></div> <!-- Conteneur pour les cartes de films -->
     </main>
     <div>
-      <button style="color: aqua;" class="">charger plus de film de 2024</button>
+      <button class="button-seco" id="load-more-2024">Charger plus de films de 2024</button>
     </div>
-    
-
-
-
     <footer style="background-color: #333; color: #fff; padding: 20px; text-align: center;">
       <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
         <img src="./data/logo.svg" alt="logo" style="width: 50px; height: auto; margin-right: 20px;" />
@@ -34,5 +33,62 @@
       </div>
       <p style="margin: 0; font-size: 14px;">&copy; 2025 Orléans Ciné ® SUPINFO</p>
     </footer>
+
+    <script>
+      // Fonction pour afficher un film spécifique (utilisée sur movie.html)
+      async function displayMovie() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const title = urlParams.get('title');
+
+        if (title) {
+          const movieData = await fetchMovieData(title);
+          const container = document.getElementById('movie-card-container');
+
+          if (movieData) {
+            const card = document.createElement('div');
+            card.classList.add('movie');
+            updateCardWithMovieData(card, movieData);
+            container.appendChild(card);
+          } else {
+            container.innerHTML = `<p>Film non trouvé : ${title}</p>`;
+          }
+        }
+      }
+
+      // Fonction pour charger les films initiaux (utilisée sur index.html)
+      async function loadInitialMovies() {
+        const container = document.getElementById('movie-card-container');
+        const initialMovies = ['Cars', 'Inception', 'The Dark Knight']; // Exemples de films
+
+        for (const title of initialMovies) {
+          const card = await createMovieCard(title);
+          container.appendChild(card);
+        }
+      }
+
+      // Événement DOMContentLoaded pour charger les films initiaux ou afficher un film spécifique
+      document.addEventListener('DOMContentLoaded', () => {
+        if (window.location.pathname.includes('movie.html')) {
+          displayMovie();
+        } else {
+          loadInitialMovies();
+        }
+      });
+
+      // Événement pour le bouton "Charger plus de films de 2024"
+      document.getElementById('load-more-2024').addEventListener('click', async () => {
+        const container = document.getElementById('movie-card-container');
+        const moviesFrom2024 = await fetchMoviesFrom2024();
+
+        if (moviesFrom2024.length > 0) {
+          for (const title of moviesFrom2024) {
+            const card = await createMovieCard(title);
+            container.appendChild(card);
+          }
+        } else {
+          alert('Aucun film trouvé pour 2024.');
+        }
+      });
+    </script>
   </body>
 </html>
